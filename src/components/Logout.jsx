@@ -2,7 +2,7 @@ import React from 'react'
 
 const Logout = () => {
   return (
-    <button className='btn'>Logout</button>
+    <button className='btn btn-outline btn-error'>Logout</button>
   )
 }
 

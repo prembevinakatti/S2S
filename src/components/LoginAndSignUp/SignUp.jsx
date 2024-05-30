@@ -7,7 +7,7 @@ const SignUp = () => {
   function handelsignup(data){
     try {
       if (data){
-        authService.createAccount(...data).then((authdata)=>{
+        authService.createAccount(data).then((authdata)=>{
           if(authdata){
             authService.getCurrentUser().then((userdata)=>{
                 console.log( userdata)

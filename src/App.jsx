@@ -1,12 +1,14 @@
 import { useState } from 'react'
-import Input from './components/InputComponent/Input'
+import { BrowserRouter,Route, Routes } from 'react-router-dom'
+import LandingPage from './components/LandingPage/LandingPage'
+import Login from './components/LoginAndSignUp/Login'
 function App() {
-  const [count, setCount] = useState(0)
 
   return (
-    <>
-     <Input placeholder="hello" />
-    </>
+   <div>
+     <LandingPage />
+    <Login />
+   </div>
   )
 }
 

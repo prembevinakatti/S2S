@@ -1,7 +1,11 @@
 
 import conf from '.././configuration/config';
 import { Client, Account, ID } from "appwrite";
+const conf={
+    appwriteurl:"https://cloud.appwrite.io/v1",
+    projectid:"665844a0001bbe7995a9",
 
+}
 
 export class AuthService {
     client = new Client();

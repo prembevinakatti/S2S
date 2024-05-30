@@ -11,8 +11,12 @@ const Login = () => {
             if(authdata){
               authService.getCurrentUser().then((curuserdata)=>{
                   console.log(curuserdata)
+              }).catch((err)=>{
+                console.log(err)
               })
             }
+        }).catch((err)=>{
+            console.log(err)
         })
         
       } catch (error) {

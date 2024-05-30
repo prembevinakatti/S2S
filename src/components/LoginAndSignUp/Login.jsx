@@ -12,7 +12,7 @@ const Login = () => {
   function hadelLogin(data){
     if(data){
       try {
-        authService.login(...data).then((authdata)=>{
+        authService.login(data).then((authdata)=>{
             if(authdata){
               authService.getCurrentUser().then((curuserdata)=>{
                 dispatch(login(curuserdata))

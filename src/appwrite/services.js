@@ -1,5 +1,4 @@
 
-import conf from '.././configuration/config';
 import { Client, Account, ID } from "appwrite";
 const conf={
     appwriteurl:"https://cloud.appwrite.io/v1",

@@ -3,8 +3,10 @@ import Input from "../InputComponent/Input";
 import { useForm } from 'react-hook-form';
 import authService from '../../appwrite/services';
 import { Link } from 'react-router-dom';
-import Login from './Login';
+import { login } from "../../store/authslice";
+import { useDispatch } from 'react-redux';
 const SignUp = () => {
+  const dispatch=useDispatch()
   const {register,handleSubmit}=useForm()
   function handelsignup(data){
     try {
@@ -12,7 +14,7 @@ const SignUp = () => {
         authService.createAccount(data).then((authdata)=>{
           if(authdata){
             authService.getCurrentUser().then((userdata)=>{
-                console.log( userdata)
+              dispatch(login(userdata))
                 
             }).catch((error)=>{
               console.log(error)

@@ -3,16 +3,19 @@ import Input from "../InputComponent/Input";
 import { useForm } from "react-hook-form";
 import authService from "../../appwrite/services"
 import { Link } from "react-router-dom";
-import SignUp from "./SignUp";
+import { useDispatch } from 'react-redux'
+import { login } from "../../store/authslice";
 const Login = () => {
+  const dispatch=useDispatch()
   const{register,handleSubmit}=useForm()
+
   function hadelLogin(data){
     if(data){
       try {
         authService.login(...data).then((authdata)=>{
             if(authdata){
               authService.getCurrentUser().then((curuserdata)=>{
-                  console.log(curuserdata)
+                dispatch(login(curuserdata))
               }).catch((err)=>{
                 console.log(err)
               })

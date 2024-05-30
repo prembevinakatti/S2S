@@ -2,6 +2,8 @@ import React from 'react'
 import Input from "../InputComponent/Input";
 import { useForm } from 'react-hook-form';
 import authService from '../../appwrite/services';
+import { Link } from 'react-router-dom';
+import Login from './Login';
 const SignUp = () => {
   const {register,handleSubmit}=useForm()
   function handelsignup(data){
@@ -39,7 +41,7 @@ const SignUp = () => {
             <button className="btn w-[20vw]"><img className="w-7" src="src/assets/google.png" alt="" />Continue with Google</button>
             <button className="btn w-[20vw] btn-active btn-primary">Sign Up</button>
 
-            <p>Don't have an acccount <span  className="text-blue-600">LogIn</span></p>
+            <p>Don't have an acccount <Link to="/login"  className="text-blue-600">LogIn</Link></p>
         </form>
       </div>
     </div>

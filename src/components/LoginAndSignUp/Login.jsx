@@ -2,6 +2,8 @@ import React from "react";
 import Input from "../InputComponent/Input";
 import { useForm } from "react-hook-form";
 import authService from "../../appwrite/services"
+import { Link } from "react-router-dom";
+import SignUp from "./SignUp";
 const Login = () => {
   const{register,handleSubmit}=useForm()
   function hadelLogin(data){
@@ -37,7 +39,7 @@ const Login = () => {
             <button className="btn w-[20vw]"><img className="w-7" src="src/assets/google.png" alt="" />Continue with Google</button>
             <button className="btn w-[20vw] btn-active btn-primary">Login</button>
 
-            <p>Don't have an acccount <span  className="text-blue-600">Sign Up</span></p>
+            <p>Don't have an acccount <Link to="/register"  className="text-blue-600">Sign Up</Link></p>
         </form>
       </div>
     </div>

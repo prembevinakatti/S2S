@@ -23,7 +23,8 @@ function App() {
   return (
     <>
       <Outlate />
-      <Dashboard />
+      {/* <Dashboard /> */}
+      <ProfilePage />
     </>
   );
 }

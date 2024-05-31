@@ -1,62 +1,65 @@
 import React, { useState } from "react";
 import Input from "../InputComponent/Input";
 import { useForm } from "react-hook-form";
-
 import profileService from "../../appwrite/profile";
 import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
-const ProfilePage = (editdata) => {
-  const authdata=useSelector((state)=>state.auth.userData)
-  const navigate=useNavigate()
+
+const ProfilePage = ({ editdata }) => {
+  const authdata = useSelector((state) => state.auth.userData);
+  const navigate = useNavigate();
   const { register, handleSubmit } = useForm();
-  const[filee,setfile]=useState()
-  const[fileurl,setfileurl]=useState()
-  function hanglepreviewimage(e) {
+  const [fileUrl, setFileUrl] = useState();
+
+  function handlePreviewImage(e) {
     const file = e.target.files[0];
     if (file) {
-        setfile(file);
-        const filepreview = URL.createObjectURL(file);
-        console.log("File preview URL:", filepreview); // Check if URL is generated correctly
-        setfileurl(filepreview);
+      const filePreview = URL.createObjectURL(file);
+      console.log("File preview URL:", filePreview); // Check if URL is generated correctly
+      setFileUrl(filePreview);
     }
-}
-  async  function handelprofile(data){
-      if(editdata){
+  }
 
-      }else{
-        try {
-          const fileid=await profileService.uploadfile(data.image)
-          if(fileid){
-            data.userId=authdata.$id
-            data.imageId=fileid
-            data.slug=createslug(data.name)
-            profileService.createProfile(...data).then((profiledata)=>{
-              console.log(profiledata)
-              if(profiledata){
-                navigate(`/dashbord${profiledata.$id}`)
-              }
-            })
-          }
-        } catch (error) {
-          
+  async function handleProfile(data) {
+    console.log(data);
+    if (editdata) {
+      // Handle edit case
+    } else {
+      try {
+        const fileId = await profileService.uploadFile(data.image[0]);
+        if (fileId) {
+          data.userId = authdata.$id;
+          data.imageId = fileId;
+          data.slug = createSlug(data.name);
+          profileService.createProfile(data).then((profileData) => {
+            console.log(profileData);
+            if (profileData) {
+              navigate(`/dashboard/${profileData.$id}`);
+            }
+          });
         }
+      } catch (error) {
+        console.error("Error uploading file:", error);
       }
     }
-    function createslug(name){
-      return name.toLowerCase()
+  }
+
+  function createSlug(name) {
+    return name.toLowerCase()
       .replace(/[^a-z0-9]+/g, '-')
-      .replace(/^-+|-+$/g, '-')
-    }
+      .replace(/^-+|-+$/g, '');
+  }
+
   return (
-    <form onSubmit={handleSubmit(handelprofile)}>
-      <div className="w-full h-[80vh]  flex items-center justify-center">
+    <form onSubmit={handleSubmit(handleProfile)}>
+      <div className="w-full h-[80vh] flex items-center justify-center">
         <div className="profileBox w-[70vw] h-[70vh] bg-slate-800 rounded-xl flex items-center justify-center">
           <div className="leftSide p-3 m-3 w-1/2 flex gap-10 flex-col items-center justify-center">
-            <div className="profileImg w-24 bg-white p-2 rounded-full">
+            <div className="profileImg w-24 h-24 bg-white p-2 rounded-full">
               <img
                 className="w-full h-full object-cover"
-                src={fileurl}
-                alt=""
+                src={fileUrl}
+                alt="Profile Preview"
               />
             </div>
             <div className="Add">
@@ -67,37 +70,33 @@ const ProfilePage = (editdata) => {
                 Add Image
               </label>
               <input
-              onChange={hanglepreviewimage}
                 id="image-upload"
                 type="file"
-                className=" hidden cursor-pointer"
+                className="hidden"
                 accept="image/png, image/jpg, image/jpeg, image/gif"
-                {...register("image")
-                 
-                }
+                {...register("image")}
+                onChange={handlePreviewImage}
               />
             </div>
           </div>
-          <div className=" divider lg:divider-horizontal"></div>
-          <div className="rightSide  w-1/2 flex flex-col items-center justify-start gap-3">
+          <div className="divider lg:divider-horizontal"></div>
+          <div className="rightSide w-1/2 flex flex-col items-center justify-start gap-3">
             <div>
               <label>Res Name</label>
-              <Input
-              placeholder="Res Name"{...register("name")}
-               />
+              <Input placeholder="Res Name" {...register("name")} />
             </div>
             <div>
               <label>Phone Number</label>
-              <Input placeholder="phone number"{...register("phoneNumber")} />
+              <Input placeholder="Phone Number" {...register("phoneNumber")} />
             </div>
             <div>
               <label>Location</label>
-              <Input placeholder="Location"{...register("location")}/>
+              <Input placeholder="Location" {...register("location")} />
             </div>
-                
-
             <div className="mt-5">
-              <button className="btn btn-wide bg-blue-600 text-2xl font-semibold">Set</button>
+              <button className="btn btn-wide bg-blue-600 text-2xl font-semibold">
+                Set
+              </button>
             </div>
           </div>
         </div>

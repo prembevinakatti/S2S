@@ -1,17 +1,17 @@
 import conf from "../configuration/config";
-import { Client, ID, Databases, Storage, Query } from "appwrite";
+import { Client, ID, Databases, Storage } from "appwrite";
 
 class ProfileServices {
     client = new Client();
     databases;
-    bucket;
+    storage;
     
     constructor(){
         this.client
             .setEndpoint(conf.appwriteurl)
             .setProject(conf.projectid);
         this.databases = new Databases(this.client);
-        this.bucket = new Storage(this.client);
+        this.storage = new Storage(this.client);
     }
 
     async createProfile({ UserId, name, location, coordinates, phoneNumber, imageId, slug }){
@@ -19,18 +19,20 @@ class ProfileServices {
             return await this.databases.createDocument(
                 conf.databaseid,
                 conf.collectionid,
-                slug,
+                ID.unique(),
                 {
                     name,
                     location,
                     phoneNumber,
                     imageId,
                     UserId,
-                    coordinates
+                    coordinates,
+                    slug
                 }
-            )
+            );
         } catch (error) {
             console.log("Appwrite service :: createProfile :: error", error);
+            throw error;
         }
     }
 
@@ -48,9 +50,10 @@ class ProfileServices {
                     UserId,
                     coordinates
                 }
-            )
+            );
         } catch (error) {
             console.log("Appwrite service :: updateProfile :: error", error);
+            throw error;
         }
     }
 
@@ -60,16 +63,16 @@ class ProfileServices {
                 conf.databaseid,
                 conf.collectionid,
                 slug
-            )
+            );
         } catch (error) {
             console.log("Appwrite service :: getUser :: error", error);
-            return false;
+            throw error;
         }
     }
 
     async deleteFile(fileId){
         try {
-            await this.bucket.deleteFile(
+            await this.storage.deleteFile(
                 conf.storageid,
                 fileId
             );
@@ -81,16 +84,24 @@ class ProfileServices {
     }
 
     getFilePreview(fileId){
-        return this.bucket.getFilePreview(
+        return this.storage.getFilePreview(
             conf.storageid,
             fileId
         );
     }
-    uploadfile(file){
-        return this.bucket.createFile(
-            conf.storageid,
-            file
-        )
+
+    async uploadFile(file){
+        try {
+            const response = await this.storage.createFile(
+                conf.storageid,
+                ID.unique(),
+                file
+            );
+            return response.$id;
+        } catch (error) {
+            console.log("Appwrite service :: uploadFile :: error", error);
+            throw error;
+        }
     }
 }
 

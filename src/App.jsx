@@ -20,8 +20,6 @@ function App() {
   }, []);
   return (
     <>
-    
-      <LandingPage />
       <Outlate />
     </>
   );

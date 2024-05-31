@@ -1,10 +1,6 @@
 
 import { Client, Account, ID } from "appwrite";
-const conf={
-    appwriteurl:"https://cloud.appwrite.io/v1",
-    projectid:"665844a0001bbe7995a9",
-
-}
+import conf from "../configuration/config";
 
 export class AuthService {
     client = new Client();

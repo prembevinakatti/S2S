@@ -6,6 +6,7 @@ import authService from "./appwrite/services";
 import { login } from "./store/authslice";
 import Outlate from "./components/Outlate";
 import ProfilePage from "./components/ProfilePage/ProfilePage";
+import Dashboard from "./components/Dashboard/Dashboard";
 function App() {
   const dispatch = useDispatch();
   useEffect(() => {
@@ -22,7 +23,7 @@ function App() {
   return (
     <>
       <Outlate />
-      <ProfilePage />
+      <Dashboard />
     </>
   );
 }

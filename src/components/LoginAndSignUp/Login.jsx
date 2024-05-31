@@ -4,10 +4,12 @@ import { useForm } from "react-hook-form";
 import authService from "../../appwrite/services"
 import { Link } from "react-router-dom";
 import { useDispatch } from 'react-redux'
-import { login } from "../../store/authslice";
+import { login } from '../../store/authslice'
+import { useNavigate } from "react-router-dom";
 const Login = () => {
   const dispatch=useDispatch()
   const{register,handleSubmit}=useForm()
+  const navigate = useNavigate()
 
   function hadelLogin(data){
     if(data){
@@ -16,6 +18,7 @@ const Login = () => {
             if(authdata){
               authService.getCurrentUser().then((curuserdata)=>{
                 dispatch(login(curuserdata))
+                navigate("/")
               }).catch((err)=>{
                 console.log(err)
               })
@@ -24,7 +27,7 @@ const Login = () => {
             console.log(err)
         })
         
-      } catch (error) {
+      }catch (error) {
         console.log(error)
       }
     }

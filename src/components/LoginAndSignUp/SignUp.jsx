@@ -5,8 +5,10 @@ import authService from '../../appwrite/services';
 import { Link } from 'react-router-dom';
 import { login } from "../../store/authslice";
 import { useDispatch } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
 const SignUp = () => {
   const dispatch=useDispatch()
+  const navigate = useNavigate()
   const {register,handleSubmit}=useForm()
   function handelsignup(data){
     try {
@@ -15,6 +17,7 @@ const SignUp = () => {
           if(authdata){
             authService.getCurrentUser().then((userdata)=>{
               dispatch(login(userdata))
+              navigate("/")
                 
             }).catch((error)=>{
               console.log(error)

@@ -6,7 +6,8 @@ const Outlate = () => {
   return (
     <>
     <Navbar />
-    <Outlet /></>
+    <Outlet />
+    </>
   )
 }
 

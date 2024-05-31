@@ -13,7 +13,7 @@ class ProfileServices {
   }
 
   async createProfile({
-    UserId,
+    userId,
     name,
     location,
     coordinates,
@@ -31,7 +31,7 @@ class ProfileServices {
           location,
           phoneNumber,
           imageId,
-          UserId,
+          userId,
           coordinates,
           slug,
         }

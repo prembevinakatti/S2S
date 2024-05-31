@@ -46,7 +46,7 @@ const ProfilePage = ({ editdata }) => {
           navigate(`/dashboard/${profileData.$id}`);
         }
       } else {
-        data.userId = authdata.$id;
+        data.userId =authdata.$id? authdata.$id:null
         data.slug = createSlug(data.name);
         const profileData = await profileService.createProfile(data);
         console.log("Created profile data:", profileData);

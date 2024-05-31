@@ -7,6 +7,8 @@ import { login } from "./store/authslice";
 import Outlate from "./components/Outlate";
 import ProfilePage from "./components/ProfilePage/ProfilePage";
 import Dashboard from "./components/Dashboard/Dashboard";
+import UploadPage from "./components/UploadPage/UploadPage";
+import PostPage from "./components/PostPage/PostPage";
 function App() {
   const dispatch = useDispatch();
   useEffect(() => {
@@ -24,7 +26,9 @@ function App() {
     <>
       <Outlate />
       {/* <Dashboard /> */}
-      <ProfilePage />
+      {/* <ProfilePage /> */}
+      {/* <UploadPage /> */}
+      <PostPage />
     </>
   );
 }

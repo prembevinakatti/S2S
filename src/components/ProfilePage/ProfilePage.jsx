@@ -23,7 +23,21 @@ const ProfilePage = ({ editdata }) => {
   async function handleProfile(data) {
     console.log(data);
     if (editdata) {
-      // Handle edit case
+      try {
+        const fileId = await profileService.uploadFile(data.image[0]);
+        if (fileId) {
+          data.imageId = fileId;
+          
+          const profileData = await profileService.updateProfile(editdata.userId,data);
+          console.log(profileData);
+          if (profileData) {
+            navigate(`/dashboard/${profileData.$id}`);
+          }
+        }
+      } catch (error) {
+        console.error("Error uploading file:", error);
+      }
+      
     } else {
       try {
         const fileId = await profileService.uploadFile(data.image[0]);

@@ -1,7 +1,13 @@
 import React, { useState } from "react";
 import Input from "../InputComponent/Input";
 import { useForm } from "react-hook-form";
+
+import profileService from "../../appwrite/profile";
+import { useSelector } from "react-redux";
+import { useNavigate } from "react-router-dom";
 const ProfilePage = (editdata) => {
+  const authdata=useSelector((state)=>state.auth.userData)
+  const navigate=useNavigate()
   const { register, handleSubmit } = useForm();
   const[filee,setfile]=useState()
   const[fileurl,setfileurl]=useState()
@@ -14,9 +20,35 @@ const ProfilePage = (editdata) => {
         setfileurl(filepreview);
     }
 }
+  async  function handelprofile(data){
+      if(editdata){
 
+      }else{
+        try {
+          const fileid=await profileService.uploadfile(data.image)
+          if(fileid){
+            data.userId=authdata.$id
+            data.imageId=fileid
+            data.slug=createslug(data.name)
+            profileService.createProfile(...data).then((profiledata)=>{
+              console.log(profiledata)
+              if(profiledata){
+                navigate(`/dashbord${profiledata.$id}`)
+              }
+            })
+          }
+        } catch (error) {
+          
+        }
+      }
+    }
+    function createslug(name){
+      return name.toLowerCase()
+      .replace(/[^a-z0-9]+/g, '-')
+      .replace(/^-+|-+$/g, '-')
+    }
   return (
-    <form>
+    <form onSubmit={handleSubmit(handelprofile)}>
       <div className="w-full h-[80vh]  flex items-center justify-center">
         <div className="profileBox w-[70vw] h-[70vh] bg-slate-800 rounded-xl flex items-center justify-center">
           <div className="leftSide p-3 m-3 w-1/2 flex gap-10 flex-col items-center justify-center">
@@ -50,20 +82,19 @@ const ProfilePage = (editdata) => {
           <div className="rightSide  w-1/2 flex flex-col items-center justify-start gap-3">
             <div>
               <label>Res Name</label>
-              <Input />
+              <Input
+              placeholder="Res Name"{...register("name")}
+               />
             </div>
             <div>
               <label>Phone Number</label>
-              <Input />
+              <Input placeholder="phone number"{...register("phoneNumber")} />
             </div>
             <div>
               <label>Location</label>
-              <Input />
+              <Input placeholder="Location"{...register("location")}/>
             </div>
-            <div>
-              <label>Number Of Feed</label>
-              <Input />
-            </div>
+                
 
             <div className="mt-5">
               <button className="btn btn-wide bg-blue-600 text-2xl font-semibold">Set</button>

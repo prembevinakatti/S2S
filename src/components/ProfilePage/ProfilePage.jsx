@@ -21,11 +21,12 @@ const ProfilePage = (editdata) => {
     }
 }
   async  function handelprofile(data){
+    console.log(data)
       if(editdata){
 
       }else{
         try {
-          const fileid=await profileService.uploadfile(data.image)
+          const fileid=await profileService.uploadFile(data.image)
           if(fileid){
             data.userId=authdata.$id
             data.imageId=fileid

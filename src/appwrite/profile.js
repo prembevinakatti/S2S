@@ -86,11 +86,17 @@ class ProfileServices {
             fileId
         );
     }
-    uploadfile(file){
-        return this.bucket.createFile(
-            conf.storageid,
-            file
-        )
+    async uploadFile(file){
+        try {
+            return await this.bucket.createFile(
+                conf.storageid,
+                ID.unique(),
+                file
+            )
+        } catch (error) {
+            console.log("Appwrite serive :: uploadFile :: error", error);
+            return false
+        }
     }
 }
 

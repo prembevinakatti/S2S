@@ -3,11 +3,17 @@ import Input from "../InputComponent/Input";
 import { useForm } from "react-hook-form";
 const ProfilePage = (editdata) => {
   const { register, handleSubmit } = useForm();
-
+  const[file,setfile]=useState()
   const[fileurl,setfileurl]=useState()
   function hanglepreviewimage(e){
        const file= e.target.files[0]
-       setfileurl(URL.createObjectURL(file))
+       if(file){
+        setfile(file)
+        const filepreview=URL.createObjectURL(file)
+
+        setfileurl(filepreview)
+       }
+      
   }
   return (
     <form>

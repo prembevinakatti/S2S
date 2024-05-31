@@ -8,52 +8,54 @@ import { useNavigate } from "react-router-dom";
 const ProfilePage = ({ editdata }) => {
   const authdata = useSelector((state) => state.auth.userData);
   const navigate = useNavigate();
-  const { register, handleSubmit } = useForm();
+  const { register, handleSubmit, setValue } = useForm();
   const [fileUrl, setFileUrl] = useState();
+  const [selectedFile, setSelectedFile] = useState(null);
 
   function handlePreviewImage(e) {
     const file = e.target.files[0];
     if (file) {
       const filePreview = URL.createObjectURL(file);
-      console.log("File preview URL:", filePreview); 
+      console.log("File preview URL:", filePreview);
       setFileUrl(filePreview);
+      setSelectedFile(file);
+      setValue("image", file); // Manually set the file value
     }
   }
 
   async function handleProfile(data) {
-    console.log(data);
-    if (editdata) {
-      try {
-        const fileId = await profileService.uploadFile(data.image[0]);
-        if (fileId) {
-          data.imageId = fileId;
-          
-          const profileData = await profileService.updateProfile(editdata.userId,data);
-          console.log(profileData);
-          if (profileData) {
-            navigate(`/dashboard/${profileData.$id}`);
-          }
-        }
-      } catch (error) {
-        console.error("Error uploading file:", error);
+    console.log("Selected file:", selectedFile);
+    if (!selectedFile && !editdata) {
+      console.error("No file selected.");
+      return;
+    }
+
+    try {
+      let fileId;
+      if (selectedFile) {
+        fileId = await profileService.uploadFile(selectedFile);
+        console.log("Uploaded file ID:", fileId);
       }
-      
-    } else {
-      try {
-        const fileId = await profileService.uploadFile(data.image[0]);
-        if (fileId) {
-          data.userId = authdata.$id;
-          data.imageId = fileId;
-          data.slug = createSlug(data.name);
-          const profileData = await profileService.createProfile(data);
-          console.log(profileData);
-          if (profileData) {
-            navigate(`/dashboard/${profileData.$id}`);
-          }
+
+      data.imageId = fileId || (editdata && editdata.imageId);
+
+      if (editdata) {
+        const profileData = await profileService.updateProfile(editdata.userId, data);
+        console.log("Updated profile data:", profileData);
+        if (profileData) {
+          navigate(`/dashboard/${profileData.$id}`);
         }
-      } catch (error) {
-        console.error("Error uploading file:", error);
+      } else {
+        data.userId = authdata.$id;
+        data.slug = createSlug(data.name);
+        const profileData = await profileService.createProfile(data);
+        console.log("Created profile data:", profileData);
+        if (profileData) {
+          navigate(`/dashboard/${profileData.$id}`);
+        }
       }
+    } catch (error) {
+      console.error("Error uploading file or creating/updating profile:", error);
     }
   }
 
@@ -92,7 +94,6 @@ const ProfilePage = ({ editdata }) => {
                 type="file"
                 className="hidden"
                 accept="image/png, image/jpg, image/jpeg, image/gif"
-                {...register("image")}
                 onChange={handlePreviewImage}
               />
             </div>

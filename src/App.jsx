@@ -4,13 +4,14 @@ import SignUp from './components/LoginAndSignUp/SignUp'
 import { useDispatch } from 'react-redux'
 import authService from './appwrite/services'
 import { login } from './store/authslice'
-import { data } from 'autoprefixer'
+
 function App() {
   const dispatch =useDispatch()
   useEffect(()=>{
     try {
       authService.getCurrentUser().then((data)=>{
         if(data){
+          console.log(data)
           dispatch(login(data))
         }
       })

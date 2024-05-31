@@ -10,9 +10,17 @@ const SignUp = () => {
   const dispatch=useDispatch()
   const navigate = useNavigate()
   const {register,handleSubmit}=useForm()
+  function generateslug(slug){
+      
+
+    return slug.toLowerCase()
+    .replace(/[^a-z0-9]+/g, '-')
+    .replace(/^-+|-+$/g, '-')
+  }
   function handelsignup(data){
     try {
       if (data){
+        data.name=
         authService.createAccount(data).then((authdata)=>{
           if(authdata){
             authService.getCurrentUser().then((userdata)=>{

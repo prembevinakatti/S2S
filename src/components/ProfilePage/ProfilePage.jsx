@@ -49,6 +49,10 @@ const ProfilePage = () => {
               <label>Number Of Feed</label>
               <Input />
             </div>
+
+            <div className="mt-5">
+              <button className="btn btn-wide bg-blue-600 text-2xl font-semibold">Set</button>
+            </div>
           </div>
         </div>
       </div>

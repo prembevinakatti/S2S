@@ -98,8 +98,7 @@ class ProfileServices {
       const response = await this.storage.createFile(
         conf.storageid,
         ID.unique(),
-        file
-      );
+        file      );
       return response.$id;
     } catch (error) {
       console.log("Appwrite service :: uploadFile :: error", error);

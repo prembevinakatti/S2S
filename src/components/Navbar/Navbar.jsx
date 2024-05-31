@@ -1,9 +1,13 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { useSelector } from "react-redux";
 import Logout from "../Logout";
+import { useDispatch } from "react-redux";
+import authService from "../../appwrite/services";
+import { login } from "../../store/authslice";
 const Navbar = () => {
   const authdata=useSelector((state)=>state.auth.userData)
   console.log(authdata);
+
 
   return (
     <div className="w-full h-[5vw] flex justify-between">

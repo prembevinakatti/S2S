@@ -16,7 +16,7 @@ import { Provider } from "react-redux";
 
 const router = createBrowserRouter(
   createRoutesFromElements(
-    <Route path="/" element={<Outlate />}>
+    <Route path="/" element={<App />}>
       <Route path="/login" element={<Login />} />
       <Route path="/register" element={<SignUp />} />
     </Route>

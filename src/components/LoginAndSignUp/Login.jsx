@@ -37,7 +37,7 @@ const Login = () => {
     <div className="w-full h-full flex items-center justify-center">
       <div className="LoginPage flex flex-col items-center p-2 w-[30vw] h-[80vh] border border-slate-500 rounded-lg">
         <img className="w-14 mb-5" src="src/assets/S2SLogo.png" alt="" />
-        <form className="flex gap-5 flex-col items-center" onClick={handleSubmit(hadelLogin)}>
+        <form className="flex gap-5 flex-col items-center" onSubmit={handleSubmit(hadelLogin)}>
             <h2 className="text-3xl text-white">Login</h2>
           <Input placeholder="Email" {...register("email")} />
           <Input placeholder="Password"{...register("password")} />

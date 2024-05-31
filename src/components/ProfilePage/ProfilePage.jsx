@@ -55,10 +55,14 @@ const ProfilePage = ({ editdata }) => {
       <div className="w-full h-[80vh] flex items-center justify-center">
         <div className="profileBox w-[70vw] h-[70vh] bg-slate-800 rounded-xl flex items-center justify-center">
           <div className="leftSide p-3 m-3 w-1/2 flex gap-10 flex-col items-center justify-center">
-            <div className="profileImg w-24 h-24 bg-white p-2 rounded-full">
+            <div className="profileImg w-24 h-24 bg-white rounded-full">
               <img
-                className="w-full h-full object-cover"
-                src={fileUrl}
+                className="w-full h-full object-cover rounded-full"
+                src={
+                  fileUrl
+                    ? fileUrl
+                    : "https://imgs.search.brave.com/bIkpHw6cWZRHzdOnYK7TnI67_uqVzpREf0V0pQWu_pw/rs:fit:500:0:0/g:ce/aHR0cHM6Ly9pLnBp/bmltZy5jb20vb3Jp/Z2luYWxzL2RkL2Yw/LzExL2RkZjAxMTBh/YTE5ZjQ0NTY4N2I3/Mzc2NzllZWM5Y2Iy/LmpwZw"
+                }
                 alt="Profile Preview"
               />
             </div>

@@ -1,8 +1,26 @@
-import React from "react";
-import Input from "../InputComponent/Input";
+import React, { useEffect } from "react";
+import { useState } from "react";
 import DetailsBox from "../DetailsBox";
-
+import profileService from "../../appwrite/profile";
+import { useParams } from "react-router-dom";
 const Dashboard = () => {
+  const [userData,setuserdata]=useState(null)
+  const{slug}=useParams()
+  useEffect(()=>{
+    async function getuser(){
+      try {
+        const userdata= await profileService.getUser(slug)
+        if(userdata){
+          setuserdata(userdata)
+        }
+   
+      } catch (error) {
+        console.log(error)
+      }
+    }
+    getuser()
+
+  })
   return (
     <div>
       <div className="mainbox flex flex-col items-center justify-center">
@@ -18,17 +36,17 @@ const Dashboard = () => {
             <div>
             <div className="m-3">
               <label htmlFor="">Res Name</label>
-              <DetailsBox details="Res Name" />
+              <DetailsBox details="Res Name" userData />
             </div>
             <div className="m-3">
               <label htmlFor="">Location</label>
-              <DetailsBox details="Location" />
+              <DetailsBox details="Location" userData />
             </div>
             </div>
             <div>
             <div className="m-3">
               <label htmlFor="">Phone Number</label>
-              <DetailsBox details="Phone Number" />
+              <DetailsBox details="Phone Number" userData />
             </div>
             <div className="m-2">
               <label htmlFor="">Numbers Of Feed</label>

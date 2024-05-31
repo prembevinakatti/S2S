@@ -31,12 +31,11 @@ const ProfilePage = ({ editdata }) => {
           data.userId = authdata.$id;
           data.imageId = fileId;
           data.slug = createSlug(data.name);
-          profileService.createProfile(data).then((profileData) => {
-            console.log(profileData);
-            if (profileData) {
-              navigate(`/dashboard/${profileData.$id}`);
-            }
-          });
+          const profileData = await profileService.createProfile(data);
+          console.log(profileData);
+          if (profileData) {
+            navigate(`/dashboard/${profileData.$id}`);
+          }
         }
       } catch (error) {
         console.error("Error uploading file:", error);
@@ -45,9 +44,10 @@ const ProfilePage = ({ editdata }) => {
   }
 
   function createSlug(name) {
-    return name.toLowerCase()
-      .replace(/[^a-z0-9]+/g, '-')
-      .replace(/^-+|-+$/g, '');
+    return name
+      .toLowerCase()
+      .replace(/[^a-z0-9]+/g, "-")
+      .replace(/^-+|-+$/g, "");
   }
 
   return (

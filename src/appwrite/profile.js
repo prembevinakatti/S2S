@@ -93,7 +93,7 @@ class ProfileServices {
     return this.storage.getFilePreview(conf.storageid, fileId);
   }
 
-  async uploadFile(file) {
+  async uploadFile({file}) {
     try {
       const response = await this.storage.createFile(
         conf.storageid,

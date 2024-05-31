@@ -15,7 +15,7 @@ const ProfilePage = ({ editdata }) => {
     const file = e.target.files[0];
     if (file) {
       const filePreview = URL.createObjectURL(file);
-      console.log("File preview URL:", filePreview); // Check if URL is generated correctly
+      console.log("File preview URL:", filePreview); 
       setFileUrl(filePreview);
     }
   }

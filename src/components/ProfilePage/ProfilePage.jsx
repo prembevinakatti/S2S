@@ -1,8 +1,14 @@
-import React from "react";
+import React, { useState } from "react";
 import Input from "../InputComponent/Input";
 import { useForm } from "react-hook-form";
-const ProfilePage = () => {
+const ProfilePage = (editdata) => {
   const { register, handleSubmit } = useForm();
+
+  const[fileurl,setfileurl]=useState()
+  function hanglepreviewimage(e){
+       const file= e.target.files[0]
+       setfileurl(URL.createObjectURL(file))
+  }
   return (
     <form>
       <div className="w-full h-[80vh]  flex items-center justify-center">
@@ -11,7 +17,7 @@ const ProfilePage = () => {
             <div className="profileImg w-24 bg-white p-2 rounded-full">
               <img
                 className="w-full h-full object-cover"
-                src="src/assets/google.png"
+                src={fileurl}
                 alt=""
               />
             </div>
@@ -23,11 +29,14 @@ const ProfilePage = () => {
                 Add Image
               </label>
               <input
+              onChange={hanglepreviewimage}
                 id="image-upload"
                 type="file"
                 className=" hidden cursor-pointer"
                 accept="image/png, image/jpg, image/jpeg, image/gif"
-                {...register("image")}
+                {...register("image")
+                 
+                }
               />
             </div>
           </div>

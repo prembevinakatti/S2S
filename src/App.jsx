@@ -5,6 +5,7 @@ import { useDispatch, useSelector } from "react-redux";
 import authService from "./appwrite/services";
 import { login } from "./store/authslice";
 import Outlate from "./components/Outlate";
+import ProfilePage from "./components/ProfilePage/ProfilePage";
 function App() {
   const dispatch = useDispatch();
   useEffect(() => {
@@ -21,6 +22,7 @@ function App() {
   return (
     <>
       <Outlate />
+      <ProfilePage />
     </>
   );
 }

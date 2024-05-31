@@ -5,16 +5,16 @@ const ProfilePage = (editdata) => {
   const { register, handleSubmit } = useForm();
   const[filee,setfile]=useState()
   const[fileurl,setfileurl]=useState()
-  function hanglepreviewimage(e){
-       const file= e.target.files[0]
-       if(file){
-        setfile(file)
-        const filepreview=URL.createObjectURL(filee)
+  function hanglepreviewimage(e) {
+    const file = e.target.files[0];
+    if (file) {
+        setfile(file);
+        const filepreview = URL.createObjectURL(file);
+        console.log("File preview URL:", filepreview); // Check if URL is generated correctly
+        setfileurl(filepreview);
+    }
+}
 
-        setfileurl(filepreview)
-       }
-      
-  }
   return (
     <form>
       <div className="w-full h-[80vh]  flex items-center justify-center">

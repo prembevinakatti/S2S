@@ -77,7 +77,7 @@ class UploadServices {
     }
   }
 
-  async getFood(slug) {
+  async getFood(food) {
     try {
       return await this.databases.getDocument(
         conf.databaseid,

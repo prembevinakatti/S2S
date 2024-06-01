@@ -103,6 +103,7 @@ const UploadPage = ({ editdata }) => {
           </button>
         </div>
       </div>
+
     </form>
   );
 };

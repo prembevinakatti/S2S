@@ -13,27 +13,27 @@ class ProfileServices {
   }
 
   async createProfile({
-    userId,
+    UserId,
     name,
     location,
     coordinates,
     phoneNumber,
-    imageId,
+    imgId,
     slug,
   }) {
     try {
       return await this.databases.createDocument(
         conf.databaseid,
         conf.collectionid,
-        ID.unique(),
+        slug,
         {
           name,
           location,
           phoneNumber,
-          imageId,
-          userId,
+          imgId,
+          UserId,
           coordinates,
-          slug,
+          
         }
       );
     } catch (error) {
@@ -44,7 +44,7 @@ class ProfileServices {
 
   async updateProfile(
     slug,
-    { UserId, name, location, coordinates, phoneNumber, imageId }
+    { UserId, name, location, coordinates, phoneNumber, imgId }
   ) {
     try {
       return await this.databases.updateDocument(
@@ -55,7 +55,7 @@ class ProfileServices {
           name,
           location,
           phoneNumber,
-          imageId,
+          imgId,
           UserId,
           coordinates,
         }

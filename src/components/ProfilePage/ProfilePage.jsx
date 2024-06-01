@@ -37,16 +37,17 @@ const ProfilePage = ({ editdata }) => {
         console.log("Uploaded file ID:", fileId);
       }
 
-      data.imageId = fileId || (editdata && editdata.imageId);
+      data.imgId = fileId.$id;
+      console.log(data.imgId)
 
       if (editdata) {
-        const profileData = await profileService.updateProfile(editdata.userId, data);
+        const profileData = await profileService.updateProfile(editdata.UserId, data);
         console.log("Updated profile data:", profileData);
         if (profileData) {
           navigate(`/dashboard/${profileData.$id}`);
         }
       } else {
-        data.userId =authdata.$id? authdata.$id:null
+        data.UserId =authdata.$id? authdata.$id:null
         data.slug = createSlug(data.name);
         const profileData = await profileService.createProfile(data);
         console.log("Created profile data:", profileData);

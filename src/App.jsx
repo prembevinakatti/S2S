@@ -26,9 +26,9 @@ function App() {
     <>
       <Outlate />
       {/* <Dashboard /> */}
-      {/* <ProfilePage /> */}
+      <ProfilePage />
       {/* <UploadPage /> */}
-      <PostPage />
+      {/* <PostPage /> */}
     </>
   );
 }

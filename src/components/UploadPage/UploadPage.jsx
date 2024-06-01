@@ -6,6 +6,7 @@ import { useForm } from "react-hook-form";
 import { ID } from "appwrite";
 import { useSelector } from "react-redux";
 import profileService from "../../appwrite/profile";
+import uploadServices from "../../appwrite/uploedservices";
 const UploadPage = (editdata) => {
   const authdata = useSelector((state) => state.auth.userData);
   const {register,handleSubmit} =useForm()
@@ -22,8 +23,8 @@ const UploadPage = (editdata) => {
             }
 
             if(imageid.length!=0){
-              data.imageids=JSON.stringify(imageid)
-              const uplodfile=async()=>(k)
+              data.imageids=JSON.stringifuploy(imageid)
+              const uplodfile=async()=>(uplodfile(data))
 
 
             }
@@ -36,16 +37,19 @@ const UploadPage = (editdata) => {
         try {
           data.slug=ID.unique()
           data.userId=authdata.$id
-          const imageid=[]
+          const imageId=[]
           data.images.map((image,index)=>{
              const data=async()=>(await profileService.uploadFile(image))
               if(data){
-                imageid.push(data)
+                imageId.push(data)
               }
 
-              if(imageid.length!=0){
-                data.imageids=JSON.stringify(imageid)
-                const uplodfile=async()=>(k)
+              if(imageId.length!=0){
+                data.imageId=JSON.stringify(imageId)
+                const uplodfile=async()=>(await uploadServices.uploadFile(data))
+                if(uplodfile){
+                  console.log(uplodfile)
+                }
 
 
               }
@@ -70,8 +74,8 @@ const UploadPage = (editdata) => {
               />
       </div>
       <div className="UploadDetails flex items-center flex-col justify-center gap-5">
-        <Input placeholder="Number Of People To Feed" {...register("nofood")} />
-        <TextArea placeholder="Food Items" {...register("details")} />
+        <Input placeholder="Number Of People To Feed" {...register("nofeed")} />
+        <TextArea placeholder="Food Items" {...register("fooddetails")} />
         <Input placeholder="Location" {...register("location")} />
         <DropDown {...register("modofdev")} />
         <button className="btn btn-outline w-[22vw] btn-primary" type="submit">Upload</button>

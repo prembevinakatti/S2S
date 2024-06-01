@@ -1,7 +1,7 @@
 import conf from "../configuration/config";
 import { Client, ID, Databases, Storage } from "appwrite";
 
-class uploadServices {
+class UploadServices {
   client = new Client();
   databases;
   storage;
@@ -114,5 +114,5 @@ class uploadServices {
   }
 }
 
-const profileService = new uploadServices();
-export default profileService;
+const uploadServices = new UploadServices();
+export default uploadServices;

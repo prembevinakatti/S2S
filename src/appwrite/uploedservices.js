@@ -1,5 +1,5 @@
 import conf from "../configuration/config";
-import { Client, ID, Databases, Storage } from "appwrite";
+import { Client, ID, Databases, Storage, Query } from "appwrite";
 
 class UploadServices {
   client = new Client();
@@ -77,12 +77,12 @@ class UploadServices {
     }
   }
 
-  async getFood(Query) {
+  async getFood(queries) {
     try {
-      return await this.databases.getDocument(
+      return await this.databases.listDocuments(
         conf.databaseid,
         conf.collectionid2,
-        Query
+        queries
       );
     } catch (error) {
       console.log("Appwrite service :: getFood :: error", error);

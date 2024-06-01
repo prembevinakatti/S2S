@@ -5,27 +5,7 @@ import { Query } from "appwrite";
 import authService from "../../appwrite/services";
 import { useSelector } from "react-redux";
 const HomePage = () => {
-<<<<<<< HEAD
-  const usedata=useSelector((state)=>(state.auth.userData))
-  const[posts,setposts]=useState(null)
-  const[type,settype]=useState("pending")
-  useEffect(()=>{
-   function getfooditeams(type){
-    if(type=="deliverd"){
-      const query=Query( [Query.equal("userId",`${usedata.$id}`,Query.equal("status",false))])
-      uploadServices.getFood({query}).then((data)=>{
-          setposts([...posts,data.documents])
-    })}
-    else{
-      const query=Query( [Query.equal("userId",`${usedata.$id}`,Query.equal("status",false))])
-      uploadServices.getFood({query}).then((data)=>{
-          setposts([...posts,data.documents])
-    })
-    }
-   }
-    getfooditeams(type)
-  },[type])
-=======
+
   const usedata = useSelector((state) => state.auth.userData);
   const [posts, setPosts] = useState([]);
   const [type, setType] = useState("pending");
@@ -53,7 +33,7 @@ const HomePage = () => {
     getFoodItems(type);
   }, [type, usedata]);
 
->>>>>>> 99a310e05489ebdd1d4cafab5bc92d1dcfc5eb16
+
   return (
     <div className="w-full h-screen overflow-auto">
       <div className="statusSection w-fit h-fit p-3 m-3 flex items-center justify-center gap-3">

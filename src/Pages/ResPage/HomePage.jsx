@@ -1,6 +1,5 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import Card from "../../components/CardComp/Card";
-import { useState } from "react";
 import uploadServices from "../../appwrite/uploedservices";
 import { Query } from "appwrite";
 import { useSelector } from "react-redux";
@@ -11,20 +10,26 @@ const HomePage = () => {
   const [type, setType] = useState("pending");
 
   useEffect(() => {
-    function getFoodItems(type) {
+    async function getFoodItems(type) {
+      if (!usedata?.$id) return;
+
       let query = [
-        Query.equal("userId", `${usedata.$id}`),
-        Query.equal("status", type === "delivered")
+        Query.equal("userId", usedata.$id),
+        Query.equal("status", type)
       ];
 
-      uploadServices.getFood(query).then((data) => {
+      console.log("Query:", query);
+
+      try {
+        const data = await uploadServices.getFood(query);
+        console.log("Fetched data:", data);
         setPosts(data.documents);
-      });
+      } catch (error) {
+        console.error("Error fetching food items:", error);
+      }
     }
 
-    if (usedata?.$id) {
-      getFoodItems(type);
-    }
+    getFoodItems(type);
   }, [type, usedata]);
 
   return (

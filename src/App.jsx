@@ -11,6 +11,8 @@ import UploadPage from "./components/UploadPage/UploadPage";
 import PostPage from "./components/PostPage/PostPage";
 import Card from "./components/CardComp/Card";
 import HomePage from "./Pages/ResPage/HomePage";
+import profileService from "./appwrite/profile";
+import { updateProfile } from "./store/profuleslice";
 function App() {
   const dispatch = useDispatch();
   useEffect(() => {
@@ -18,6 +20,10 @@ function App() {
       authService.getCurrentUser().then((userData) => {
         if (userData) {
           dispatch(login({ userData }));
+           profileService.getUser(userData.name).then((profiledata)=>{
+            dispatch(updateProfile({profiledata}))
+           })
+         
         }
       });
     } catch (error) {

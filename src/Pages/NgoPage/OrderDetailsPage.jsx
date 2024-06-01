@@ -16,7 +16,7 @@ const OrderDetailsPage = () => {
       if (!usedata?.$id) return;
 
       let query = [
-        Query.equal("userId", usedata.$id),
+        
         Query.equal("status", type)
       ];
 

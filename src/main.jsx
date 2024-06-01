@@ -27,6 +27,10 @@ import ResProfilePage from "./Pages/ResPage/ResProfilePage.jsx";
 import NgoProfilePage from "./Pages/NgoPage/NgoProfilePage.jsx";
 import ResDashboard from "./Pages/ResPage/ResDashboard.jsx";
 import NgoDashboard from "./Pages/NgoPage/NgoDashboard.jsx";
+import ResUploedpage from "./Pages/ResPage/ResUploedpage.jsx";
+import ResHomePage from "./Pages/ResPage/ResHomePage.jsx";
+import NgoHomePage from "./Pages/NgoPage/NgoHomePage.jsx";
+import OrderDetailsPage from "./Pages/NgoPage/OrderDetailsPage.jsx";
 
 const router = createBrowserRouter(
   createRoutesFromElements(
@@ -42,7 +46,11 @@ const router = createBrowserRouter(
         <Route path="/upload" element={<UploadPage />} />
         <Route path="/post/:slug" element={<PostPage />} />
         <Route path="/ResDashboard/:slug" element={<ResDashboard />} />
+        <Route path="ResUploedpage" element={<ResUploedpage />} />
         <Route path="/NgoDashboard/:slug" element={<NgoDashboard />} />
+        <Route path="ResHomepage" element={<ResHomePage/>}/>
+        <Route path="NgoHomepage" element={<NgoHomePage/>}/>
+        <Route path="Orderdetailspage" element={<OrderDetailsPage/>}/>
         <Route path="/home" element={<HomePage />} />
         <Route path="/profile" element={<ProfilePage />} />
         <Route path="/" element={<LandingPage />} />

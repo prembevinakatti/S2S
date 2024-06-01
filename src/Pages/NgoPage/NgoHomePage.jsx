@@ -1,24 +1,33 @@
 import React, { useEffect, useState } from "react";
+import { useSelector } from "react-redux";
+import { Query } from "appwrite";
 import Card from "../../components/CardComp/Card";
 import uploadServices from "../../appwrite/uploedservices";
-import { Query } from "appwrite";
-import { useSelector } from "react-redux";
 import Footer from "../../components/Footer/Footer";
 import Navbar from "../../components/Navbar/Navbar";
 
 const NgoHomePage = () => {
-  const usedata = useSelector((state) => state.auth.userData);
+  const userData = useSelector((state) => state.auth.userData);
+  const profileData = useSelector((state) => state.profile.profiledata);
   const [posts, setPosts] = useState([]);
   const [type, setType] = useState("pending");
 
   useEffect(() => {
+    // Function to fetch food items based on the selected type
     async function getFoodItems(type) {
-      if (!usedata?.$id) return;
+      let query;
 
-      let query = [
-        Query.equal("userId", usedata.$id),
-        Query.equal("status", type)
-      ];
+      // Construct the query based on the type
+      if (type === "NearLocation") {
+        query = [
+          Query.equal("location", profileData.location),
+          Query.equal("status", "pending")
+        ];
+      } else {
+        query = [
+          Query.equal("status", "pending")
+        ];
+      }
 
       console.log("Query:", query);
 
@@ -31,8 +40,9 @@ const NgoHomePage = () => {
       }
     }
 
+    // Call the function with the current type
     getFoodItems(type);
-  }, [type, usedata]);
+  }, [type, profileData.location]);
 
   return (
     <div className="w-full h-screen overflow-auto">
@@ -40,13 +50,13 @@ const NgoHomePage = () => {
       <div className="statusSection w-fit h-fit p-3 m-3 flex items-center justify-center gap-3">
         <button
           className="btn btn-primary btn-wide"
-          onClick={() => setType("delivered")}
+          onClick={() => setType("NearLocation")}
         >
           Near Location
         </button>
         <button
           className="btn btn-primary btn-wide"
-          onClick={() => setType("pending")}
+          onClick={() => setType("FarLocation")}
         >
           Far Location
         </button>
@@ -58,7 +68,7 @@ const NgoHomePage = () => {
           </div>
         ))}
       </div>
-      <Footer />
+     
     </div>
   );
 };

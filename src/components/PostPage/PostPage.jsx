@@ -1,7 +1,25 @@
-import React from 'react'
+import React, { useState } from 'react'
 import DetailsBox from "../DetailsBox";
+import { useParams } from 'react-router-dom';
+import uploedservices from '../../appwrite/uploedservices';
 
 const PostPage = () => {
+    const[fooddata,setfooddata]=useState()
+    const {slug}=useParams()
+    useEffect(() => {
+        async function getfoood() {
+          try {
+            const fooddata = await uploedservices.getFood(slug);
+            if (fooddata) {
+              console.log(fooddata)
+              setfooddata(fooddata);
+            }
+          } catch (error) {
+            console.log(error);
+          }
+        }
+        getfoood();
+      },[]);
   return (
     <div className='PostPage py-10 w-full h-full gap-5 flex items-center justify-center'>
         <div className="PostImg w-[25vw] h-[70vh]">

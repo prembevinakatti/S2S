@@ -77,12 +77,12 @@ class UploadServices {
     }
   }
 
-  async getFood({query}) {
+  async getFood(Query) {
     try {
       return await this.databases.getDocument(
         conf.databaseid,
         conf.collectionid2,
-        query
+        Query
       );
     } catch (error) {
       console.log("Appwrite service :: getFood :: error", error);

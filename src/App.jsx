@@ -9,6 +9,7 @@ import ProfilePage from "./components/ProfilePage/ProfilePage";
 import Dashboard from "./components/Dashboard/Dashboard";
 import UploadPage from "./components/UploadPage/UploadPage";
 import PostPage from "./components/PostPage/PostPage";
+import Card from "./components/CardComp/Card";
 function App() {
   const dispatch = useDispatch();
   useEffect(() => {
@@ -25,6 +26,7 @@ function App() {
   return (
     <>
       <Outlate />
+      <Card />
       {/* <Dashboard /> */}
       {/* <ProfilePage /> */}
       {/* <UploadPage /> */}

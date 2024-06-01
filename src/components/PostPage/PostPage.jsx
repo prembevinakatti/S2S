@@ -1,5 +1,6 @@
 import React from 'react'
 import DetailsBox from "../DetailsBox";
+import TextAreaBox from '../TextAreaBox';
 
 const PostPage = () => {
   return (
@@ -10,7 +11,7 @@ const PostPage = () => {
           alt=""
         />
         </div>
-        <div className="PostDetailes border border-slate-500 rounded-lg flex flex-col items-center justify-center gap-3 w-[50vw] h-[70vh]">
+        <div className="PostDetailes border border-slate-500 rounded-lg p-3 flex flex-col items-center justify-center gap-3 w-[50vw] h-fit">
             <div>
                 <label className='text-sm text-slate-500'>Res Name</label>
                 <DetailsBox details="Res Name" />
@@ -21,7 +22,7 @@ const PostPage = () => {
             </div>
             <div>
                 <label className='text-sm text-slate-500'>Items</label>
-                <DetailsBox  details="Items" />
+                <TextAreaBox  details="Items" />
             </div>
             <div>
                 <label className='text-sm text-slate-500'>Mode Of Delivery</label>
@@ -30,6 +31,10 @@ const PostPage = () => {
             <div>
                 <label className='text-sm text-slate-500'>Number Of People Feed</label>
                 <DetailsBox  details="Number Of People Feed" />
+            </div>
+            <div>
+                <label className='text-sm text-slate-500'>Phone Number</label>
+                <DetailsBox  details="Phone Number" />
             </div>
         </div>
     </div>

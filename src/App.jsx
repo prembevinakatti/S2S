@@ -26,11 +26,11 @@ function App() {
   return (
     <>
       <Outlate />
-      <Card />
+      {/* <Card /> */}
       {/* <Dashboard /> */}
       {/* <ProfilePage /> */}
       {/* <UploadPage /> */}
-      {/* <PostPage /> */}
+      <PostPage />
     </>
   );
 }

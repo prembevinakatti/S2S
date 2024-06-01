@@ -15,9 +15,9 @@ const Card = () => {
           />
         </div>
         <div className="CardContent flex flex-col gap-2">
-            <CardDetails details="details" />
-            <CardDetails details="details" />
-            <CardDetails details="details" />
+            <CardDetails details="NUmber Of Peoples To feed" />
+            <CardDetails details="Items" />
+            <CardDetails details="Mode Of Delivery" />
             <CardDetails details="details" />
         </div>
       </div>

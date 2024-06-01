@@ -69,7 +69,6 @@ const UploadPage = (editdata) => {
                 type="file"
                 className="hidden"
                 accept="image/png, image/jpg, image/jpeg, image/gif"
-                
                 {...register("images")}
               />
       </div>

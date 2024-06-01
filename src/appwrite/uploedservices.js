@@ -13,7 +13,7 @@ class UploadServices {
   }
 
   async uploadFile({
-    UserId,
+    userId,
     name,
     location,
     coordinates,
@@ -21,6 +21,7 @@ class UploadServices {
     imageId,
     fooddetails,
     slug,
+    nofeed,
   }) {
     try {
       return await this.databases.createDocument(
@@ -28,13 +29,14 @@ class UploadServices {
         conf.collectionid2,
         slug,
         {
-          UserId,
+          userId,
           name,
           location,
           coordinates,
           modofdev,
           imageId,
           fooddetails,
+          nofeed,
         }
       );
     } catch (error) {
@@ -44,13 +46,14 @@ class UploadServices {
   }
 
   async updateFile(slug, {
-    UserId,
+    userId,
     name,
     location,
     coordinates,
     modofdev,
     imageId,
     fooddetails,
+    nofeed,
   }) {
     try {
       return await this.databases.updateDocument(
@@ -58,13 +61,14 @@ class UploadServices {
         conf.collectionid2,
         slug,
         {
-          UserId,
+          userId,
           name,
           location,
           coordinates,
           modofdev,
           imageId,
           fooddetails,
+          nofeed,
         }
       );
     } catch (error) {

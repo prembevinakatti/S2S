@@ -25,7 +25,7 @@ const router = createBrowserRouter(
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<SignUp />} />
         <Route path="/upload" element={<UploadPage />} />
-        <Route path="/postpage/:slug" element={<PostPage />} />
+        <Route path="/post/:slug" element={<PostPage />} />
         <Route path="/dashboard/:slug" element={<Dashboard />} />
       </Route>
       <Route path="/profile" element={<ProfilePage />} />

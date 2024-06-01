@@ -20,7 +20,7 @@ const ProfilePage = ({ editdata }) => {
       console.log("File preview URL:", filePreview);
       setFileUrl(filePreview);
       setSelectedFile(file);
-      setValue("image", file); // Manually set the file value
+      setValue("image", file);
     }
   }
 

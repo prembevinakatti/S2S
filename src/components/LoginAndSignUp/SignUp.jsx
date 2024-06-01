@@ -54,7 +54,7 @@ const SignUp = ({flag}) => {
             <button className="btn w-[20vw]"><img className="w-7" src="src/assets/google.png" alt="" />Continue with Google</button>
             <button className="btn w-[20vw] btn-active btn-primary">Sign Up</button>
 
-            <p>Don't have an acccount <Link to={flag ? "/ResLoginPage" : "/NgoLoginPage"}  className="text-blue-600">LogIn</Link></p>
+            <p>Don't have an acccount ?<Link to={flag ? "/ResLoginPage" : "/NgoLoginPage"}  className="text-blue-600">LogIn</Link></p>
         </form>
       </div>
     </div>

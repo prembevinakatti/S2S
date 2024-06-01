@@ -15,6 +15,14 @@ import profileService from "./appwrite/profile";
 import { updateProfile } from "./store/profuleslice";
 import NgoHomePage from "./Pages/NgoPage/NgoHomePage";
 import OrderDetailsPage from "./Pages/NgoPage/OrderDetailsPage";
+import ResLoginPage from "./Pages/ResPage/ResLoginPage";
+import ResRegPage from "./Pages/ResPage/ResRegPage";
+import NgoLoginPage from "./Pages/NgoPage/NgoLoginPage";
+import NgoRegPage from "./Pages/NgoPage/NgoRegPage";
+import ResProfilePage from "./Pages/ResPage/ResProfilePage";
+import NgoProfilePage from "./Pages/NgoPage/NgoProfilePage";
+import NgoDashboard from "./Pages/NgoPage/NgoDashboard";
+import ResDashboard from "./Pages/ResPage/ResDashboard";
 function App() {
   const dispatch = useDispatch();
   useEffect(() => {
@@ -43,7 +51,16 @@ function App() {
       {/* <HomePage /> */}
       {/* <LandingPage /> */}
       {/* <NgoHomePage /> */}
-      <OrderDetailsPage />
+      {/* <OrderDetailsPage /> */}
+      {/* <ResLoginPage /> */}
+      {/* <ResRegPage /> */}
+      {/* <NgoLoginPage /> */}
+      {/* <NgoRegPage /> */}
+      {/* <ResProfilePage /> */}
+      {/* <NgoProfilePage /> */}
+      {/* <NgoDashboard/> */}
+      <ResDashboard />
+      
     </>
   );
 }

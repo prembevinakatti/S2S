@@ -3,6 +3,8 @@ import { useState } from "react";
 import DetailsBox from "../DetailsBox";
 import profileService from "../../appwrite/profile";
 import { useParams } from "react-router-dom";
+import Navbar from "../Navbar/Navbar";
+import Footer from "../Footer/Footer";
 const Dashboard = ({ flag }) => {
   const [userData, setuserdata] = useState(null);
   const { slug } = useParams();
@@ -22,6 +24,7 @@ const Dashboard = ({ flag }) => {
   }, []);
   return (
     <div>
+      <Navbar />
       <div className="mainbox flex flex-col items-center justify-center">
         <div className="firstBox w-full h-[45vh] flex items-center gap-10 justify-center">
           <div className="imageBox  rounded-lg p-2 flex items-center justify-center w-[25vw] h-[45vh]">
@@ -53,7 +56,9 @@ const Dashboard = ({ flag }) => {
               {flag ? null : (
                 <div className="m-3">
                   <label htmlFor="">Ngo Number</label>
-                  <DetailsBox details={userData ? userData.ngoNumber : "1233"} />
+                  <DetailsBox
+                    details={userData ? userData.ngoNumber : "1233"}
+                  />
                 </div>
               )}
             </div>
@@ -76,6 +81,7 @@ const Dashboard = ({ flag }) => {
           <div className="ratings"></div>
         </div>
       </div>
+      <Footer />
     </div>
   );
 };

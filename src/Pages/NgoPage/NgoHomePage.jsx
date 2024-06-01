@@ -3,6 +3,8 @@ import Card from "../../components/CardComp/Card";
 import uploadServices from "../../appwrite/uploedservices";
 import { Query } from "appwrite";
 import { useSelector } from "react-redux";
+import Footer from "../../components/Footer/Footer";
+import Navbar from "../../components/Navbar/Navbar";
 
 const NgoHomePage = () => {
   const usedata = useSelector((state) => state.auth.userData);
@@ -34,6 +36,7 @@ const NgoHomePage = () => {
 
   return (
     <div className="w-full h-screen overflow-auto">
+      <Navbar />
       <div className="statusSection w-fit h-fit p-3 m-3 flex items-center justify-center gap-3">
         <button
           className="btn btn-primary btn-wide"
@@ -55,6 +58,7 @@ const NgoHomePage = () => {
           </div>
         ))}
       </div>
+      <Footer />
     </div>
   );
 };

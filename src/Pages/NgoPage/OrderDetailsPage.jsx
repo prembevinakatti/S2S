@@ -3,6 +3,8 @@ import Card from "../../components/CardComp/Card";
 import uploadServices from "../../appwrite/uploedservices";
 import { Query } from "appwrite";
 import { useSelector } from "react-redux";
+import Navbar from "../../components/Navbar/Navbar";
+import Footer from "../../components/Footer/Footer";
 
 const OrderDetailsPage = () => {
   const usedata = useSelector((state) => state.auth.userData);
@@ -34,6 +36,7 @@ const OrderDetailsPage = () => {
 
   return (
     <div className="w-full h-screen overflow-auto">
+        <Navbar />
       <div className="statusSection w-fit h-fit p-3 m-3 flex items-center justify-center gap-3">
         <button
           className="btn btn-primary btn-wide"
@@ -61,6 +64,7 @@ const OrderDetailsPage = () => {
           </div>
         ))}
       </div>
+      <Footer />
     </div>
   );
 };

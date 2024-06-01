@@ -4,7 +4,6 @@ import Dashboard from "../../components/Dashboard/Dashboard";
 const NgoDashboard = () => {
   return (
     <>
-      <div>Ngo Dashboard</div>
       <Dashboard flag={false} />
     </>
   );

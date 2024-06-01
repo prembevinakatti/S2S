@@ -29,8 +29,8 @@ function App() {
       {/* <Card /> */}
       {/* <Dashboard /> */}
       {/* <ProfilePage /> */}
-      {/* <UploadPage /> */}
-      <PostPage />
+      <UploadPage />
+      {/* <PostPage /> */}
     </>
   );
 }

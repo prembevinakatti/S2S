@@ -67,7 +67,7 @@ const UploadPage = (editdata) => {
       <input
                 id="image-upload"
                 type="file"
-                className="hidden"
+                className=""
                 accept="image/png, image/jpg, image/jpeg, image/gif"
                 
                 {...register("images")}

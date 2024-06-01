@@ -4,6 +4,7 @@ import { useForm } from "react-hook-form";
 import profileService from "../../appwrite/profile";
 import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
+import Navbar from "../Navbar/Navbar";
 
 const ProfilePage = ({ editdata }) => {
   const authdata = useSelector((state) => state.auth.userData);
@@ -68,7 +69,9 @@ const ProfilePage = ({ editdata }) => {
   }
 
   return (
+    
     <form onSubmit={handleSubmit(handleProfile)}>
+      <Navbar />
       <div className="w-full h-[80vh] flex items-center justify-center">
         <div className="profileBox w-[70vw] h-[70vh] bg-slate-800 rounded-xl flex items-center justify-center">
           <div className="leftSide p-3 m-3 w-1/2 flex gap-10 flex-col items-center justify-center">

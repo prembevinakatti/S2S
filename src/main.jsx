@@ -15,15 +15,22 @@ import store from "./store/store.js";
 import { Provider } from "react-redux";
 import Dashboard from "./components/Dashboard/Dashboard.jsx";
 import ProfilePage from "./components/ProfilePage/ProfilePage.jsx";
+import PostPage from "./components/PostPage/PostPage.jsx";
+import UploadPage from "./components/UploadPage/UploadPage.jsx";
 
 const router = createBrowserRouter(
   createRoutesFromElements(
-    <Route path="/" element={<App />}>
-      <Route path="/login" element={<Login />} />
-      <Route path="/register" element={<SignUp />} />
+    <>
+      <Route path="/" element={<App />}>
+        <Route path="/login" element={<Login />} />
+        <Route path="/register" element={<SignUp />} />
+        <Route path="/upload" element={<UploadPage />} />
+        <Route path="/postpage/:slug" element={<PostPage />} />
+        <Route path="/dashboard/:slug" element={<Dashboard />} />
+      </Route>
       <Route path="/profile" element={<ProfilePage />} />
-      <Route path="/dashboard/:slug" element={<Dashboard />} />
-    </Route>
+    </>
+   
   )
 );
 

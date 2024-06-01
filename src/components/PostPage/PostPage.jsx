@@ -32,7 +32,7 @@ const PostPage = () => {
           alt=""
         />
         </div>
-        <div className="PostDetailes border border-slate-500 rounded-lg p-3 flex flex-col items-center justify-center gap-3 w-[50vw] h-fit">
+        <div className="PostDetailes m-5 border border-slate-500 rounded-lg p-3 flex flex-col items-center justify-center gap-3 w-[50vw] h-fit">
             <div>
                 <label className='text-sm text-slate-500'>Res Name</label>
                 <DetailsBox details="Res Name" />

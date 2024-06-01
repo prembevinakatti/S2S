@@ -5,6 +5,7 @@ import profileService from "../../appwrite/profile";
 import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import Navbar from "../Navbar/Navbar";
+import authService from "../../appwrite/services";
 
 const ProfilePage = ({ editdata }) => {
   const authdata = useSelector((state) => state.auth.userData);
@@ -48,8 +49,10 @@ const ProfilePage = ({ editdata }) => {
           navigate(`/dashboard/${profileData.$id}`);
         }
       } else {
+
         data.UserId =authdata.$id? authdata.$id:null
         data.slug = createSlug(data.name);
+        authService.updateName(data.slug)
         const profileData = await profileService.createProfile(data);
         console.log("Created profile data:", profileData);
         if (profileData) {

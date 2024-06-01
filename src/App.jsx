@@ -10,6 +10,7 @@ import Dashboard from "./components/Dashboard/Dashboard";
 import UploadPage from "./components/UploadPage/UploadPage";
 import PostPage from "./components/PostPage/PostPage";
 import Card from "./components/CardComp/Card";
+import HomePage from "./Pages/ResPage/HomePage";
 function App() {
   const dispatch = useDispatch();
   useEffect(() => {
@@ -29,8 +30,9 @@ function App() {
       {/* <Card /> */}
       {/* <Dashboard /> */}
       {/* <ProfilePage /> */}
-      <UploadPage />
+      {/* <UploadPage /> */}
       {/* <PostPage /> */}
+      <HomePage />
     </>
   );
 }

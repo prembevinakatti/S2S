@@ -8,7 +8,7 @@ const Footer = () => {
   };
 
   return (
-    <div className='fixed bottom-0 px-5 w-full h-14 rounded-md flex items-center justify-between bg-slate-800'>
+    <div className='fixed z-10 bottom-0 px-5 w-full h-14 rounded-md flex items-center justify-between bg-slate-800'>
       <button
         className={`btn btn-outline btn-primary ${activeButton === 'Home' ? 'btn-active' : ''}`}
         onClick={() => handleButtonClick('Home')}

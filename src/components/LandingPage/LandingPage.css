@@ -1,0 +1,8 @@
+.word {
+  transition: color 0.3s;
+}
+
+.word:hover {
+  color: #1984ff; 
+  filter: drop-shadow(0 0 2em #61dafbaa)
+}

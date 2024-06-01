@@ -17,20 +17,37 @@ import Dashboard from "./components/Dashboard/Dashboard.jsx";
 import ProfilePage from "./components/ProfilePage/ProfilePage.jsx";
 import PostPage from "./components/PostPage/PostPage.jsx";
 import UploadPage from "./components/UploadPage/UploadPage.jsx";
-import HomePage from "./Pages/ResPage/HomePage.jsx";
+import HomePage from "./Pages/ResPage/ResHomePage.jsx";
+import ResLoginPage from "./Pages/ResPage/ResLoginPage.jsx";
+import ResRegPage from "./Pages/ResPage/ResRegPage.jsx";
+import NgoLoginPage from "./Pages/NgoPage/NgoLoginPage.jsx";
+import NgoRegPage from "./Pages/NgoPage/NgoRegPage.jsx";
+import LandingPage from "./components/LandingPage/LandingPage.jsx";
+import ResProfilePage from "./Pages/ResPage/ResProfilePage.jsx";
+import NgoProfilePage from "./Pages/NgoPage/NgoProfilePage.jsx";
+import ResDashboard from "./Pages/ResPage/ResDashboard.jsx";
+import NgoDashboard from "./Pages/NgoPage/NgoDashboard.jsx";
 
 const router = createBrowserRouter(
   createRoutesFromElements(
     <>
       <Route path="/" element={<App />}>
-        <Route path="/login" element={<Login />} />
+        <Route path="/ResLoginPage" element={<ResLoginPage />} />
+        <Route path="/ResRegPage" element={<ResRegPage />} />
+        <Route path="/NgoLoginPage" element={<NgoLoginPage />} />
+        <Route path="/NgoRegPage" element={<NgoRegPage />} />
+        <Route path="/ResProfilePage" element={<ResProfilePage />} />
+        <Route path="/NgoProfilePage" element={<NgoProfilePage />} />
         <Route path="/register" element={<SignUp />} />
         <Route path="/upload" element={<UploadPage />} />
         <Route path="/post/:slug" element={<PostPage />} />
-        <Route path="/dashboard/:slug" element={<Dashboard />} />
+        <Route path="/ResDashboard/:slug" element={<ResDashboard />} />
+        <Route path="/NgoDashboard/:slug" element={<NgoDashboard />} />
         <Route path="/home" element={<HomePage />} />
         <Route path="/profile" element={<ProfilePage />} />
+        <Route path="/" element={<LandingPage />} />
       </Route>
+      <Route path="/" element={<Outlate />} />
     </>
   )
 );

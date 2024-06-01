@@ -4,7 +4,7 @@ import uploadServices from "../../appwrite/uploedservices";
 import { Query } from "appwrite";
 import { useSelector } from "react-redux";
 
-const HomePage = () => {
+const ResHomePage = () => {
   const usedata = useSelector((state) => state.auth.userData);
   const [posts, setPosts] = useState([]);
   const [type, setType] = useState("pending");
@@ -59,4 +59,4 @@ const HomePage = () => {
   );
 };
 
-export default HomePage;
+export default ResHomePage;

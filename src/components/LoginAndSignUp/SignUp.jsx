@@ -6,7 +6,7 @@ import { Link } from 'react-router-dom';
 import { login } from "../../store/authslice";
 import { useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
-const SignUp = () => {
+const SignUp = ({flag}) => {
   const dispatch=useDispatch()
   const navigate = useNavigate()
   const {register,handleSubmit}=useForm()
@@ -25,7 +25,7 @@ const SignUp = () => {
           if(authdata){
             authService.getCurrentUser().then((userdata)=>{
               dispatch(login(userdata))
-              navigate("/")
+              flag ? navigate("/ResProfilePage") :  navigate("/NgoProfilePage")
                 
             }).catch((error)=>{
               console.log(error)
@@ -46,7 +46,7 @@ const SignUp = () => {
         <img className="w-14 mb-5" src="src/assets/S2SLogo.png" alt="" />
         <form className="flex gap-5 flex-col items-center" onSubmit={handleSubmit(handelsignup)}>
             <h2 className="text-3xl text-white">Sign Up</h2>
-          <Input placeholder="Res Name"{...register("name")} />
+          {flag ? <Input placeholder="Res Name"{...register("name")} /> : <Input placeholder="NGO Name"{...register("name")} />}
           <Input placeholder="Email"{...register("email")} />
           <Input placeholder="Phone Number"{...register("phonenumber")} />
           <Input placeholder="Password"{...register("password")} />
@@ -54,7 +54,7 @@ const SignUp = () => {
             <button className="btn w-[20vw]"><img className="w-7" src="src/assets/google.png" alt="" />Continue with Google</button>
             <button className="btn w-[20vw] btn-active btn-primary">Sign Up</button>
 
-            <p>Don't have an acccount <Link to="/login"  className="text-blue-600">LogIn</Link></p>
+            <p>Don't have an acccount <Link to={flag ? "/ResLoginPage" : "/NgoLoginPage"}  className="text-blue-600">LogIn</Link></p>
         </form>
       </div>
     </div>

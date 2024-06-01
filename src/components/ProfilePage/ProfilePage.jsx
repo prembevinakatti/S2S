@@ -7,7 +7,7 @@ import { useNavigate } from "react-router-dom";
 import Navbar from "../Navbar/Navbar";
 import authService from "../../appwrite/services";
 
-const ProfilePage = ({ editdata }) => {
+const ProfilePage = ({ editdata,flag }) => {
   const authdata = useSelector((state) => state.auth.userData);
   const navigate = useNavigate();
   const { register, handleSubmit, setValue } = useForm();
@@ -40,27 +40,32 @@ const ProfilePage = ({ editdata }) => {
       }
 
       data.imgId = fileId.$id;
-      console.log(data.imgId)
+      console.log(data.imgId);
 
       if (editdata) {
-        const profileData = await profileService.updateProfile(editdata.UserId, data);
+        const profileData = await profileService.updateProfile(
+          editdata.UserId,
+          data
+        );
         console.log("Updated profile data:", profileData);
         if (profileData) {
           navigate(`/dashboard/${profileData.$id}`);
         }
       } else {
-
         data.UserId = authdata && authdata.$id ? authdata.$id : "vgvgvvhg";
         data.slug = createSlug(data.name);
-        authService.updateName(data.slug)
+        authService.updateName(data.slug);
         const profileData = await profileService.createProfile(data);
         console.log("Created profile data:", profileData);
         if (profileData) {
-          navigate(`/dashboard/${profileData.$id}`);
+          flag ? navigate(`/ResDashboard/${profileData.$id}`) : navigate(`/NgoDashboard/${profileData.$id}`);
         }
       }
     } catch (error) {
-      console.error("Error uploading file or creating/updating profile:", error);
+      console.error(
+        "Error uploading file or creating/updating profile:",
+        error
+      );
     }
   }
 
@@ -105,10 +110,23 @@ const ProfilePage = ({ editdata }) => {
           </div>
           <div className="divider lg:divider-horizontal"></div>
           <div className="rightSide w-1/2 flex flex-col items-center justify-start gap-3">
-            <div>
-              <label>Res Name</label>
-              <Input placeholder="Res Name" {...register("name")} />
-            </div>
+            {flag ? (
+              <div>
+                <label>Res Name</label>
+                <Input placeholder="Res Name" {...register("name")} />
+              </div>
+            ) : (
+              <div>
+                <label>Ngo Name</label>
+                <Input placeholder="Ngo Name" {...register("name")} />
+              </div>
+            )}
+            {flag ? null : (
+              <div>
+                <label>Res Name</label>
+                <Input placeholder="Ngo Number" {...register("ngoNumber")} />
+              </div>
+            )}
             <div>
               <label>Phone Number</label>
               <Input placeholder="Phone Number" {...register("phoneNumber")} />

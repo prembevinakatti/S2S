@@ -6,7 +6,8 @@ import { Link } from "react-router-dom";
 import { useDispatch } from 'react-redux'
 import { login } from '../../store/authslice'
 import { useNavigate } from "react-router-dom";
-const Login = () => {
+const Login = ({flag}) => {
+  console.log(flag)
   const dispatch=useDispatch()
   const{register,handleSubmit}=useForm()
   const navigate = useNavigate()
@@ -45,7 +46,7 @@ const Login = () => {
             <button className="btn w-[20vw]"><img className="w-7" src="src/assets/google.png" alt="" />Continue with Google</button>
             <button className="btn w-[20vw] btn-active btn-primary">Login</button>
 
-            <p>Don't have an acccount <Link to="/register"  className="text-blue-600">Sign Up</Link></p>
+            <p>Don't have an acccount <Link to={flag ? "/ResRegPage" : "/NgoRegPage"}  className="text-blue-600">Sign Up</Link></p>
         </form>
       </div>
     </div>

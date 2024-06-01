@@ -10,9 +10,11 @@ import Dashboard from "./components/Dashboard/Dashboard";
 import UploadPage from "./components/UploadPage/UploadPage";
 import PostPage from "./components/PostPage/PostPage";
 import Card from "./components/CardComp/Card";
-import HomePage from "./Pages/ResPage/HomePage";
+import HomePage from "./Pages/ResPage/ResHomePage";
 import profileService from "./appwrite/profile";
 import { updateProfile } from "./store/profuleslice";
+import NgoHomePage from "./Pages/NgoPage/NgoHomePage";
+import OrderDetailsPage from "./Pages/NgoPage/OrderDetailsPage";
 function App() {
   const dispatch = useDispatch();
   useEffect(() => {
@@ -32,7 +34,7 @@ function App() {
   }, []);
   return (
     <>
-      <Outlate />
+      {/* <Outlate /> */}
       {/* <Card /> */}
       {/* <Dashboard /> */}
       {/* <ProfilePage /> */}
@@ -40,6 +42,8 @@ function App() {
       {/* <PostPage /> */}
       {/* <HomePage /> */}
       {/* <LandingPage /> */}
+      {/* <NgoHomePage /> */}
+      <OrderDetailsPage />
     </>
   );
 }

@@ -20,6 +20,7 @@ class ProfileServices {
     phoneNumber,
     imgId,
     slug,
+    ngoNumber,
   }) {
     try {
       return await this.databases.createDocument(
@@ -33,6 +34,7 @@ class ProfileServices {
           imgId,
           UserId,
           coordinates,
+          ngoNumber
           
         }
       );

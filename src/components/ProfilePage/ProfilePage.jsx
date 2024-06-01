@@ -50,7 +50,7 @@ const ProfilePage = ({ editdata }) => {
         }
       } else {
 
-        data.UserId =authdata.$id? authdata.$id:null
+        data.UserId = authdata && authdata.$id ? authdata.$id : "vgvgvvhg";
         data.slug = createSlug(data.name);
         authService.updateName(data.slug)
         const profileData = await profileService.createProfile(data);
@@ -72,9 +72,7 @@ const ProfilePage = ({ editdata }) => {
   }
 
   return (
-    
     <form onSubmit={handleSubmit(handleProfile)}>
-      <Navbar />
       <div className="w-full h-[80vh] flex items-center justify-center">
         <div className="profileBox w-[70vw] h-[70vh] bg-slate-800 rounded-xl flex items-center justify-center">
           <div className="leftSide p-3 m-3 w-1/2 flex gap-10 flex-col items-center justify-center">

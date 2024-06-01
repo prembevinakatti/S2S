@@ -32,14 +32,14 @@ function App() {
   }, []);
   return (
     <>
-      {/* <Outlate /> */}
+      <Outlate />
       {/* <Card /> */}
       {/* <Dashboard /> */}
       {/* <ProfilePage /> */}
       {/* <UploadPage /> */}
       {/* <PostPage /> */}
       {/* <HomePage /> */}
-      <LandingPage />
+      {/* <LandingPage /> */}
     </>
   );
 }

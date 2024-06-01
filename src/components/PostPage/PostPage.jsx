@@ -13,7 +13,7 @@ const PostPage = () => {
     useEffect(() => {
         async function getfoood() {
           try {
-            const fooddata = await uploedservices.getFood(slug);
+            const fooddata = await uploedservices.getSingleFood(slug);
             if (fooddata) {
               console.log(fooddata)
               setfooddata(fooddata);

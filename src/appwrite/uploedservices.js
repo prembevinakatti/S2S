@@ -89,6 +89,18 @@ class UploadServices {
       throw error;
     }
   }
+  async getSingleFood(food) {
+    try {
+      return await this.databases.getDocument(
+        conf.databaseid,
+        conf.collectionid2,
+        food
+      );
+    } catch (error) {
+      console.log("Appwrite service :: getFood :: error", error);
+      throw error;
+    }
+  }
 
   async deleteFile(fileId) {
     try {

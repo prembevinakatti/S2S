@@ -17,6 +17,7 @@ import Dashboard from "./components/Dashboard/Dashboard.jsx";
 import ProfilePage from "./components/ProfilePage/ProfilePage.jsx";
 import PostPage from "./components/PostPage/PostPage.jsx";
 import UploadPage from "./components/UploadPage/UploadPage.jsx";
+import HomePage from "./Pages/ResPage/HomePage.jsx";
 
 const router = createBrowserRouter(
   createRoutesFromElements(
@@ -27,10 +28,10 @@ const router = createBrowserRouter(
         <Route path="/upload" element={<UploadPage />} />
         <Route path="/post/:slug" element={<PostPage />} />
         <Route path="/dashboard/:slug" element={<Dashboard />} />
+        <Route path="/home" element={<HomePage />} />
+        <Route path="/profile" element={<ProfilePage />} />
       </Route>
-      <Route path="/profile" element={<ProfilePage />} />
     </>
-   
   )
 );
 

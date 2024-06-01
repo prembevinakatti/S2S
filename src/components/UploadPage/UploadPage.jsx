@@ -6,7 +6,7 @@ import { useForm } from "react-hook-form";
 import { ID } from "appwrite";
 import { useSelector } from "react-redux";
 import profileService from "../../appwrite/profile";
-import uploadServices from "../../appwrite/uploadServices";
+import uploadServices from "../../appwrite/uploedservices";
 
 const UploadPage = ({ editdata }) => {
   const authdata = useSelector((state) => state.auth.userData);

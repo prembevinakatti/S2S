@@ -41,7 +41,7 @@ const Footer = () => {
             }`}
             onClick={() => (
               handleButtonClick(`/ResDashboard/${profileData.$id}`),
-              navigate(`/ResDashboard/${profileData.$id}`)
+              navigate(`/NgoDashboard/${profileData.$id}`)
             )}
           >
             Dashboard
@@ -66,7 +66,7 @@ const Footer = () => {
                 activeButton === "Upload" ? "btn-active" : ""
               }`}
               onClick={() => (
-                handleButtonClick("ResUploedpage"), navigate("ResUploedpage")
+                handleButtonClick("ResUploedpage"), navigate("/ResUploedpage")
               )}
             >
               Upload

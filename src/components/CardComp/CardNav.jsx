@@ -15,7 +15,7 @@ const CardNav = ({ name }) => {
   }, [name]);
 
   const imageSrc = useMemo(() => {
-    return data ? profileService.getFilePreview(data.imageId) : "";
+    return data && data.imageId ? profileService.getFilePreview(data.imageId) : "";
   }, [data]);
 
   return (

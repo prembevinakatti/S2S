@@ -7,6 +7,7 @@ import { updateProfile } from "./store/profuleslice";
 import ResDashboard from "./Pages/ResPage/ResDashboard";
 import Outlate from "../src/components/Outlate"
 import { Outlet, useNavigate } from "react-router-dom";
+import RequestCard from "./components/RequestCard/RequestCard";
 function App() {
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -34,7 +35,7 @@ function App() {
   }, []);
   return (
     <>
-      <Outlate />
+      {/* <Outlate /> */}
       {/* <Card /> */}
       {/* <Dashboard /> */}
       {/* <ProfilePage /> */}
@@ -52,6 +53,7 @@ function App() {
       {/* <NgoProfilePage /> */}
       {/* <NgoDashboard/> */}
       {/* <ResDashboard /> */}
+      <RequestCard />
     </>
   );
 }

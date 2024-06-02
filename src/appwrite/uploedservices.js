@@ -128,7 +128,21 @@ class UploadServices {
       throw error;
     }
   }
+  async updaterequests(slug,requests){
+    try {
+      return await this.databases.updateDocument(
+        conf.databaseid,
+        conf.collectionid2,
+        slug,
+        requests
+      )
+      
+    } catch (error) {
+      console.log("error in updaterequests")
+    }
+  }
 }
+
 
 const uploadServices = new UploadServices();
 export default uploadServices;

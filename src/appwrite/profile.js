@@ -34,8 +34,7 @@ class ProfileServices {
           imgId,
           UserId,
           coordinates,
-          ngoNumber
-          
+          ngoNumber,
         }
       );
     } catch (error) {
@@ -97,16 +96,49 @@ class ProfileServices {
 
   async uploadFile(file) {
     try {
-        return await this.storage.createFile(
-            conf.storageid,
-            ID.unique(),
-            file
-        );
+      return await this.storage.createFile(conf.storageid, ID.unique(), file);
     } catch (error) {
-        console.log("Appwrite service :: uploadFile :: error", error);
-        throw error;
+      console.log("Appwrite service :: uploadFile :: error", error);
+      throw error;
     }
-}
+  }
+
+  async updatePendingSection(slug, pendingSection) {
+    try {
+      return await this.databases.updateDocument(
+        conf.databaseid,
+        conf.collectionid,
+        slug,
+        pendingSection
+      );
+    } catch (error) {
+      console.log("error in updaterequests");
+    }
+  }
+  async updateApprovedSection(slug, approvedSection) {
+    try {
+      return await this.databases.updateDocument(
+        conf.databaseid,
+        conf.collectionid,
+        slug,
+        approvedSection
+      );
+    } catch (error) {
+      console.log("error in updaterequests");
+    }
+  }
+  async updateDeliveredSection(slug, deliveredSection) {
+    try {
+      return await this.databases.updateDocument(
+        conf.databaseid,
+        conf.collectionid,
+        slug,
+        deliveredSection
+      );
+    } catch (error) {
+      console.log("error in updaterequests");
+    }
+  }
 }
 
 const profileService = new ProfileServices();

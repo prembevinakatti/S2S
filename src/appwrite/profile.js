@@ -109,7 +109,7 @@ class ProfileServices {
         conf.databaseid,
         conf.collectionid,
         slug,
-        { pendingSection }
+        pendingSection 
       );
     } catch (error) {
       console.log("Appwrite service :: updatePendingSection :: error", error);

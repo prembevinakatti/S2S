@@ -8,6 +8,9 @@ import ResDashboard from "./Pages/ResPage/ResDashboard";
 import Outlate from "../src/components/Outlate"
 import { Outlet, useNavigate } from "react-router-dom";
 import RequestCard from "./components/RequestCard/RequestCard";
+import FeedBack from "./components/FeedBackRatings/FeedBack";
+import GotOrder from "./components/GotOrder";
+import NotificationPage from "./components/NotificationPage/NotificationPage";
 function App() {
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -35,7 +38,7 @@ function App() {
   }, []);
   return (
     <>
-      <Outlate />
+      {/* <Outlate /> */}
       {/* <Card /> */}
       {/* <Dashboard /> */}
       {/* <ProfilePage /> */}
@@ -54,6 +57,9 @@ function App() {
       {/* <NgoDashboard/> */}
       {/* <ResDashboard /> */}
       {/* <RequestCard /> */}
+      {/* <FeedBack /> */}
+      {/* <GotOrder /> */}
+      <NotificationPage />
     </>
   );
 }

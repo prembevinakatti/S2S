@@ -64,7 +64,7 @@ const RequestCard = ({ request }) => {
   }
 
   return (
-    <div className="w-full h-[100vh] flex items-center justify-center">
+    <div className="w-fit h-fit p-3 flex items-center justify-center">
       <div className="w-[40vw] relative h-fit p-5 rounded-lg border border-slate-500 flex items-center justify-between">
         <div className="timing absolute top-0 right-5">
           <p>{new Date(request.time).toLocaleString()}</p>

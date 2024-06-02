@@ -1,24 +1,92 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import DetailsBox from "../DetailsBox";
+import uploadServices from "../../appwrite/uploedservices";
+import profileService from "../../appwrite/profile";
 
-const RequestCard = () => {
+const RequestCard = ({ request }) => {
+  const [data, setData] = useState(null);
+
+  const handleRejectClick = async () => {
+    if (!request.allreq) {
+      console.error("Request list is not defined");
+      return;
+    }
+
+    try {
+      const newRequests = request.allreq.filter((req) => req.id !== request.id);
+      await uploadServices.updaterequests(request.slug, { requests: JSON.stringify(newRequests) });
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
+  const handleAcceptClick = async () => {
+    if (!request.allreq) {
+      console.error("Request list is not defined");
+      return;
+    }
+
+    try {
+      const newRequests = request.allreq.filter((req) => req.id !== request.id);
+      await uploadServices.updaterequests(request.slug, { requests: JSON.stringify(newRequests) });
+
+      if (data) {
+        let pendingSection = JSON.parse(data.pendingSection || "[]");
+        pendingSection = pendingSection.filter((id) => id !== request.id);
+        await profileService.updatePendingSection(data.$id, { pendingSection: JSON.stringify(pendingSection) });
+
+        const approvedSection = JSON.parse(data.approvedSection || "[]");
+        approvedSection.push(request.id);
+        await profileService.updateApprovedSection(data.$id, { approvedSection: JSON.stringify(approvedSection) });
+      }
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
+  useEffect(() => {
+    async function getUser() {
+      try {
+        const userData = await profileService.getUser(request.profileId);
+        if (userData) {
+          setData(userData);
+        }
+      } catch (error) {
+        console.error(error);
+      }
+    }
+    getUser();
+  }, [request]);
+
+  if (!data) {
+    return <div>Loading...</div>;
+  }
+
   return (
     <div className="w-full h-[100vh] flex items-center justify-center">
       <div className="w-[40vw] relative h-fit p-5 rounded-lg border border-slate-500 flex items-center justify-between">
         <div className="timing absolute top-0 right-5">
-            <p>timing</p>
+          <p>{new Date(request.time).toLocaleString()}</p>
         </div>
         <div className="ReqImage w-[8vw] flex items-center justify-center rounded-full overflow-hidden ">
-          <img
-            src="https://imgs.search.brave.com/oUCHWCnXFlhrQwRHjc75Qk249pfxXQIsWZRpJIZB7g8/rs:fit:500:0:0/g:ce/aHR0cHM6Ly9pLnBp/bmltZy5jb20vb3Jp/Z2luYWxzL2Q5L2Jh/LzRiL2Q5YmE0Yjdl/YWU2MGExNDJlYjE0/YzBhZWY4MzFkZTA4/LmpwZw"
-            alt=""
-          />
+          {/* <img
+            src={profileService.getFilePreview(data.imageId)}
+            alt="Profile"
+          /> */}
         </div>
         <div className="ResDetails">
-            <DetailsBox details="Ngo Name" />
-            <DetailsBox details="Location" />
-            <DetailsBox details="Number Of Peoples" />
-            <DetailsBox details="Phone Number" />
+          <DetailsBox details={data.name} />
+          <DetailsBox details={data.location} />
+          <DetailsBox details={data.nofeed} />
+          <DetailsBox details={data.phoneNumber} />
+          <div className="btns flex items-center justify-end gap-5 w-full mt-2">
+            <button onClick={handleRejectClick} className="btn btn-error">
+              Reject
+            </button>
+            <button onClick={handleAcceptClick} className="btn btn-info">
+              Accept
+            </button>
+          </div>
         </div>
       </div>
     </div>

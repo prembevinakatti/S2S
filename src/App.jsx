@@ -35,7 +35,7 @@ function App() {
   }, []);
   return (
     <>
-      {/* <Outlate /> */}
+      <Outlate />
       {/* <Card /> */}
       {/* <Dashboard /> */}
       {/* <ProfilePage /> */}
@@ -53,7 +53,7 @@ function App() {
       {/* <NgoProfilePage /> */}
       {/* <NgoDashboard/> */}
       {/* <ResDashboard /> */}
-      <RequestCard />
+      {/* <RequestCard /> */}
     </>
   );
 }

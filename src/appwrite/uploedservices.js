@@ -89,6 +89,7 @@ class UploadServices {
       throw error;
     }
   }
+
   async getSingleFood(food) {
     try {
       return await this.databases.getDocument(
@@ -128,21 +129,21 @@ class UploadServices {
       throw error;
     }
   }
-  async updaterequests(slug,requests){
+
+  async updaterequests(documentId, requests) {
     try {
       return await this.databases.updateDocument(
         conf.databaseid,
         conf.collectionid2,
-        slug,
+        documentId,
         requests
-      )
-      
+      );
     } catch (error) {
-      console.log("error in updaterequests")
+      console.log("error in updaterequests", error);
+      throw error;
     }
   }
 }
-
 
 const uploadServices = new UploadServices();
 export default uploadServices;

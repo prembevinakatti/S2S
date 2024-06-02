@@ -109,34 +109,39 @@ class ProfileServices {
         conf.databaseid,
         conf.collectionid,
         slug,
-        pendingSection
+        { pendingSection }
       );
     } catch (error) {
-      console.log("error in updaterequests");
+      console.log("Appwrite service :: updatePendingSection :: error", error);
+      throw error;
     }
   }
+
   async updateApprovedSection(slug, approvedSection) {
     try {
       return await this.databases.updateDocument(
         conf.databaseid,
         conf.collectionid,
         slug,
-        approvedSection
+        { approvedSection }
       );
     } catch (error) {
-      console.log("error in updaterequests");
+      console.log("Appwrite service :: updateApprovedSection :: error", error);
+      throw error;
     }
   }
+
   async updateDeliveredSection(slug, deliveredSection) {
     try {
       return await this.databases.updateDocument(
         conf.databaseid,
         conf.collectionid,
         slug,
-        deliveredSection
+        { deliveredSection }
       );
     } catch (error) {
-      console.log("error in updaterequests");
+      console.log("Appwrite service :: updateDeliveredSection :: error", error);
+      throw error;
     }
   }
 }

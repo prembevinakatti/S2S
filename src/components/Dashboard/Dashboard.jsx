@@ -70,7 +70,7 @@ const Dashboard = ({ flag }) => {
               </div>
               <div className="m-2">
                 <label htmlFor="">Numbers Of Feed</label>
-                <DetailsBox details={userData ? userData.name : "1233"} />
+                <DetailsBox details="0" />
               </div>
             </div>
           </div>

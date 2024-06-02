@@ -24,7 +24,6 @@ const Dashboard = ({ flag }) => {
   }, []);
   return (
     <div>
-      <Navbar />
       <div className="mainbox flex flex-col items-center justify-center">
         <div className="firstBox w-full h-[45vh] flex items-center gap-10 justify-center">
           <div className="imageBox  rounded-lg p-2 flex items-center justify-center w-[25vw] h-[45vh]">

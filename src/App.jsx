@@ -5,30 +5,27 @@ import { login } from "./store/authslice";
 import profileService from "./appwrite/profile";
 import { updateProfile } from "./store/profuleslice";
 import ResDashboard from "./Pages/ResPage/ResDashboard";
-import { useNavigate } from "react-router-dom";
+import Outlate from "../src/components/Outlate"
+import { Outlet, useNavigate } from "react-router-dom";
 function App() {
   const dispatch = useDispatch();
-  const navigate=useNavigate()
+  const navigate = useNavigate();
+  const profileData = useSelector((state) => state.profile.profiledata);
   useEffect(() => {
-    const profileData = useSelector((state) => state.profile.profiledata);
     try {
       authService.getCurrentUser().then((userData) => {
         if (userData) {
           dispatch(login({ userData }));
-           profileService.getUser(userData.name).then((profiledata)=>{
-            
-            dispatch(updateProfile({profiledata}))
-
-           })
-           if(profileData==null){
-              if(profileData.ngoNumber==null||undefined||""){
-                navigate("ResProfilePage")
-              }
-              else{
-                navigate("NgoProfilePage")
-              }
-           }
-         
+          profileService.getUser(userData.name).then((profiledata) => {
+            dispatch(updateProfile({ profiledata }));
+          });
+          // if (profileData == null) {
+          //   if (profileData.ngoNumber == null || undefined || "") {
+          //     navigate("ResProfilePage");
+          //   } else {
+          //     navigate("NgoProfilePage");
+          //   }
+          // }
         }
       });
     } catch (error) {
@@ -37,7 +34,7 @@ function App() {
   }, []);
   return (
     <>
-      {/* <Outlate /> */}
+      <Outlate />
       {/* <Card /> */}
       {/* <Dashboard /> */}
       {/* <ProfilePage /> */}
@@ -54,8 +51,7 @@ function App() {
       {/* <ResProfilePage /> */}
       {/* <NgoProfilePage /> */}
       {/* <NgoDashboard/> */}
-      <ResDashboard />
-      
+      {/* <ResDashboard /> */}
     </>
   );
 }

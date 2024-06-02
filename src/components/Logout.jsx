@@ -9,7 +9,7 @@ const Logout = () => {
   function handelogout(){
     authService.logout().then(()=>{
       
-      navigate("/login")
+      navigate("/")
       dispatch(logout())
     })
   }

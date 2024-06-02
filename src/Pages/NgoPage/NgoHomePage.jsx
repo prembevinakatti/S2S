@@ -42,11 +42,10 @@ const NgoHomePage = () => {
 
     // Call the function with the current type
     getFoodItems(type);
-  }, [type, profileData.location]);
+  }, [type]);
 
   return (
     <div className="w-full h-screen overflow-auto">
-      <Navbar />
       <div className="statusSection w-fit h-fit p-3 m-3 flex items-center justify-center gap-3">
         <button
           className="btn btn-primary btn-wide"

@@ -19,7 +19,7 @@ const Login = ({flag}) => {
             if(authdata){
               authService.getCurrentUser().then((curuserdata)=>{
                 dispatch(login(curuserdata))
-                navigate("/")
+                flag ? navigate("/ResHomePage") : navigate("/NgoHomePage")
               }).catch((err)=>{
                 console.log(err)
               })

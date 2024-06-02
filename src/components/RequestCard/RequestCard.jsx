@@ -14,7 +14,8 @@ const RequestCard = ({ request }) => {
 
     try {
       const newRequests = request.allreq.filter((req) => req.id !== request.id);
-      await uploadServices.updaterequests(request.slug, { requests: JSON.stringify(newRequests) });
+      const newuploed= await uploadServices.updaterequests(request.slug, { requests: JSON.stringify(newRequests) });
+      console.log(newuploed)
     } catch (error) {
       console.error(error);
     }

@@ -110,7 +110,7 @@ const PostPage = ({ flag }) => {
       <div>
         {!profiledata.ngoNumber && fooddata.requests
           ? JSON.parse(fooddata.requests).map((request) => (
-              <RequestCard key={request.id} request={{ ...request, allreq: JSON.parse(fooddata.requests), slug: fooddata.$id }} />
+              <RequestCard key={request.id} request={{ request, allreq: JSON.parse(fooddata.requests), slug: fooddata.$id }} />
             ))
           : null}
       </div>

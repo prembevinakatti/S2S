@@ -4,22 +4,25 @@ import uploadServices from '../appwrite/uploedservices';
 import profileService from '../appwrite/profile';
 
 const GotOrder = ({ data }) => {
-  const [profileData, setProfileData] = useState();
+  const [profileData, setProfileData] = useState(null);
   const reduxProfileData = useSelector((state) => state.profile.profiledata);
-  console.log(data)
+
   const handleApprove = async () => {
     try {
+      if (!profileData) throw new Error('Profile data not loaded');
+
       // Update approvedSection
-      let approvedSection = JSON.parse(data.approvedSection || '[]');
+      let approvedSection = JSON.parse(profileData.approvedSection || '[]');
       approvedSection = approvedSection.filter((id) => id !== data.slug);
+
       const updateApp = await profileService.updateapprovedSection(profileData.$id, {
         approvedSection: JSON.stringify(approvedSection),
       });
 
       if (updateApp) {
         // Update deliveredSection
-        let deliveredSection = JSON.parse(data.deliveredSection || '[]');
-        deliveredSection.push(data.slug); // Ensure push is used correctly
+        let deliveredSection = JSON.parse(profileData.deliveredSection || '[]');
+        deliveredSection.push(data.slug);
 
         const updateDel = await profileService.updatedeliveredSection(profileData.$id, {
           deliveredSection: JSON.stringify(deliveredSection),
@@ -27,8 +30,8 @@ const GotOrder = ({ data }) => {
 
         if (updateDel) {
           console.log('Delivered');
-          const ghg={ slug: data.slug, status: 'delivered' }
-          await uploadServices.updatestatus({ghg});
+          const updateStatusData = { slug: data.slug, status: 'delivered' };
+          await uploadServices.updatestatus(updateStatusData);
         }
       }
     } catch (error) {
@@ -37,7 +40,7 @@ const GotOrder = ({ data }) => {
   };
 
   useEffect(() => {
-    async function getUser() {
+    const getUser = async () => {
       try {
         const userData = await profileService.getUser(reduxProfileData.$id);
         if (userData) {
@@ -46,7 +49,7 @@ const GotOrder = ({ data }) => {
       } catch (error) {
         console.error('Error in getUser:', error);
       }
-    }
+    };
     getUser();
   }, [reduxProfileData]);
 

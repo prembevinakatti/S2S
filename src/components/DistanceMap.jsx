@@ -28,7 +28,7 @@ const DistanceCalculator = ({ originCoords, destinationCoords }) => {
 
       const data = response.data;
 
-      if (data.routes && data.routes.length > 0) {
+      if (data.routes && data.routes.length > 0 && data.routes[0].geometry && data.routes[0].geometry.coordinates) {
         setDistance(data.routes[0].summary.distance / 1000); // Convert to km
         setDuration(data.routes[0].summary.duration / 60); // Convert to minutes
         setRoute(data.routes[0].geometry.coordinates.map(coord => ({

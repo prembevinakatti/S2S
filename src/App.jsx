@@ -30,7 +30,7 @@ function App() {
       } catch (error) {
         console.log(error);
       } finally {
-        setLoading(false); // Set loading to false after data is fetched
+        setLoading(false);
       }
     };
 
@@ -46,7 +46,6 @@ function App() {
   return (
     <>
       <Outlate />
-      {/* Add your other components here */}
     </>
   );
 }

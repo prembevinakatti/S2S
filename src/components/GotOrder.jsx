@@ -15,7 +15,8 @@ const GotOrder = ({data}) => {
     deliveredSection = deliveredSection.push(data.slug);
    const updatedel= await profileService.updatedeliveredSection(profiledata.$id, { deliveredSection: JSON.stringify(deliveredSection) });
       if(updatedel){
-        await uploadServices.updaterequests(data.slug,"delivered")
+        console.log("deleverd")
+        await uploadServices.updatestatus({slug:data.slug,status:"delivered"})
         
       }
    }

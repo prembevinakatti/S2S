@@ -123,7 +123,7 @@ const PostPage = ({ flag }) => {
             <button
               className={`${type === "pending" ? 'btn-disabled' : 'btn btn-wide btn-outline btn-primary'}`}
               onClick={handleOrder}
-              disabled={type === "pending"||"delivered"}
+              disabled={type === "pending"}
             >
               {type}
             </button>

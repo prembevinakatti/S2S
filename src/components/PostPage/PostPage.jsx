@@ -52,7 +52,11 @@ const PostPage = ({ flag }) => {
             if (request.profileId === profiledata.$id) {
               setType("pending");
             }
+            
           });
+          if(fooddata.status=="delivered"){
+            setType("delivered")
+          }
           const profileapp= JSON.parse(profiledata.approvedSection||"[]")
           if(profileapp){
             profileapp.map((Id)=>{
@@ -119,7 +123,7 @@ const PostPage = ({ flag }) => {
             <button
               className={`${type === "pending" ? 'btn-disabled' : 'btn btn-wide btn-outline btn-primary'}`}
               onClick={handleOrder}
-              disabled={type === "pending"}
+              disabled={type === "pending"||"delivered"}
             >
               {type}
             </button>

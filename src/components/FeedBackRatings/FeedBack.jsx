@@ -3,7 +3,7 @@ import TextArea from "../TextArea";
 
 const FeedBack = () => {
   return (
-    <div>
+    <div className="w-full flex items-center justify-center">
       <div className="FeedBox w-[40vw] h-[50vh] border flex flex-col items-center justify-center gap-20 border-slate-600 rounded-lg">
         <div className="feedback w-full flex flex-col items-center justify-center gap-5">
           <h1 className="text-3xl text-center w-full">FeedBack</h1>

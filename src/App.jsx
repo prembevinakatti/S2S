@@ -14,12 +14,14 @@ import NotificationPage from "./components/NotificationPage/NotificationPage";
 import LoadingPage from "./components/LoadingPage";
 import Navbar from "./components/Navbar/Navbar";
 import Footer from "./components/Footer/Footer";
+import DistanceCalculator from "./components/DistanceMap";
 function App() {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const profileData = useSelector((state) => state.profile.profiledata);
   const [loading, setLoading] = useState(true); // State variable to manage loading
-
+  const originCoords = { lat: 40.7580, lng: -73.9855 }; // Times Square, New York City
+  const destinationCoords = { lat: 40.7851, lng: -73.9683 }; // Central Park, New York City
   useEffect(() => {
     const fetchData = async () => {
       try {
@@ -49,7 +51,8 @@ function App() {
     <>
     {/* <Navbar /> */}
       <Outlate />
-      {/* <Footer /> */}
+      <DistanceCalculator originCoords={originCoords} destinationCoords={destinationCoords} />
+      
     </>
   );
 }

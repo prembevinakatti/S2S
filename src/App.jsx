@@ -38,7 +38,7 @@ function App() {
   }, []);
   return (
     <>
-      {/* <Outlate /> */}
+       <Outlate /> 
       {/* <Card /> */}
       {/* <Dashboard /> */}
       {/* <ProfilePage /> */}
@@ -59,7 +59,7 @@ function App() {
       {/* <RequestCard /> */}
       {/* <FeedBack /> */}
       {/* <GotOrder /> */}
-      <NotificationPage />
+      
     </>
   );
 }

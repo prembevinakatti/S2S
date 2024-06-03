@@ -7,14 +7,23 @@ import TextAreaBox from "../TextAreaBox";
 import profileService from "../../appwrite/profile";
 import { ID } from "appwrite";
 import RequestCard from "../RequestCard/RequestCard";
+import GotOrder from "../GotOrder";
 
 const PostPage = ({ flag }) => {
   const profiledata = useSelector((state) => state.profile.profiledata);
   const [fooddata, setFooddata] = useState(null);
   const [type, setType] = useState("place order");
-  const time = Date.now();
+  const [app,setapp]=useState(false)
+  const currentDate = new Date();
+  const year = currentDate.getFullYear();
+  const month = String(currentDate.getMonth() + 1).padStart(2, '0'); // Months are zero-based
+  const day = String(currentDate.getDate()).padStart(2, '0');
+  const hours = String(currentDate.getHours()).padStart(2, '0');
+  const minutes = String(currentDate.getMinutes()).padStart(2, '0');
+  const seconds = String(currentDate.getSeconds()).padStart(2, '0');
+  const time = `${year}-${month}-${day} ${hours}:${minutes}:${seconds}`;
   const { slug } = useParams();
-
+  
   const handleOrder = async () => {
     try {
       const requests = JSON.parse(fooddata.requests || "[]");
@@ -24,7 +33,7 @@ const PostPage = ({ flag }) => {
       if (profiledata) {
         const pendingSection = JSON.parse(profiledata.pendingSection || "[]");
         pendingSection.push(fooddata.$id);
-        await profileService.updatePendingSection(profiledata.$id, { pendingSection: JSON.stringify(pendingSection) });
+        await profileService.updatependingSection(profiledata.$id, { pendingSection: JSON.stringify(pendingSection) });
         setType("pending");
       }
     } catch (error) {
@@ -51,6 +60,16 @@ const PostPage = ({ flag }) => {
     }
     if (slug && profiledata) {
       getFood();
+    }
+    profileapp= JSON.parse(profiledata.approvedSection||"[]")
+    if(profileapp){
+      profileapp.map((Id)=>{
+        if(Id==fooddata.$id){
+          setapp(true)
+          
+        }
+
+      })
     }
   }, [slug, profiledata]);
 
@@ -113,6 +132,11 @@ const PostPage = ({ flag }) => {
               <RequestCard key={request.id} request={{ request, allreq: JSON.parse(fooddata.requests), slug: fooddata.$id }} />
             ))
           : null}
+          {/* {
+            app&&(
+              <GotOrder data={{slug:fooddata.$id,}}/>
+            )
+          } */}
       </div>
     </>
   );

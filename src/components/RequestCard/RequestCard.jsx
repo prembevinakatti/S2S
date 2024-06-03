@@ -2,8 +2,10 @@ import React, { useEffect, useState } from "react";
 import DetailsBox from "../DetailsBox";
 import uploadServices from "../../appwrite/uploedservices";
 import profileService from "../../appwrite/profile";
+import { ID } from "appwrite";
 
 const RequestCard = ({ request }) => {
+  console.log(request)
   const [data, setData] = useState(null);
 
   const handleRejectClick = async () => {
@@ -28,17 +30,17 @@ const RequestCard = ({ request }) => {
     }
 
     try {
-      const newRequests = request.allreq.filter((req) => req.id !== request.request.id);
+      const newRequests =[ ]
       await uploadServices.updaterequests(request.slug, { requests: JSON.stringify(newRequests) });
 
       if (data) {
         let pendingSection = JSON.parse(data.pendingSection || "[]");
-        pendingSection = pendingSection.filter((id) => id !== request.request.id);
-        await profileService.updatePendingSection(data.$id, { pendingSection: JSON.stringify(pendingSection) });
+        pendingSection = pendingSection.filter((id) => id !==request.slug);
+        await profileService.updatependingSection(data.$id, { pendingSection: JSON.stringify(pendingSection) });
 
         const approvedSection = JSON.parse(data.approvedSection || "[]");
-        approvedSection.push(request.request.id);
-        await profileService.updateApprovedSection(data.$id, { approvedSection: JSON.stringify(approvedSection) });
+        approvedSection.push(request.slug);
+        await profileService.updateapprovedSection(data.$id, { approvedSection: JSON.stringify(approvedSection) });
       }
     } catch (error) {
       console.error(error);
@@ -57,6 +59,7 @@ const RequestCard = ({ request }) => {
       }
     }
     getUser();
+   
   }, [request]);
 
   if (!data) {

@@ -103,7 +103,7 @@ class ProfileServices {
     }
   }
 
-  async updatePendingSection(slug, pendingSection) {
+  async updatependingSection(slug, pendingSection) {
     try {
       return await this.databases.updateDocument(
         conf.databaseid,
@@ -117,13 +117,13 @@ class ProfileServices {
     }
   }
 
-  async updateApprovedSection(slug, approvedSection) {
+  async updateapprovedSection(slug, approvedSection) {
     try {
       return await this.databases.updateDocument(
         conf.databaseid,
         conf.collectionid,
         slug,
-        { approvedSection }
+        approvedSection 
       );
     } catch (error) {
       console.log("Appwrite service :: updateApprovedSection :: error", error);
@@ -131,13 +131,13 @@ class ProfileServices {
     }
   }
 
-  async updateDeliveredSection(slug, deliveredSection) {
+  async updatedeliveredSection(slug, deliveredSection) {
     try {
       return await this.databases.updateDocument(
         conf.databaseid,
         conf.collectionid,
         slug,
-        { deliveredSection }
+        deliveredSection 
       );
     } catch (error) {
       console.log("Appwrite service :: updateDeliveredSection :: error", error);

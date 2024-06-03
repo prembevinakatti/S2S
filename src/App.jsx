@@ -12,6 +12,8 @@ import FeedBack from "./components/FeedBackRatings/FeedBack";
 import GotOrder from "./components/GotOrder";
 import NotificationPage from "./components/NotificationPage/NotificationPage";
 import LoadingPage from "./components/LoadingPage";
+import Navbar from "./components/Navbar/Navbar";
+import Footer from "./components/Footer/Footer";
 function App() {
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -45,7 +47,9 @@ function App() {
 
   return (
     <>
+    {/* <Navbar /> */}
       <Outlate />
+      {/* <Footer /> */}
     </>
   );
 }

@@ -13,7 +13,7 @@ const Card = (props) => {
 
   return (
     <div 
-      className="card shadow-xl bg-slate-700 gap-1 rounded-lg overflow-hidden w-[25vw] h-auto p-3" 
+      className="card shadow-xl bg-slate-700 gap-1 rounded-lg overflow-hidden w-[25vw] h-[70vh] p-3" 
       onClick={handleCardClick}
     >
       <CardNav name={props.name}/>
@@ -24,7 +24,7 @@ const Card = (props) => {
           alt="Food Item"
         />
       </div>
-      <div className="CardContent flex flex-col gap-2">
+      <div className="CardContent flex flex-col items-center  justify-center gap-8">
         <CardDetails details={`Number of People to Feed: ${props.nofeed}`} />
         <CardDetails details={`Food Details: ${props.fooddetails}`} />
         <CardDetails details={`Mode of Delivery: ${props.modofdev}`} />

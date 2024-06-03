@@ -149,7 +149,7 @@ class UploadServices {
       return await this.databases.updateDocument(
         conf.databaseid,
         conf.collectionid2,
-        {slug},
+        slug,
         status
       );
     } catch (error) {

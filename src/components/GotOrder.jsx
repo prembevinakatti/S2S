@@ -37,7 +37,7 @@ const GotOrder = ({data}) => {
 
   },[ ])
   return (
-    <div>
+    <div className='w-full flex m-5 items-center justify-center'>
         <div className="GotOrder w-fit h-fit border p-3 border-slate-500 rounded-lg flex flex-col gap-10 items-center  justify-center">
             <h2 className='w-full text-4xl font-semibold text-center'>Got Your Order..?</h2>
             <div className="GotBtns flex items-center gap-5">

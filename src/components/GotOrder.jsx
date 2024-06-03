@@ -6,7 +6,7 @@ import profileService from '../appwrite/profile';
 const GotOrder = ({ data }) => {
   const [profileData, setProfileData] = useState();
   const reduxProfileData = useSelector((state) => state.profile.profiledata);
-
+  console.log(data)
   const handleApprove = async () => {
     try {
       // Update approvedSection

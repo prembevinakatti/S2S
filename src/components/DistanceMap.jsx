@@ -1,80 +1,113 @@
 import React, { useState } from 'react';
-import axios from 'axios';
-import { MapContainer, TileLayer, Marker, Polyline } from 'react-leaflet';
 
-const DistanceCalculator = ({ originCoords, destinationCoords }) => {
-  const [distance, setDistance] = useState(null);
-  const [duration, setDuration] = useState(null);
-  const [route, setRoute] = useState(null);
+export default function Home() {
+  const [pointA, setPointA] = useState('');
+  const [pointB, setPointB] = useState('');
+  const [calculatedDistance, setCalculatedDistance] = useState(undefined);
+  const [averageTime, setAverageTime] = useState(undefined);
+  const [invalidInput, setInvalidInput] = useState(false);
 
-  const calculateDistance = async (originCoords, destinationCoords) => {
-    const apiKey = "5b3ce3597851110001cf6248844e67d82eb8433b88ae8c05af8e5064";
-    const url = `https://api.openrouteservice.org/v2/directions/driving-car`;
+  const calculateDistance = () => {
+    let [lat1, lon1] = pointA.split(',');
+    let [lat2, lon2] = pointB.split(',');
+    let lat1num = parseFloat(lat1);
+    let lon1num = parseFloat(lon1);
+    let lat2num = parseFloat(lat2);
+    let lon2num = parseFloat(lon2);
 
-    const body = {
-      coordinates: [
-        [originCoords.lng, originCoords.lat],
-        [destinationCoords.lng, destinationCoords.lat]
-      ]
-    };
-
-    try {
-      const response = await axios.post(url, body, {
-        headers: {
-          Authorization: apiKey,
-          'Content-Type': 'application/json',
-        }
-      });
-
-      const data = response.data;
-
-      if (data.routes && data.routes.length > 0 && data.routes[0].geometry && data.routes[0].geometry.coordinates) {
-        setDistance(data.routes[0].summary.distance / 1000); // Convert to km
-        setDuration(data.routes[0].summary.duration / 60); // Convert to minutes
-        setRoute(data.routes[0].geometry.coordinates.map(coord => ({
-          lat: coord[1],
-          lng: coord[0]
-        })));
-      } else {
-        alert('Error fetching data. Please check your inputs.');
-      }
-    } catch (error) {
-      console.error('Error fetching the distance data', error);
+    if (isNaN(lat1num) || isNaN(lon1num) || isNaN(lat2num) || isNaN(lon2num)) {
+      setInvalidInput(true);
+      return;
     }
+
+    setInvalidInput(false);
+
+    let R = 6371; // km
+    let dLat = (lat2num - lat1num) * Math.PI / 180;
+    let dLon = (lon2num - lon1num) * Math.PI / 180;
+    let a = Math.sin(dLat / 2) * Math.sin(dLat / 2) +
+      Math.cos(lat1num * Math.PI / 180) * Math.cos(lat2num * Math.PI / 180) *
+      Math.sin(dLon / 2) * Math.sin(dLon / 2);
+    let c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
+    let distance = R * c;
+
+    setCalculatedDistance(Number(distance.toFixed(2)));
+
+    // Example of calculating average time for driving (in minutes)
+    let averageTimeInHours = distance / 60; // Assuming an average speed of 60 km/h
+    setAverageTime(Math.round(averageTimeInHours * 60)); // Convert to minutes
   };
 
-  // Calculate distance and route when the component mounts or coordinates change
-  React.useEffect(() => {
-    if (originCoords && destinationCoords) {
-      calculateDistance(originCoords, destinationCoords);
-    }
-  }, [originCoords, destinationCoords]);
+  const handlePointAChange = (event) => {
+    setPointA(event.target.value);
+  }
+
+  const handlePointBChange = (event) => {
+    setPointB(event.target.value);
+  }
 
   return (
-    <div>
-      <h1>Distance Calculator</h1>
+    <main className="mt-40">
+      <h1 className="text-6xl font-extrabold text-center text-gradient bg-clip-text bg-gradient-to-r from-purple-500 to-pink-500 tracking-tight leading-tight">
+        Distance Calculator
+      </h1>
+      <p className="text-center m-2 p-2 text-2xl font-semibold mt-4">
+        Calculates distance between two points using longitude and latitude coordinates
+      </p>
+      <div className="flex justify-center">
+        <label htmlFor="pointA" className="text-m font-semibold mt-4">
+          Point A:
+        </label>
+        <input
+          type="text"
+          id="pointA"
+          placeholder="37.773972,-122.431297"
+          className="p-2 m-2 border border-gray-300 rounded-md"
+          value={pointA}
+          onChange={handlePointAChange}
+        />
+        <label htmlFor="pointB" className="text-m font-semibold mt-4">
+          Point B:
+        </label>
+        <input
+          type="text"
+          id="pointB"
+          placeholder="34.052235,-118.243683"
+          className="p-2 m-2 border border-gray-300 rounded-md"
+          value={pointB}
+          onChange={handlePointBChange}
+        />
+      </div>
+      <div className="flex justify-center mt-4">
+        <button
+          className="px-4 py-2 m-2 bg-blue-500 text-white font-semibold rounded-md hover:bg-blue-600"
+          onClick={calculateDistance}
+        >
+          Calculate
+        </button>
+      </div>
 
-      {distance && duration && (
-        <div>
-          <h2>Results</h2>
-          <p>Distance: {distance.toFixed(2)} km</p>
-          <p>Duration: {duration.toFixed(2)} minutes</p>
+      {invalidInput && (
+        <div className="flex justify-center mt-4">
+          <p className="text-2xl text-red-500">Invalid input. Please enter valid latitude and longitude values.</p>
         </div>
       )}
 
-      {originCoords && destinationCoords && (
-        <MapContainer center={originCoords} zoom={10} style={{ height: '400px', width: '800px' }}>
-          <TileLayer
-            url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
-            attribution="&copy; <a href='http://osm.org/copyright'>OpenStreetMap</a> contributors"
-          />
-          <Marker position={originCoords} />
-          <Marker position={destinationCoords} />
-          {route && <Polyline positions={route} color="blue" />}
-        </MapContainer>
+      {calculatedDistance !== undefined && (
+        <div className="flex justify-center mt-4">
+          <p className="text-2xl font-semibold">
+            Distance: {calculatedDistance} km
+          </p>
+        </div>
       )}
-    </div>
-  );
-};
 
-export default DistanceCalculator;
+      {averageTime !== undefined && (
+        <div className="flex justify-center mt-4">
+          <p className="text-2xl font-semibold">
+            Average Time: {averageTime} minutes (assuming driving mode)
+          </p>
+        </div>
+      )}
+    </main>
+  );
+}

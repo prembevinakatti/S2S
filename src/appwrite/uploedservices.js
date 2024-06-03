@@ -143,14 +143,14 @@ class UploadServices {
       throw error;
     }
   }
-  async updatestatus({slug},{status} ) {
-    console.log(slug)
+
+  async updatestatus(data) {
     try {
       return await this.databases.updateDocument(
         conf.databaseid,
         conf.collectionid2,
-        slug,
-        status
+        data.slug,
+        { status: data.status }
       );
     } catch (error) {
       console.log("error in updaterequests", error);

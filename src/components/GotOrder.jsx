@@ -1,18 +1,21 @@
 import React, { useState } from 'react'
 import { useSelector } from 'react-redux';
+import uploadServices from '../appwrite/uploedservices';
+import profileService from '../appwrite/profile';
 
-const GotOrder = () => {
+const GotOrder = ({data}) => {
   const [profiledata,profilesetData]=useState()
   const profileData = useSelector((state) => state.profile.profiledata);
-  async function handelapprove({data}){
+  async function handelapprove(){
     let approvedSection = JSON.parse(data.approvedSection || "[]");
     approvedSection = approvedSection.filter((id) => id !==data.slug);
-   updateapp= await profileService.updatependingSection(profileData.$id, { approvedSection: JSON.stringify(approvedSection) });
+   const updateapp= await profileService.updateapprovedSection(profiledata.$id, { approvedSection: JSON.stringify(approvedSection) });
    if(updateapp){
     let deliveredSection = JSON.parse(data.deliveredSection || "[]");
     deliveredSection = deliveredSection.push(data.slug);
-   const updatedel= await profileService.updatependingSection(profileData.$id, { deliveredSection: JSON.stringify(deliveredSection) });
+   const updatedel= await profileService.updatedeliveredSection(profiledata.$id, { deliveredSection: JSON.stringify(deliveredSection) });
       if(updatedel){
+        await uploadServices.updaterequests(data.slug,"delivered")
         
       }
    }
@@ -23,7 +26,7 @@ const GotOrder = () => {
       try {
         const userData = await profileService.getUser(profileData);
         if (userData) {
-          profileData(userData);
+          profilesetData(userData);
         }
       } catch (error) {
         console.error(error);

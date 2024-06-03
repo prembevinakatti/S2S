@@ -61,7 +61,7 @@ const PostPage = ({ flag }) => {
     if (slug && profiledata) {
       getFood();
     }
-    profileapp= JSON.parse(profiledata.approvedSection||"[]")
+    const profileapp= JSON.parse(profiledata.approvedSection||"[]")
     if(profileapp){
       profileapp.map((Id)=>{
         if(Id==fooddata.$id){
@@ -132,11 +132,11 @@ const PostPage = ({ flag }) => {
               <RequestCard key={request.id} request={{ request, allreq: JSON.parse(fooddata.requests), slug: fooddata.$id }} />
             ))
           : null}
-          {/* {
+          {
             app&&(
               <GotOrder data={{slug:fooddata.$id,}}/>
             )
-          } */}
+          } 
       </div>
     </>
   );

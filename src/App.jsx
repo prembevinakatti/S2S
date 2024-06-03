@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import authService from "./appwrite/services";
 import { login } from "./store/authslice";
@@ -11,55 +11,42 @@ import RequestCard from "./components/RequestCard/RequestCard";
 import FeedBack from "./components/FeedBackRatings/FeedBack";
 import GotOrder from "./components/GotOrder";
 import NotificationPage from "./components/NotificationPage/NotificationPage";
+import LoadingPage from "./components/LoadingPage";
 function App() {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const profileData = useSelector((state) => state.profile.profiledata);
+  const [loading, setLoading] = useState(true); // State variable to manage loading
+
   useEffect(() => {
-    try {
-      authService.getCurrentUser().then((userData) => {
+    const fetchData = async () => {
+      try {
+        const userData = await authService.getCurrentUser();
         if (userData) {
           dispatch(login({ userData }));
-          profileService.getUser(userData.name).then((profiledata) => {
-            dispatch(updateProfile({ profiledata }));
-          });
-          // if (profileData == null) {
-          //   if (profileData.ngoNumber == null || undefined || "") {
-          //     navigate("ResProfilePage");
-          //   } else {
-          //     navigate("NgoProfilePage");
-          //   }
-          // }
+          const profiledata = await profileService.getUser(userData.name);
+          dispatch(updateProfile({ profiledata }));
         }
-      });
-    } catch (error) {
-      console.log(error);
-    }
-  }, []);
+      } catch (error) {
+        console.log(error);
+      } finally {
+        setLoading(false); // Set loading to false after data is fetched
+      }
+    };
+
+    fetchData();
+  }, [dispatch, navigate]);
+
+  if (loading) {
+    return <div>
+      <LoadingPage />
+    </div>
+  }
+
   return (
     <>
-       <Outlate /> 
-      {/* <Card /> */}
-      {/* <Dashboard /> */}
-      {/* <ProfilePage /> */}
-      {/* <UploadPage /> */}
-      {/* <PostPage /> */}
-      {/* <HomePage /> */}
-      {/* <LandingPage /> */}
-      {/* <NgoHomePage /> */}
-      {/* <OrderDetailsPage /> */}
-      {/* <ResLoginPage /> */}
-      {/* <ResRegPage /> */}
-      {/* <NgoLoginPage /> */}
-      {/* <NgoRegPage /> */}
-      {/* <ResProfilePage /> */}
-      {/* <NgoProfilePage /> */}
-      {/* <NgoDashboard/> */}
-      {/* <ResDashboard /> */}
-      {/* <RequestCard /> */}
-      {/* <FeedBack /> */}
-      {/* <GotOrder /> */}
-      
+      <Outlate />
+      {/* Add your other components here */}
     </>
   );
 }

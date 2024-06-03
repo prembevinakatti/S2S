@@ -27,7 +27,8 @@ const GotOrder = ({ data }) => {
 
         if (updateDel) {
           console.log('Delivered');
-          await uploadServices.updatestatus({ slug: data.slug, status: 'delivered' });
+          const ghg={ slug: data.slug, status: 'delivered' }
+          await uploadServices.updatestatus({ghg});
         }
       }
     } catch (error) {

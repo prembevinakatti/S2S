@@ -53,6 +53,16 @@ const PostPage = ({ flag }) => {
               setType("pending");
             }
           });
+          const profileapp= JSON.parse(profiledata.approvedSection||"[]")
+          if(profileapp){
+            profileapp.map((Id)=>{
+              if(Id==fooddata.$id){
+                setapp(true)
+                
+              }
+      
+            })
+          }
         }
       } catch (error) {
         console.error("Error in getFood: ", error);
@@ -61,16 +71,7 @@ const PostPage = ({ flag }) => {
     if (slug && profiledata) {
       getFood();
     }
-    const profileapp= JSON.parse(profiledata.approvedSection||"[]")
-    if(profileapp){
-      profileapp.map((Id)=>{
-        if(Id==fooddata.$id){
-          setapp(true)
-          
-        }
-
-      })
-    }
+   
   }, [slug, profiledata]);
 
   if (!fooddata) {

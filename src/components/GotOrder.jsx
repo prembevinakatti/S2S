@@ -24,7 +24,7 @@ const GotOrder = ({data}) => {
   useEffect(()=>{
     async function getUser() {
       try {
-        const userData = await profileService.getUser(profileData);
+        const userData = await profileService.getUser(profileData.$id);
         if (userData) {
           profilesetData(userData);
         }

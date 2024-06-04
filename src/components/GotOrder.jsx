@@ -85,7 +85,11 @@ console.log(respro)
   const newdeta=JSON.parse(respro.charts||"[ ]")
   newdeta.push(deta)
   const newdetaa=JSON.stringify(newdeta)
-  await profileService.updatecharts(respro.$id,{charts:newdetaa})
+  const a=await profileService.updatecharts(respro.$id,{charts:newdetaa})
+  if(a){
+    toast.success("tank updated successfully")
+    window.location.reload();
+  }
 
 
   }

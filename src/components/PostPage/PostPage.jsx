@@ -45,6 +45,7 @@ const PostPage = ({ flag }) => {
         });
         setType("pending");
         toast.success("Ordered Successfully");
+        window.location.reload();
       }
     } catch (error) {
       toast.error("Error in handleOrder: " + error.message);

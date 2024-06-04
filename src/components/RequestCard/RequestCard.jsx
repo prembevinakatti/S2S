@@ -22,6 +22,7 @@ const RequestCard = ({ request }) => {
       console.log(newUpload);
       if(newUpload){
         toast.success("Rejected")
+        window.location.reload();
       }
     } catch (error) {
       toast.error(error.message || error);
@@ -48,6 +49,7 @@ const RequestCard = ({ request }) => {
         const suc = await profileService.updateapprovedSection(data.$id, { approvedSection: JSON.stringify(approvedSection) });
         if(suc){
           toast.success("Approved")
+          window.location.reload();
          
         }
       }

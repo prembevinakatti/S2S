@@ -6,7 +6,7 @@ import profileService from "./appwrite/profile";
 import { updateProfile } from "./store/profuleslice";
 import ResDashboard from "./Pages/ResPage/ResDashboard";
 import Outlate from "../src/components/Outlate";
-import { Outlet, useNavigate } from "react-router-dom";
+import { Outlet, useLocation, useNavigate } from "react-router-dom";
 import RequestCard from "./components/RequestCard/RequestCard";
 // import FeedBack from "./components/FeedBackRatings/FeedBack";
 import GotOrder from "./components/GotOrder";
@@ -22,6 +22,7 @@ import Home from "./components/DistanceMap";
 function App() {
   const dispatch = useDispatch();
   const navigate = useNavigate();
+  const location=useLocation()
   const profileData = useSelector((state) => state.profile.profiledata);
   const [loading, setLoading] = useState(true); // State variable to manage loading
   const originCoords = { lat: 40.758, lng: -73.9855 }; // Times Square, New York City
@@ -34,11 +35,18 @@ function App() {
           dispatch(login({ userData }));
           const profiledata = await profileService.getUser(userData.name);
           dispatch(updateProfile({ profiledata }));
+          navigate(`${location.pathname}`)
+          setLoading(false)
+        }
+        else{
+          navigate('/')
+          setLoading(false)
         }
       } catch (error) {
         console.log(error);
       } finally {
-        setLoading(false);
+        
+      
       }
     };
 
@@ -57,8 +65,7 @@ function App() {
     <>
       
      <Outlate /> 
-     {/* <FeedbackSection /> */}
-     {/* <DistanceCalculator /> */}
+     
      
     </>
   );

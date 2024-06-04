@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Input from "../InputComponent/Input";
 import TextArea from "../TextArea";
 import DropDown from "../DropDown";
@@ -15,7 +15,7 @@ const UploadPage = ({ editdata }) => {
   const { register, handleSubmit, setValue } = useForm();
   const [fileUrl, setFileUrl] = useState();
   const [selectedFile, setSelectedFile] = useState(null);
-
+  const [cordinates,setcordinates]=useState(null)
   function handlePreviewImage(e) {
     const file = e.target.files[0];
     if (file) {
@@ -50,6 +50,9 @@ const UploadPage = ({ editdata }) => {
           navigate(`/dashboard/${foodata.$id}`);
         }
       } else {
+        if(cordinates){
+          data.coordinates=cordinates
+        }
         data.userId = authdata?.$id ?? null;
         data.slug = ID.unique();
         data.name = authdata?.name ?? null;
@@ -63,6 +66,27 @@ const UploadPage = ({ editdata }) => {
       console.error("Error during upload:", error);
     }
   }
+  useEffect(()=>{
+    if ('geolocation' in navigator) {
+      console.log('Geolocation is available.');
+      navigator.geolocation.getCurrentPosition(
+          
+          (position) => {
+            setcordinates(JSON.stringify([position.coords.latitude,position.coords.longitude]))
+            
+          },
+          
+          (error) => {
+              console.error('Error getting geolocation:', error.message);
+          },
+          
+          
+      );
+  } else {
+      console.log('Geolocation is not available.');
+  }
+
+  },[ ])
 
   return (
     <form onSubmit={handleSubmit(handleUpload)}>

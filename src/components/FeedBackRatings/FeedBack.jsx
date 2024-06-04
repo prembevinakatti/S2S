@@ -66,6 +66,8 @@ const FeedBack = ({id}) => {
           </div>
         </div>
       </div>
+
+      <button className="btn tbn-primary" type="submit">Submit</button>
     </div>
     </form>
   );

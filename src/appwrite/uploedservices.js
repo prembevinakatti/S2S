@@ -22,6 +22,9 @@ class UploadServices {
     fooddetails,
     slug,
     nofeed,
+    timeoffoodprepared,
+
+    foodsustainability
   }) {
     try {
       return await this.databases.createDocument(
@@ -37,6 +40,8 @@ class UploadServices {
           imageId,
           fooddetails,
           nofeed,
+          timeoffoodprepared,
+          foodsustainability
         }
       );
     } catch (error) {

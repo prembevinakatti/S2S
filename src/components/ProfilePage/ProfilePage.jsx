@@ -8,14 +8,13 @@ import Navbar from "../Navbar/Navbar";
 import authService from "../../appwrite/services";
 import toast from "react-hot-toast";
 
-const ProfilePage = ({ editdata,flag }) => {
+const ProfilePage = ({ editdata, flag }) => {
   const authdata = useSelector((state) => state.auth.userData);
   const navigate = useNavigate();
   const { register, handleSubmit, setValue } = useForm();
   const [fileUrl, setFileUrl] = useState();
   const [selectedFile, setSelectedFile] = useState(null);
-  const [cordinates,setcordinates]=useState(null)
-  
+  const [cordinates, setcordinates] = useState(null);
 
   function handlePreviewImage(e) {
     const file = e.target.files[0];
@@ -54,10 +53,9 @@ const ProfilePage = ({ editdata,flag }) => {
         if (profileData) {
           navigate(`/dashboard/${profileData.$id}`);
         }
-        
       } else {
-        if(cordinates){
-          data.coordinates=cordinates
+        if (cordinates) {
+          data.coordinates = cordinates;
         }
         data.UserId = authdata && authdata.$id ? authdata.$id : "vgvgvvhg";
         data.slug = createSlug(data.name);
@@ -65,15 +63,14 @@ const ProfilePage = ({ editdata,flag }) => {
         const profileData = await profileService.createProfile(data);
         console.log("Created profile data:", profileData);
         if (profileData) {
-          flag ? navigate(`/ResDashboard/${profileData.$id}`) : navigate(`/NgoDashboard/${profileData.$id}`);
+          flag
+            ? navigate(`/ResDashboard/${profileData.$id}`)
+            : navigate(`/NgoDashboard/${profileData.$id}`);
         }
-        toast.success("Profile updated successfully")
+        toast.success("Profile updated successfully");
       }
     } catch (error) {
-      toast.error(
-        "Error uploading file or creating/updating profile:",
-        error
-      );
+      toast.error("Error uploading file or creating/updating profile:", error);
     }
   }
 
@@ -83,27 +80,27 @@ const ProfilePage = ({ editdata,flag }) => {
       .replace(/[^a-z0-9]+/g, "-")
       .replace(/^-+|-+$/g, "");
   }
-  useEffect(()=>{
-    if ('geolocation' in navigator) {
-      console.log('Geolocation is available.');
+  useEffect(() => {
+    if ("geolocation" in navigator) {
+      console.log("Geolocation is available.");
       navigator.geolocation.getCurrentPosition(
-          
-          (position) => {
-            setcordinates(JSON.stringify([position.coords.latitude,position.coords.longitude]))
-            
-          },
-          
-          (error) => {
-              toast.error('Error getting geolocation:', error.message);
-          },
-          
-          
-      );
-  } else {
-      console.log('Geolocation is not available.');
-  }
+        (position) => {
+          setcordinates(
+            JSON.stringify([
+              position.coords.latitude,
+              position.coords.longitude,
+            ])
+          );
+        },
 
-  },[ ])
+        (error) => {
+          toast.error("Error getting geolocation:", error.message);
+        }
+      );
+    } else {
+      console.log("Geolocation is not available.");
+    }
+  }, []);
 
   return (
     <form onSubmit={handleSubmit(handleProfile)}>
@@ -149,6 +146,7 @@ const ProfilePage = ({ editdata,flag }) => {
                 <label>Ngo Name</label>
                 <Input placeholder="Ngo Name" {...register("name")} />
               </div>
+              
             )}
             {flag ? null : (
               <div>
@@ -164,6 +162,14 @@ const ProfilePage = ({ editdata,flag }) => {
               <label>Location</label>
               <Input placeholder="Location" {...register("location")} />
             </div>
+            {
+              flag? null : (
+                <div>
+                  <label>nofeed</label>
+                  <Input placeholder="Nuber of people to feed" {...register("nofeed")} />
+                </div>
+              )
+            }
             <div className="mt-5">
               <button className="btn btn-wide bg-blue-600 text-2xl font-semibold">
                 Set Profile

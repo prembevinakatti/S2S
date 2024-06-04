@@ -5,9 +5,11 @@ import profileService from '../appwrite/profile';
 import toast from 'react-hot-toast';
 
 const GotOrder = ({ data }) => {
+console.log(data.slug)
+console.log(data.respro.name)
   const [profileData, setProfileData] = useState(null);
   const reduxProfileData = useSelector((state) => state.profile.profiledata);
-
+  const [respro,setrespro]=useState(null);
   const handleApprove = async () => {
     try {
       if (!profileData) throw new Error('Profile data not loaded');
@@ -21,6 +23,7 @@ const GotOrder = ({ data }) => {
       });
 
       if (updateApp) {
+        updatecharts()
         // Update deliveredSection
         let deliveredSection = JSON.parse(profileData.deliveredSection || '[]');
         deliveredSection.push(data.slug);
@@ -33,6 +36,7 @@ const GotOrder = ({ data }) => {
           console.log('Delivered');
           const updateStatusData = { slug: data.slug, status: 'delivered' };
           await uploadServices.updatestatus(updateStatusData);
+        
         }
       }
     } catch (error) {
@@ -51,9 +55,40 @@ const GotOrder = ({ data }) => {
         toast.error('Error in getUser:', error);
       }
     };
+   const getfooddata=async()=>{
+      try {
+        const foodown = await profileService.getUser(data.respro.name);
+        if (foodown) {
+          setrespro(foodown);
+        }
+        
+      } catch (error) {
+        console.log(error);
+        
+      }
+    }
+  
     getUser();
+    getfooddata()
   }, [reduxProfileData]);
+async function updatecharts() {
+ 
+    const feed=reduxProfileData.nofeed
+    const currentDate = new Date();
+const year = currentDate.getFullYear();
+const month = currentDate.getMonth() + 1; 
+const day = currentDate.getDate();
 
+const datee=`${year}/${month}/${day}`
+const deta={nuberoffeed:feed,date:datee}
+console.log(respro)
+  const newdeta=JSON.parse(respro.charts||"[ ]")
+  newdeta.push(deta)
+  const newdetaa=JSON.stringify(newdeta)
+  await profileService.updatecharts(respro.$id,{charts:newdetaa})
+
+
+  }
   return (
     <div className='w-full flex m-5 items-center justify-center'>
       <div className='GotOrder w-fit h-fit border p-3 border-slate-500 rounded-lg flex flex-col gap-10 items-center justify-center'>

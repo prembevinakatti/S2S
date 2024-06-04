@@ -48,6 +48,7 @@ const RequestCard = ({ request }) => {
         const suc = await profileService.updateapprovedSection(data.$id, { approvedSection: JSON.stringify(approvedSection) });
         if(suc){
           toast.success("Approved")
+         
         }
       }
     } catch (error) {
@@ -74,7 +75,7 @@ const RequestCard = ({ request }) => {
   if (!data) {
     return <div><LoadingPage /></div>;
   }
-
+  
   return (
     <div className="w-full h-fit m-5 p-3 flex items-center justify-center">
       <div className="w-[40vw] relative h-fit p-5 rounded-lg border border-slate-500 flex items-center justify-between">
@@ -89,6 +90,11 @@ const RequestCard = ({ request }) => {
           <DetailsBox details={data.location} />
           <DetailsBox details={data.nofeed} />
           <DetailsBox details={data.phoneNumber} />
+          {
+            request.request.badge&&(
+              <button className="absolute top-0 left-0 m-1 badge badge-error">Emergency</button>
+            )
+          }
           <div className="btns flex items-center justify-end gap-5 w-full mt-2">
             <button onClick={handleRejectClick} className="btn btn-error">
               Reject

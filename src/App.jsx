@@ -8,7 +8,7 @@ import ResDashboard from "./Pages/ResPage/ResDashboard";
 import Outlate from "../src/components/Outlate";
 import { Outlet, useNavigate } from "react-router-dom";
 import RequestCard from "./components/RequestCard/RequestCard";
-import FeedBack from "./components/FeedBackRatings/FeedBack";
+// import FeedBack from "./components/FeedBackRatings/FeedBack";
 import GotOrder from "./components/GotOrder";
 import NotificationPage from "./components/NotificationPage/NotificationPage";
 import LoadingPage from "./components/LoadingPage";
@@ -18,7 +18,7 @@ import DistanceCalculator from "./components/DistanceMap";
 import GeolocationMap from "./components/DistanceMap";
 import MyMap from "./components/DistanceMap";
 import Home from "./components/DistanceMap";
-import FeedbackSection from "./components/FeedbackSection/FeedbackSection";
+// import FeedbackSection from "./components/FeedbackSection/FeedbackSection";
 function App() {
   const dispatch = useDispatch();
   const navigate = useNavigate();

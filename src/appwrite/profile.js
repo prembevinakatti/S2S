@@ -21,6 +21,8 @@ class ProfileServices {
     imgId,
     slug,
     ngoNumber,
+
+    nofeed,
   }) {
     try {
       return await this.databases.createDocument(
@@ -35,6 +37,7 @@ class ProfileServices {
           UserId,
           coordinates,
           ngoNumber,
+          nofeed,
         }
       );
     } catch (error) {
@@ -109,7 +112,7 @@ class ProfileServices {
         conf.databaseid,
         conf.collectionid,
         slug,
-        pendingSection 
+        pendingSection
       );
     } catch (error) {
       console.log("Appwrite service :: updatePendingSection :: error", error);
@@ -123,7 +126,7 @@ class ProfileServices {
         conf.databaseid,
         conf.collectionid,
         slug,
-        approvedSection 
+        approvedSection
       );
     } catch (error) {
       console.log("Appwrite service :: updateApprovedSection :: error", error);
@@ -137,7 +140,7 @@ class ProfileServices {
         conf.databaseid,
         conf.collectionid,
         slug,
-        deliveredSection 
+        deliveredSection
       );
     } catch (error) {
       console.log("Appwrite service :: updateDeliveredSection :: error", error);
@@ -150,7 +153,20 @@ class ProfileServices {
         conf.databaseid,
         conf.collectionid,
         slug,
-        {feedback} 
+        { feedback }
+      );
+    } catch (error) {
+      console.log("Appwrite service :: updateDeliveredSection :: error", error);
+      throw error;
+    }
+  }
+  async updatecharts(slug, charts) {
+    try {
+      return await this.databases.updateDocument(
+        conf.databaseid,
+        conf.collectionid,
+        slug,
+        charts
       );
     } catch (error) {
       console.log("Appwrite service :: updateDeliveredSection :: error", error);

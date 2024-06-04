@@ -34,6 +34,7 @@ import OrderDetailsPage from "./Pages/NgoPage/OrderDetailsPage.jsx";
 import FeedbackSection from "./components/FeedbackSection/FeedbackSection.jsx"
 import NotificationPage from "./components/NotificationPage/NotificationPage.jsx";
 import { Toaster } from "react-hot-toast";
+import FeedbackPage from "./Pages/ResPage/FeedbackPage.jsx";
 
 const router = createBrowserRouter(
   createRoutesFromElements(
@@ -58,7 +59,7 @@ const router = createBrowserRouter(
         <Route path="/profile" element={<ProfilePage />} />
         <Route path="/notification" element={<NotificationPage />} />
         <Route path="/" element={<LandingPage />} />
-        <Route path="/feedback" element={<FeedbackSection />} />
+        <Route path="/feedback" element={<FeedbackPage />} />
       </Route>
       <Route path="/" element={<Outlate />} />
     </>

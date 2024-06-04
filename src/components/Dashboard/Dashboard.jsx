@@ -5,10 +5,20 @@ import profileService from "../../appwrite/profile";
 import { useParams } from "react-router-dom";
 import Navbar from "../Navbar/Navbar";
 import Footer from "../Footer/Footer";
+import {
+  AreaChart,
+  Area,
+  XAxis,
+  YAxis,
+  CartesianGrid,
+  Tooltip
+} from "recharts";
+
 const Dashboard = ({ flag }) => {
   const [userData, setuserdata] = useState(null);
+  constarts[a]
   const { slug } = useParams();
-  useEffect(() => {
+  useEffect((flag) => {
     async function getuser() {
       try {
         const userdata = await profileService.getUser(slug);
@@ -70,13 +80,30 @@ const Dashboard = ({ flag }) => {
               </div>
               <div className="m-2">
                 <label htmlFor="">Numbers Of Feed</label>
-                <DetailsBox details="0" />
+                <DetailsBox details= {userData ? userData.nofeed : 0}/>
               </div>
             </div>
           </div>
         </div>
         <div className="secondBox w-full h-[42vh] bg-green-500">
-          <div className="graph bg-red-600 w-[70vw] h-full"></div>
+        <AreaChart
+      width={250}
+      height={250}
+      data={data}
+      margin={{
+        top: 10,
+        right: 30,
+        left: 0,
+        bottom: 0
+      }}
+    >
+      <CartesianGrid strokeDasharray="3 3" />
+      <XAxis dataKey="name" />
+      <YAxis />
+      <Tooltip />
+      <Area type="monotone" dataKey="uv" stroke="#8884d8" fill="#8884d8" />
+    </AreaChart>
+          <div className="graph  w-[70vw] h-full"></div>
           <div className="ratings"></div>
         </div>
       </div>

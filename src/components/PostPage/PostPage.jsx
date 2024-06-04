@@ -8,6 +8,7 @@ import profileService from "../../appwrite/profile";
 import { ID } from "appwrite";
 import RequestCard from "../RequestCard/RequestCard";
 import GotOrder from "../GotOrder";
+import DistanceCalculator from "../DistanceMap";
 
 const PostPage = ({ flag }) => {
   const profiledata = useSelector((state) => state.profile.profiledata);
@@ -139,7 +140,11 @@ const PostPage = ({ flag }) => {
           : null}
           {
             app&&(
+              <>
+              <DistanceCalculator startCoord={fooddata.coordinates}  endCoord={profiledata.coordinates}/>
               <GotOrder data={{slug:fooddata.$id,}}/>
+              </>
+              
             )
           } 
       </div>

@@ -11,7 +11,7 @@ const GotOrder = ({ data }) => {
     try {
       if (!profileData) throw new Error('Profile data not loaded');
 
-      // Update approvedSection
+      
       let approvedSection = JSON.parse(profileData.approvedSection || '[]');
       approvedSection = approvedSection.filter((id) => id !== data.slug);
 

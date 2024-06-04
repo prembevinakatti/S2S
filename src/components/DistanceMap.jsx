@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 
-export default function DistanceCalculator({ startCoord, endCoord }) {
-  console.log(startCoord,"start cord")
+export default function DistanceCalculator({ startCoord, endCoord ,reslocation,negolocation}) {
+  
   const [pointA, setPointA] = useState("");
   const [pointB, setPointB] = useState("");
   const [calculatedDistance, setCalculatedDistance] = useState(undefined);
@@ -40,8 +40,10 @@ export default function DistanceCalculator({ startCoord, endCoord }) {
   };
 
   useEffect(() => {
-    setPointA(startCoord);
-    setPointB(endCoord);
+    const a=`${startCoord[0]},${startCoord[1]}`
+    setPointA(a);
+    const b=`${endCoord[0]},${endCoord[1]}`
+    setPointB(b);
     calculateDistance();
   }, [[startCoord, endCoord]]);
 
@@ -50,10 +52,10 @@ export default function DistanceCalculator({ startCoord, endCoord }) {
       <div className=" p-10 border text-white border-slate-600 rounded-lg shadow-lg bg-[#1D232A]">
       <div className="locations flex items-center justify-center gap-5">
         <p className="text-2xl font-semibold">
-          From : <span className="font-serif">Locations</span>
+          From : <span className="font-serif">{reslocation}</span>
         </p>
         <p className="text-2xl font-semibold">
-          To : <span className="font-serif">Locations</span>
+          To : <span className="font-serif">{negolocation}</span>
         </p>
       </div>
       {calculatedDistance !== undefined && (

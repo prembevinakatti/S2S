@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 
-export default function Home({ startCoord, endCoord }) {
+export default function DistanceCalculator({ startCoord, endCoord }) {
   const [pointA, setPointA] = useState("");
   const [pointB, setPointB] = useState("");
   const [calculatedDistance, setCalculatedDistance] = useState(undefined);

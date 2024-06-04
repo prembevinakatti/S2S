@@ -9,7 +9,11 @@ import { ID } from "appwrite";
 import RequestCard from "../RequestCard/RequestCard";
 import GotOrder from "../GotOrder";
 import DistanceCalculator from "../DistanceMap";
+
 import FeedBack from "../FeedBackRatings/FeedBack";
+
+import toast from "react-hot-toast";
+
 
 const PostPage = ({ flag }) => {
   const profiledata = useSelector((state) => state.profile.profiledata);
@@ -33,9 +37,10 @@ const PostPage = ({ flag }) => {
         pendingSection.push(fooddata.$id);
         await profileService.updatependingSection(profiledata.$id, { pendingSection: JSON.stringify(pendingSection) });
         setType("pending");
+        toast.success("Ordered Successfully")
       }
     } catch (error) {
-      console.error("Error in handleOrder: ", error);
+      toast.error("Error in handleOrder: ", error);
     }
   };
 
@@ -77,7 +82,7 @@ const PostPage = ({ flag }) => {
           }
         }
       } catch (error) {
-        console.error("Error in getFood: ", error);
+        toast.error("Error in getFood: ", error);
       }
     }
     if (slug && profiledata) {

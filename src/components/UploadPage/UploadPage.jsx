@@ -8,6 +8,7 @@ import { useSelector } from "react-redux";
 import profileService from "../../appwrite/profile";
 import uploadServices from "../../appwrite/uploedservices";
 import { useNavigate } from "react-router-dom"; // Add this import if not already present
+import toast from "react-hot-toast";
 
 const UploadPage = ({ editdata }) => {
   const authdata = useSelector((state) => state.auth.userData);
@@ -61,6 +62,7 @@ const UploadPage = ({ editdata }) => {
         if (foodata) {
           navigate(`/post/${foodata.$id}`);
         }
+        toast.success("Food Posted successfully")
       }
     } catch (error) {
       console.error("Error during upload:", error);

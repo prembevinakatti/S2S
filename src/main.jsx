@@ -33,6 +33,7 @@ import NgoHomePage from "./Pages/NgoPage/NgoHomePage.jsx";
 import OrderDetailsPage from "./Pages/NgoPage/OrderDetailsPage.jsx";
 import FeedbackSection from "./components/FeedbackSection/FeedbackSection.jsx"
 import NotificationPage from "./components/NotificationPage/NotificationPage.jsx";
+import { Toaster } from "react-hot-toast";
 
 const router = createBrowserRouter(
   createRoutesFromElements(
@@ -67,6 +68,7 @@ const router = createBrowserRouter(
 ReactDOM.createRoot(document.getElementById("root")).render(
   <React.StrictMode>
     <Provider store={store}>
+      <Toaster />
       <RouterProvider router={router} />
     </Provider>
   </React.StrictMode>

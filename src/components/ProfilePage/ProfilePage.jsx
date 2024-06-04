@@ -6,6 +6,7 @@ import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import Navbar from "../Navbar/Navbar";
 import authService from "../../appwrite/services";
+import toast from "react-hot-toast";
 
 const ProfilePage = ({ editdata,flag }) => {
   const authdata = useSelector((state) => state.auth.userData);
@@ -30,7 +31,7 @@ const ProfilePage = ({ editdata,flag }) => {
   async function handleProfile(data) {
     console.log("Selected file:", selectedFile);
     if (!selectedFile && !editdata) {
-      console.error("No file selected.");
+      toast.error("No file selected.");
       return;
     }
 
@@ -53,6 +54,7 @@ const ProfilePage = ({ editdata,flag }) => {
         if (profileData) {
           navigate(`/dashboard/${profileData.$id}`);
         }
+        
       } else {
         if(cordinates){
           data.coordinates=cordinates
@@ -65,9 +67,10 @@ const ProfilePage = ({ editdata,flag }) => {
         if (profileData) {
           flag ? navigate(`/ResDashboard/${profileData.$id}`) : navigate(`/NgoDashboard/${profileData.$id}`);
         }
+        toast.success("Profile updated successfully")
       }
     } catch (error) {
-      console.error(
+      toast.error(
         "Error uploading file or creating/updating profile:",
         error
       );
@@ -91,7 +94,7 @@ const ProfilePage = ({ editdata,flag }) => {
           },
           
           (error) => {
-              console.error('Error getting geolocation:', error.message);
+              toast.error('Error getting geolocation:', error.message);
           },
           
           
@@ -149,7 +152,7 @@ const ProfilePage = ({ editdata,flag }) => {
             )}
             {flag ? null : (
               <div>
-                <label>Res Name</label>
+                <label>Ngo Number</label>
                 <Input placeholder="Ngo Number" {...register("ngoNumber")} />
               </div>
             )}
@@ -163,7 +166,7 @@ const ProfilePage = ({ editdata,flag }) => {
             </div>
             <div className="mt-5">
               <button className="btn btn-wide bg-blue-600 text-2xl font-semibold">
-                Set
+                Set Profile
               </button>
             </div>
           </div>

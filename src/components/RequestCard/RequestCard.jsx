@@ -4,6 +4,7 @@ import uploadServices from "../../appwrite/uploedservices";
 import profileService from "../../appwrite/profile";
 import { ID } from "appwrite";
 import LoadingPage from "../LoadingPage";
+import toast from "react-hot-toast";
 
 const RequestCard = ({ request }) => {
   console.log(request)
@@ -11,7 +12,7 @@ const RequestCard = ({ request }) => {
 
   const handleRejectClick = async () => {
     if (!request.allreq) {
-      console.error("Request list is not defined");
+      toast.error("Request list is not defined");
       return;
     }
 
@@ -19,14 +20,17 @@ const RequestCard = ({ request }) => {
       const newRequests = request.allreq.filter((req) => req.id !== request.request.id);
       const newUpload = await uploadServices.updaterequests(request.slug, { requests: JSON.stringify(newRequests) });
       console.log(newUpload);
+      if(newUpload){
+        toast.success("Rejected")
+      }
     } catch (error) {
-      console.error(error);
+      toast.error(error.message || error);
     }
   };
 
   const handleAcceptClick = async () => {
     if (!request.allreq) {
-      console.error("Request list is not defined");
+      toast.error("Request list is not defined");
       return;
     }
 
@@ -41,10 +45,13 @@ const RequestCard = ({ request }) => {
 
         const approvedSection = JSON.parse(data.approvedSection || "[]");
         approvedSection.push(request.slug);
-        await profileService.updateapprovedSection(data.$id, { approvedSection: JSON.stringify(approvedSection) });
+        const suc = await profileService.updateapprovedSection(data.$id, { approvedSection: JSON.stringify(approvedSection) });
+        if(suc){
+          toast.success("Approved")
+        }
       }
     } catch (error) {
-      console.error(error);
+      toast.error(error.message || error);
     }
   };
   console.log(request.currentDate);
@@ -56,7 +63,7 @@ const RequestCard = ({ request }) => {
           setData(userData);
         }
       } catch (error) {
-        console.error(error);
+        toast.error(error.message || error);
       }
     }
     getUser();
@@ -88,6 +95,7 @@ const RequestCard = ({ request }) => {
             </button>
             <button onClick={handleAcceptClick} className="btn btn-info">
               Accept
+
             </button>
           </div>
         </div>

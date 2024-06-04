@@ -6,6 +6,7 @@ import { Link } from "react-router-dom";
 import { useDispatch } from 'react-redux'
 import { login } from '../../store/authslice'
 import { useNavigate } from "react-router-dom";
+import toast from "react-hot-toast";
 const Login = ({flag}) => {
   console.log(flag)
   const dispatch=useDispatch()
@@ -20,16 +21,17 @@ const Login = ({flag}) => {
               authService.getCurrentUser().then((curuserdata)=>{
                 dispatch(login(curuserdata))
                 flag ? navigate("/ResHomePage") : navigate("/NgoHomePage")
+                toast.success("Login Successfull")
               }).catch((err)=>{
-                console.log(err)
+                toast.error(err.message)
               })
             }
         }).catch((err)=>{
-            console.log(err)
+          toast.error(err.message)
         })
         
       }catch (error) {
-        console.log(error)
+        toast.error(error.message)
       }
     }
 

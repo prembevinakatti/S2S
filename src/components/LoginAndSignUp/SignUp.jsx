@@ -6,6 +6,7 @@ import { Link } from 'react-router-dom';
 import { login } from "../../store/authslice";
 import { useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
+import toast from 'react-hot-toast';
 const SignUp = ({flag}) => {
   const dispatch=useDispatch()
   const navigate = useNavigate()
@@ -26,17 +27,18 @@ const SignUp = ({flag}) => {
             authService.getCurrentUser().then((userdata)=>{
               dispatch(login(userdata))
               flag ? navigate("/ResProfilePage") :  navigate("/NgoProfilePage")
+              toast.success("Register Successfully")
                 
             }).catch((error)=>{
-              console.log(error)
+              toast.error(error.message)
             })
           }
         }).catch((error)=>{
-          console.log(error)
+          toast.error(error.message)
         })
     }
     } catch (error) {
-      console.log(error)
+      toast.error(error.message)
     }
      
   }

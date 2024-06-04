@@ -150,7 +150,7 @@ class ProfileServices {
         conf.databaseid,
         conf.collectionid,
         slug,
-        feedback 
+        {feedback} 
       );
     } catch (error) {
       console.log("Appwrite service :: updateDeliveredSection :: error", error);

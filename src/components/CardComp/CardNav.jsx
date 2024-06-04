@@ -14,14 +14,11 @@ const CardNav = ({ name }) => {
     getUser();
   }, [name]);
 
-  const imageSrc = useMemo(() => {
-    return data && data.imageId ? profileService.getFilePreview(data.imgId) : "";
-  }, [data]);
 
   return (
     <div className="CardNav flex items-center p-3 bg-slate-800 justify-between rounded-md w-full h-20">
       <div className="NavImage w-12">
-        {imageSrc && <img src={imageSrc} alt="Profile" />}
+      <img src={profileService.getFilePreview(data?data.imgId:null)} alt="" />
       </div>
       <div>
         <div className="NavName">

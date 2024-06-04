@@ -3,12 +3,15 @@ import TextArea from "../TextArea";
 import profileService from "../../appwrite/profile";
 import { useSelector } from "react-redux";
 import toast from "react-hot-toast";
+
+        
 const FeedBack = ({ id }) => {
   const [rating, setRating] = useState(0);
   const [comment, setComment] = useState("");
   const [prodata, setProdata] = useState(null);
+
   const profiledata = useSelector((state) => state.profile.profiledata);
-  const time=new Date();
+
   useEffect(() => {
     async function getUser() {
       try {
@@ -20,8 +23,8 @@ const FeedBack = ({ id }) => {
         toast.error(error.message || error);
       }
     }
-    getUser()
-  }, [profiledata]);
+    getUser();
+  }, [id]); // Added id as a dependency
 
   const handleRatingChange = (value) => {
     setRating(value);
@@ -35,22 +38,20 @@ const FeedBack = ({ id }) => {
 
   const handleFeedbackSubmit = async (e) => {
     e.preventDefault();
-    const existingFeedback = JSON.parse(prodata.feedback || "[]");
-    const newFeedback = {
-      ngoid: profiledata.$id,
-      rating: rating,
-      comment: comment,
-      time:time,
-      foodid:id,
-      fooddata
-    };
-    existingFeedback.push(newFeedback);
-    const updatedFeedback = JSON.stringify(existingFeedback);
-
     try {
-      await profileService.updatefeedback(profiledata.$id, { feedback: updatedFeedback });
-      toast.success("Feedback submitted successfully!");
-      onHide(); // Hide the component after successful submission
+      const feed = JSON.parse(prodata.feedback || "[]");
+      console.log(feed);
+      const data = {
+        ngoid: profiledata.$id,
+        rating: rating,
+        comment: comment,
+      };
+      feed.push(data);
+      console.log(feed);
+      const feeddata = JSON.stringify(feed);
+      console.log(feeddata);
+      await profileService.updatefeedback(prodata.$id, feeddata); // Ensure the method name is correct
+      toast.success("Feedback submitted successfully");
     } catch (error) {
       toast.error(error.message || error);
     }
@@ -79,27 +80,13 @@ const FeedBack = ({ id }) => {
               ))}
             </div>
           </div>
+          <button className="btn btn-primary" type="submit">
+            Submit
+          </button>
         </div>
-        <button className="btn btn-primary" type="submit">
-          Submit
-        </button>
       </div>
     </form>
   );
 };
 
-const ParentComponent = () => {
-  const [showFeedback, setShowFeedback] = useState(true);
-
-  const handleHideFeedback = () => {
-    setShowFeedback(false);
-  };
-
-  return (
-    <div>
-      {showFeedback && <FeedBack id="some-id" onHide={handleHideFeedback} />}
-    </div>
-  );
-};
-
-export default ParentComponent;
+export default FeedBack;

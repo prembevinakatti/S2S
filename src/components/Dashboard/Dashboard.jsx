@@ -1,113 +1,109 @@
-import React, { useEffect } from "react";
-import { useState } from "react";
+import React, { useEffect, useState } from "react";
+import { useParams } from "react-router-dom";
 import DetailsBox from "../DetailsBox";
 import profileService from "../../appwrite/profile";
-import { useParams } from "react-router-dom";
-import Navbar from "../Navbar/Navbar";
 import Footer from "../Footer/Footer";
 import {
-  AreaChart,
-  Area,
+  BarChart,
+  Bar,
   XAxis,
   YAxis,
   CartesianGrid,
-  Tooltip
+  Tooltip,
+  Legend,
 } from "recharts";
 
 const Dashboard = ({ flag }) => {
-  const [userData, setuserdata] = useState(null);
-  constarts[a]
+  const [userData, setUserData] = useState(null);
+  const [charts, setCharts] = useState(null);
   const { slug } = useParams();
-  useEffect((flag) => {
-    async function getuser() {
+
+  useEffect(() => {
+    async function getUserData() {
       try {
-        const userdata = await profileService.getUser(slug);
-        if (userdata) {
-          console.log(userdata);
-          setuserdata(userdata);
+        const userData = await profileService.getUser(slug);
+        if (userData) {
+          setUserData(userData);
+          const parsedCharts = JSON.parse(userData.charts || "[]");
+          setCharts(parsedCharts);
         }
       } catch (error) {
         console.log(error);
       }
     }
-    getuser();
-  }, []);
+    getUserData();
+  }, [slug]);
+
   return (
     <div>
       <div className="mainbox flex flex-col items-center justify-center">
         <div className="firstBox w-full h-[45vh] flex items-center gap-10 justify-center">
-          <div className="imageBox  rounded-lg p-2 flex items-center justify-center w-[25vw] h-[45vh]">
+          <div className="imageBox rounded-lg p-2 flex items-center justify-center w-[25vw] h-[45vh]">
             <img
               className="w-full border border-slate-600 h-full object-cover rounded-lg"
-              src={profileService.getFilePreview(
-                userData ? userData.imgId : null
-              )}
+              src={profileService.getFilePreview(userData?.imgId || null)}
               alt=""
             />
           </div>
-          <div className="detailsBox p-3 flex items-center  justify-center gap-10 w-[70vw] h-full">
+          <div className="detailsBox p-3 flex items-center justify-center gap-10 w-[70vw] h-full">
             <div>
-              {flag ? (
-                <div className="m-3">
-                  <label htmlFor="">Res Name</label>
-                  <DetailsBox details={userData ? userData.name : "1233"} />
-                </div>
-              ) : (
-                <div className="m-3">
-                  <label htmlFor="">Ngo Name</label>
-                  <DetailsBox details={userData ? userData.name : "1233"} />
-                </div>
-              )}
+              <div className="m-3">
+                <label htmlFor="">{flag ? "Res Name" : "Ngo Name"}</label>
+                <DetailsBox details={userData?.name || "1233"} />
+              </div>
               <div className="m-3">
                 <label htmlFor="">Location</label>
-                <DetailsBox details={userData ? userData.location : "1233"} />
+                <DetailsBox details={userData?.location || "1233"} />
               </div>
-              {flag ? null : (
+              {!flag && (
                 <div className="m-3">
                   <label htmlFor="">Ngo Number</label>
-                  <DetailsBox
-                    details={userData ? userData.ngoNumber : "1233"}
-                  />
+                  <DetailsBox details={userData?.ngoNumber || "1233"} />
                 </div>
               )}
             </div>
             <div>
               <div className="m-3">
                 <label htmlFor="">Phone Number</label>
-                <DetailsBox
-                  details={userData ? userData.phoneNumber : "1233"}
-                />
+                <DetailsBox details={userData?.phoneNumber || "1233"} />
               </div>
               <div className="m-2">
                 <label htmlFor="">Numbers Of Feed</label>
-                <DetailsBox details= {userData ? userData.nofeed : 0}/>
+                <DetailsBox details={userData?.nofeed || 0} />
               </div>
             </div>
           </div>
         </div>
-        <div className="secondBox w-full h-[42vh] bg-green-500">
-        <AreaChart
-      width={250}
-      height={250}
-      data={data}
-      margin={{
-        top: 10,
-        right: 30,
-        left: 0,
-        bottom: 0
-      }}
-    >
-      <CartesianGrid strokeDasharray="3 3" />
-      <XAxis dataKey="name" />
-      <YAxis />
-      <Tooltip />
-      <Area type="monotone" dataKey="uv" stroke="#8884d8" fill="#8884d8" />
-    </AreaChart>
-          <div className="graph  w-[70vw] h-full"></div>
+        <div className="secondBox w-full h-[42vh]">
+          {flag && (
+            <div>
+              {charts ? (
+                <BarChart
+                  width={500}
+                  height={300}
+                  data={charts}
+                  margin={{
+                    top: 5,
+                    right: 30,
+                    left: 20,
+                    bottom: 5,
+                  }}
+                >
+                  <CartesianGrid strokeDasharray="3 3" />
+                  <XAxis dataKey="date" />
+                  <YAxis />
+                  <Tooltip shared={false} trigger="click" />
+                  <Legend />
+                  <Bar dataKey="nuberoffeed" fill="#8884d8" />
+                </BarChart>
+              ) : (
+                <div className="graph w-[70vw] h-full">Loading...</div>
+              )}
+            </div>
+          )}
           <div className="ratings"></div>
         </div>
       </div>
-      <Footer />
     </div>
   );
 };

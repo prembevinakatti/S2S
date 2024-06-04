@@ -35,7 +35,7 @@ const NgoHomePage = () => {
       try {
         const data = await uploadServices.getFood(query);
         console.log("Fetched data:", data);
-        setPosts(data.documents);
+        setPosts(data.documents.reverse()); // Reverse the array to set the cards last
       } catch (error) {
         toast.error("Error fetching food items:", error);
       }

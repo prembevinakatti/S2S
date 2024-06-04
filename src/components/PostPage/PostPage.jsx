@@ -96,6 +96,15 @@ const PostPage = ({ flag }) => {
     );
   }
 
+  // Parse and sort requests
+  const requests = JSON.parse(fooddata.requests || "[]");
+  requests.sort((a, b) => {
+    if (a.badge === b.badge) {
+      return new Date(a.currentDate) - new Date(b.currentDate);
+    }
+    return a.badge ? -1 : 1;
+  });
+
   return (
     <>
       <div className="PostPage py-10 w-full h-full gap-5 flex items-center justify-center">
@@ -165,17 +174,20 @@ const PostPage = ({ flag }) => {
         </div>
       </div>
       <div>
-        {!profiledata.ngoNumber && fooddata.requests &&
-          JSON.parse(fooddata.requests).map((request) => (
-            <RequestCard
-              key={request.id}
-              request={{
-                request,
-                allreq: JSON.parse(fooddata.requests),
-                slug: fooddata.$id,
-              }}
-            />
-          ))}
+        {!profiledata.ngoNumber && fooddata.requests && (
+          <div>
+            {requests.map((request) => (
+              <RequestCard
+                key={request.id}
+                request={{
+                  request,
+                  allreq: JSON.parse(fooddata.requests),
+                  slug: fooddata.$id,
+                }}
+              />
+            ))}
+          </div>
+        )}
         {app && (
           <>
             <DistanceCalculator
@@ -184,10 +196,10 @@ const PostPage = ({ flag }) => {
               negolocation={profiledata.location}
               endCoord={JSON.parse(profiledata.coordinates)}
             />
-            <GotOrder data={{ slug: fooddata.$id ,respro:fooddata}} />
+            <GotOrder data={{ slug: fooddata.$id, respro: fooddata }} />
           </>
         )}
-        {dev && <FeedBack id={fooddata.name}  />}
+        {dev && <FeedBack id={fooddata.name} />}
       </div>
     </>
   );

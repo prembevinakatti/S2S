@@ -23,14 +23,14 @@ const ResHomePage = () => {
       try {
         const data = await uploadServices.getFood(query);
         console.log("Fetched data:", data);
-        setPosts(data.documents);
+        setPosts(data.documents.reverse()); // Reverse the order of the posts
       } catch (error) {
         console.error("Error fetching food items:", error);
       }
     }
 
     getFoodItems(type);
-  }, [type, usedata]);
+  }, [type, usedata?.$id]); // Add usedata.$id to the dependency array
 
   return (
     <div className="w-full h-screen overflow-auto">

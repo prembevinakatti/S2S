@@ -14,10 +14,10 @@ const Card = (props) => {
   return (
     <div 
       className="card shadow-xl bg-slate-700 gap-1 rounded-lg overflow-hidden w-[25vw] h-[70vh] p-3" 
-      onClick={handleCardClick}
+     
     >
       <CardNav name={props.name}/>
-      <div className="CardImg overflow-hidden w-full rounded-md h-[30vh]">
+      <div className="CardImg overflow-hidden w-full rounded-md h-[30vh]"  onClick={handleCardClick}>
         <img
           className="w-full h-full object-cover"
           src={profileService.getFilePreview(props.imageId)}

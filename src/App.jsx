@@ -56,8 +56,8 @@ function App() {
   return (
     <>
       
-     {/* <Outlate />  */}
-     <FeedbackSection />
+     <Outlate /> 
+     {/* <FeedbackSection /> */}
      {/* <DistanceCalculator /> */}
      
     </>

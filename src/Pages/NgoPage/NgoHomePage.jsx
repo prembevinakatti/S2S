@@ -5,6 +5,7 @@ import Card from "../../components/CardComp/Card";
 import uploadServices from "../../appwrite/uploedservices";
 import Footer from "../../components/Footer/Footer";
 import Navbar from "../../components/Navbar/Navbar";
+import toast from "react-hot-toast";
 
 const NgoHomePage = () => {
   const userData = useSelector((state) => state.auth.userData);
@@ -36,7 +37,7 @@ const NgoHomePage = () => {
         console.log("Fetched data:", data);
         setPosts(data.documents);
       } catch (error) {
-        console.error("Error fetching food items:", error);
+        toast.error("Error fetching food items:", error);
       }
     }
 

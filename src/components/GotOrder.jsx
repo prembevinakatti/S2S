@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { useSelector } from 'react-redux';
 import uploadServices from '../appwrite/uploedservices';
 import profileService from '../appwrite/profile';
+import toast from 'react-hot-toast';
 
 const GotOrder = ({ data }) => {
   const [profileData, setProfileData] = useState(null);
@@ -47,7 +48,7 @@ const GotOrder = ({ data }) => {
           setProfileData(userData);
         }
       } catch (error) {
-        console.error('Error in getUser:', error);
+        toast.error('Error in getUser:', error);
       }
     };
     getUser();

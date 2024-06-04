@@ -39,7 +39,7 @@ const FeedBack = ({id}) => {
 
 
   }
-    await profileService.updatefeedback()
+    await profileService.updatefeedback(id,data)
   }
 
   return (<form onSubmit={handelfeedback}>

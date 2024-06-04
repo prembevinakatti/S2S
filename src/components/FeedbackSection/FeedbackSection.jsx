@@ -1,12 +1,13 @@
 import React from "react";
 import DetailsBox from "../DetailsBox";
+import profileService from "../../appwrite/profile";
 
 const FeedbackSection = () => {
   return (
     <div className="w-full h-fit m-5 p-3 flex items-center justify-center">
       <div className="w-[40vw] relative h-fit p-5 rounded-lg border border-slate-500 flex items-center justify-between">
         <div className="ReqImage w-[8vw] flex  items-center justify-center rounded-full overflow-hidden">
-          {/* <img src={profileService.getFilePreview(data.imageId)} alt="Profile" /> */}
+          {/* <img src={profileService.getFilePreview(data.imgId)} alt="Profile" /> */}
         </div>
         <div className="flex flex-col gap-5 items-center justify-start">
           <div className="ResDetails">

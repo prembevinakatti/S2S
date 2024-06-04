@@ -18,6 +18,7 @@ import DistanceCalculator from "./components/DistanceMap";
 import GeolocationMap from "./components/DistanceMap";
 import MyMap from "./components/DistanceMap";
 import Home from "./components/DistanceMap";
+import FeedbackSection from "./components/FeedbackSection/FeedbackSection";
 function App() {
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -55,7 +56,8 @@ function App() {
   return (
     <>
       
-     <Outlate /> 
+     {/* <Outlate />  */}
+     <FeedbackSection />
      {/* <DistanceCalculator /> */}
      
     </>

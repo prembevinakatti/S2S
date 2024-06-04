@@ -13,6 +13,7 @@ import DistanceCalculator from "../DistanceMap";
 import FeedBack from "../FeedBackRatings/FeedBack";
 
 import toast from "react-hot-toast";
+import LoadingPage from "../LoadingPage";
 
 
 const PostPage = ({ flag }) => {
@@ -92,7 +93,7 @@ const PostPage = ({ flag }) => {
   }, [slug, profiledata]);
 
   if (!fooddata) {
-    return <div>Loading...</div>;
+    return <div><LoadingPage /></div>;
   }
 
   return (

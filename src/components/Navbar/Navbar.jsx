@@ -29,7 +29,7 @@ const Navbar = () => {
               <label htmlFor="my-drawer-4" className="btn btn-circle">
                 {/* this hidden checkbox controls the state */}
                 <svg
-                  className="text-[#EF4C53] shadow-lg fill-current"
+                  className="text-[#646EE4] border-2 border-[#646EE4] rounded-full w-full h-full p-1 shadow-lg fill-current"
                   xmlns="http://www.w3.org/2000/svg"
                   width="32"
                   height="32"

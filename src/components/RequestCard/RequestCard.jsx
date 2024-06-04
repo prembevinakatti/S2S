@@ -70,7 +70,7 @@ const RequestCard = ({ request }) => {
     <div className="w-full h-fit m-5 p-3 flex items-center justify-center">
       <div className="w-[40vw] relative h-fit p-5 rounded-lg border border-slate-500 flex items-center justify-between">
         <div className="timing absolute top-0 right-5">
-          <p>{new Date(request.time).toLocaleString()}</p>
+          <p>{request.time}</p>
         </div>
         <div className="ReqImage w-[8vw] flex items-center justify-center rounded-full overflow-hidden">
           {/* <img src={profileService.getFilePreview(data.imageId)} alt="Profile" /> */}

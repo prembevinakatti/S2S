@@ -51,6 +51,8 @@ const PostPage = ({ flag }) => {
         const fooddata = await uploedservices.getSingleFood(slug);
         if (fooddata) {
           setFooddata(fooddata);
+          console.log(fooddata.name
+          )
           const requests = JSON.parse(fooddata.requests || "[]");
           requests.forEach((request) => {
             if (request.profileId === profiledata.$id) {
@@ -163,7 +165,8 @@ const PostPage = ({ flag }) => {
           } 
           {
             dev&&(
-              <FeedBack id={fooddata.userId}/>
+
+              <FeedBack id={fooddata.name}/>
             )
           }
 

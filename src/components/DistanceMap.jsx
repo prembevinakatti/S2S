@@ -6,9 +6,7 @@ export default function DistanceCalculator({ startCoord, endCoord }) {
   const [calculatedDistance, setCalculatedDistance] = useState(undefined);
   const [averageTime, setAverageTime] = useState(undefined);
 
-
-  const calculateDistance = () => {
-
+  const calculateDistance = () => {``
     let [lat1, lon1] = pointA.split(",");
     let [lat2, lon2] = pointB.split(",");
     let lat1num = parseFloat(lat1);
@@ -16,14 +14,11 @@ export default function DistanceCalculator({ startCoord, endCoord }) {
     let lat2num = parseFloat(lat2);
     let lon2num = parseFloat(lon2);
 
-
-
     if (isNaN(lat1num) || isNaN(lon1num) || isNaN(lat2num) || isNaN(lon2num)) {
       return <div>
         <p>location not found</p>
       </div>
     }
-
 
     let R = 6371;
     let dLat = ((lat2num - lat1num) * Math.PI) / 180;

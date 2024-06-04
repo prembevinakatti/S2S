@@ -144,6 +144,19 @@ class ProfileServices {
       throw error;
     }
   }
+  async updatefeedback(slug, feedback) {
+    try {
+      return await this.databases.updateDocument(
+        conf.databaseid,
+        conf.collectionid,
+        slug,
+        feedback 
+      );
+    } catch (error) {
+      console.log("Appwrite service :: updateDeliveredSection :: error", error);
+      throw error;
+    }
+  }
 }
 
 const profileService = new ProfileServices();

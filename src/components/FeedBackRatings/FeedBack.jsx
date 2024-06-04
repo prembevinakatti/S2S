@@ -1,20 +1,54 @@
 import React, { useState } from "react";
 import TextArea from "../TextArea";
+import profileService from "../../appwrite/profile";
+import { useSelector } from "react-redux";
 
-const FeedBack = () => {
+const FeedBack = ({id}) => {
   const [rating, setRating] = useState(0);
+  const [data,setData]=useState(null)
+  const [commment,setcomment]=useState(null)
 
+  const profiledata = useSelector((state) => state.profile.profiledata);
   const handleRatingChange = (value) => {
     setRating(value);
-    console.log(value);
+    console.lsetcommentog(value);
   };
+  const comment = (value) => {
+    setcomment(value);
+    
+  };
+  useEffect(() => {
+    async function getUser() {
+      try {
+        const userData = await profileService.getUser(id);
+        if (userData) {
+          setData(userData);
+        }
+      } catch (error) {
+        console.error(error);
+      }
+    }
+    getUser();
+   
+  }, [id]);
+ async function handelfeedback(){
+  data={
+    ngoid:profiledata.$id,
+    rating:rating,
+    comment:commment
 
-  return (
+
+  }
+    await profileService.updatefeedback()
+  }
+
+  return (<form onSubmit={handelfeedback}>
     <div className="w-full flex items-center justify-center">
       <div className="FeedBox w-[40vw] h-[50vh] border flex flex-col items-center justify-center gap-20 border-slate-600 rounded-lg">
         <div className="feedback w-full flex flex-col items-center justify-center gap-5">
           <h1 className="text-3xl text-center w-full">FeedBack</h1>
-          <TextArea placeholder="Submit Your FeedBack" />
+          <TextArea placeholder="Submit Your FeedBack"
+          onChange={() => comment(value)}  />
         </div>
         <div className="ratings flex flex-col items-center justify-center gap-5">
           <h2 className="text-3xl w-full text-center">Give Ratings</h2>
@@ -33,6 +67,7 @@ const FeedBack = () => {
         </div>
       </div>
     </div>
+    </form>
   );
 };
 

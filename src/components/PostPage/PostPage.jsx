@@ -9,12 +9,14 @@ import { ID } from "appwrite";
 import RequestCard from "../RequestCard/RequestCard";
 import GotOrder from "../GotOrder";
 import DistanceCalculator from "../DistanceMap";
+import FeedBack from "../FeedBackRatings/FeedBack";
 
 const PostPage = ({ flag }) => {
   const profiledata = useSelector((state) => state.profile.profiledata);
   const [fooddata, setFooddata] = useState(null);
   const [type, setType] = useState("place order");
   const [app,setapp]=useState(false)
+  const [dev,setdev]=useState(false)
   let currentDate = new Date();
   currentDate=currentDate.toLocaleTimeString()
   
@@ -58,6 +60,16 @@ const PostPage = ({ flag }) => {
             profileapp.map((Id)=>{
               if(Id==fooddata.$id){
                 setapp(true)
+                
+              }
+      
+            })
+          }
+          const profiledev= JSON.parse(profiledata.deliveredSection||"[]")
+          if(profiledev){
+            profiledev.map((Id)=>{
+              if(Id==fooddata.$id){
+                setdev(true)
                 
               }
       
@@ -141,7 +153,14 @@ const PostPage = ({ flag }) => {
               </>
               
             )
+
           } 
+          {
+            dev&&(
+              <FeedBack id={fooddata.userId}/>
+            )
+          }
+
       </div>
     </>
   );

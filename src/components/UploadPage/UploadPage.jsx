@@ -24,7 +24,8 @@ const UploadPage = ({ editdata }) => {
       console.log("File preview URL:", filePreview);
       setFileUrl(filePreview);
       setSelectedFile(file);
-      setValue("image", file); 
+      setValue("image", file); // Manually set the file value
+    }
   }
 
   async function handleUpload(data) {
@@ -124,14 +125,6 @@ const UploadPage = ({ editdata }) => {
               placeholder="Number Of People To Feed"
               {...register("nofeed")}
             />
-            <Input
-              placeholder="TIME OF FOOD PREPARED"
-              {...register("timeoffoodprepared")}
-            />
-            <Input
-              placeholder="TIME OF FOOD PREPARED"
-              {...register("foodsustainability")}
-            />
             <TextArea placeholder="Food Items" {...register("fooddetails")} />
             <Input placeholder="Location" {...register("location")} />
             <DropDown register={register} />
@@ -146,6 +139,6 @@ const UploadPage = ({ editdata }) => {
       </div>
     </form>
   );
-};}
+};
 
-export default UploadPage
+export default UploadPage;

@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Input from "../InputComponent/Input";
 import { useForm } from "react-hook-form";
 import profileService from "../../appwrite/profile";
@@ -13,6 +13,8 @@ const ProfilePage = ({ editdata,flag }) => {
   const { register, handleSubmit, setValue } = useForm();
   const [fileUrl, setFileUrl] = useState();
   const [selectedFile, setSelectedFile] = useState(null);
+  const [cordinates,setcordinates]=useState(null)
+  
 
   function handlePreviewImage(e) {
     const file = e.target.files[0];
@@ -52,6 +54,9 @@ const ProfilePage = ({ editdata,flag }) => {
           navigate(`/dashboard/${profileData.$id}`);
         }
       } else {
+        if(cordinates){
+          data.coordinates=cordinates
+        }
         data.UserId = authdata && authdata.$id ? authdata.$id : "vgvgvvhg";
         data.slug = createSlug(data.name);
         authService.updateName(data.slug);
@@ -75,6 +80,27 @@ const ProfilePage = ({ editdata,flag }) => {
       .replace(/[^a-z0-9]+/g, "-")
       .replace(/^-+|-+$/g, "");
   }
+  useEffect(()=>{
+    if ('geolocation' in navigator) {
+      console.log('Geolocation is available.');
+      navigator.geolocation.getCurrentPosition(
+          
+          (position) => {
+            setcordinates(JSON.stringify([position.coords.latitude,position.coords.longitude]))
+            
+          },
+          
+          (error) => {
+              console.error('Error getting geolocation:', error.message);
+          },
+          
+          
+      );
+  } else {
+      console.log('Geolocation is not available.');
+  }
+
+  },[ ])
 
   return (
     <form onSubmit={handleSubmit(handleProfile)}>

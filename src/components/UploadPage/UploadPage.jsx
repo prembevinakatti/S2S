@@ -125,6 +125,16 @@ const UploadPage = ({ editdata }) => {
               placeholder="Number Of People To Feed"
               {...register("nofeed")}
             />
+            <Input
+            type="time"
+              placeholder="timea at which food prepared"
+              {...register("timeoffoodprepared")}
+            />
+            <Input
+            type="time"
+              placeholder="approximate time it expire"
+              {...register("foodsustainability")}
+            />
             <TextArea placeholder="Food Items" {...register("fooddetails")} />
             <Input placeholder="Location" {...register("location")} />
             <DropDown register={register} />

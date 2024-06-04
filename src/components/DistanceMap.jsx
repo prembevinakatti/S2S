@@ -6,8 +6,9 @@ export default function DistanceCalculator({ startCoord, endCoord }) {
   const [calculatedDistance, setCalculatedDistance] = useState(undefined);
   const [averageTime, setAverageTime] = useState(undefined);
 
+
   const calculateDistance = () => {
- 
+
     let [lat1, lon1] = pointA.split(",");
     let [lat2, lon2] = pointB.split(",");
     let lat1num = parseFloat(lat1);
@@ -15,6 +16,13 @@ export default function DistanceCalculator({ startCoord, endCoord }) {
     let lat2num = parseFloat(lat2);
     let lon2num = parseFloat(lon2);
 
+
+
+    if (isNaN(lat1num) || isNaN(lon1num) || isNaN(lat2num) || isNaN(lon2num)) {
+      return <div>
+        <p>location not found</p>
+      </div>
+    }
 
 
     let R = 6371;
@@ -43,7 +51,7 @@ export default function DistanceCalculator({ startCoord, endCoord }) {
 
   return (
     <main className="w-full h-fit flex-col flex items-center justify-center">
-      <div className=" p-10 border border-slate-600 rounded-lg shadow-lg bg-[#1D232A]">
+      <div className=" p-10 border text-white border-slate-600 rounded-lg shadow-lg bg-[#1D232A]">
       <div className="locations flex items-center justify-center gap-5">
         <p className="text-2xl font-semibold">
           From : <span className="font-serif">Locations</span>

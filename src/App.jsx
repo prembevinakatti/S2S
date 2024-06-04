@@ -55,7 +55,8 @@ function App() {
   return (
     <>
       
-     <Outlate /> 
+     {/* <Outlate />  */}
+     <DistanceCalculator />
      
     </>
   );

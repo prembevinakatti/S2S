@@ -141,7 +141,7 @@ const PostPage = ({ flag }) => {
           {
             app&&(
               <>
-              <DistanceCalculator startCoord={fooddata.coordinates}  endCoord={profiledata.coordinates}/>
+              <DistanceCalculator startCoord={JSON.parse(fooddata.coordinates)}  endCoord={JSON.parse(profiledata.coordinates)}/>
               <GotOrder data={{slug:fooddata.$id,}}/>
               </>
               

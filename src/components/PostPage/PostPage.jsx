@@ -82,11 +82,11 @@ const PostPage = ({ flag }) => {
     <>
       <div className="PostPage py-10 w-full h-full gap-5 flex items-center justify-center">
         <div className="PostImg w-[25vw] h-[70vh]">
-          {/* <img
+          <img
             className="w-full h-full object-cover rounded-lg"
             src={profileService.getFilePreview(fooddata.imageId)}
             alt=""
-          /> */}
+          />
         </div>
         <div className="PostDetails m-5 border border-slate-500 rounded-lg p-3 flex flex-col items-center justify-center gap-3 w-[50vw] h-fit">
           <div>

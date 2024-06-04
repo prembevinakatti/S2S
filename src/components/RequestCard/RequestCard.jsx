@@ -3,6 +3,7 @@ import DetailsBox from "../DetailsBox";
 import uploadServices from "../../appwrite/uploedservices";
 import profileService from "../../appwrite/profile";
 import { ID } from "appwrite";
+import LoadingPage from "../LoadingPage";
 
 const RequestCard = ({ request }) => {
   console.log(request)
@@ -46,7 +47,7 @@ const RequestCard = ({ request }) => {
       console.error(error);
     }
   };
-
+  console.log(request.currentDate);
   useEffect(() => {
     async function getUser() {
       try {
@@ -62,18 +63,19 @@ const RequestCard = ({ request }) => {
    
   }, [request]);
 
+
   if (!data) {
-    return <div>Loading...</div>;
+    return <div><LoadingPage /></div>;
   }
 
   return (
     <div className="w-full h-fit m-5 p-3 flex items-center justify-center">
       <div className="w-[40vw] relative h-fit p-5 rounded-lg border border-slate-500 flex items-center justify-between">
-        <div className="timing absolute top-0 right-5">
-          <p>{request.currentDate}</p>
+        <div className="timing text-white absolute top-0 right-5">
+          <p>{request.request.currentDate}</p>
         </div>
         <div className="ReqImage w-[8vw] flex items-center justify-center rounded-full overflow-hidden">
-          {/* <img src={profileService.getFilePreview(data.imageId)} alt="Profile" /> */}
+          <img src={data ? profileService.getFilePreview(data.imgId) : null} alt="Profile" />
         </div>
         <div className="ResDetails">
           <DetailsBox details={data.name} />

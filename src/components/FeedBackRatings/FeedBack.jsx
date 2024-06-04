@@ -1,9 +1,10 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import TextArea from "../TextArea";
 import profileService from "../../appwrite/profile";
 import { useSelector } from "react-redux";
 
 const FeedBack = ({id}) => {
+  console.log(id)
   const [rating, setRating] = useState(0);
   const [data,setData]=useState(null)
   const [commment,setcomment]=useState(null)
@@ -17,20 +18,7 @@ const FeedBack = ({id}) => {
     setcomment(value);
     
   };
-  useEffect(() => {
-    async function getUser() {
-      try {
-        const userData = await profileService.getUser(id);
-        if (userData) {
-          setData(userData);
-        }
-      } catch (error) {
-        console.error(error);
-      }
-    }
-    getUser();
-   
-  }, [id]);
+  
  async function handelfeedback(){
   data={
     ngoid:profiledata.$id,

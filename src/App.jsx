@@ -54,9 +54,9 @@ function App() {
 
   return (
     <>
-      {/* <Navbar /> */}
-      {/* <Outlate /> */}
-      <Home />
+      
+     <Outlate /> 
+     
     </>
   );
 }

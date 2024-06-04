@@ -31,6 +31,7 @@ import ResUploedpage from "./Pages/ResPage/ResUploedpage.jsx";
 import ResHomePage from "./Pages/ResPage/ResHomePage.jsx";
 import NgoHomePage from "./Pages/NgoPage/NgoHomePage.jsx";
 import OrderDetailsPage from "./Pages/NgoPage/OrderDetailsPage.jsx";
+import NotificationPage from "./components/NotificationPage/NotificationPage.jsx";
 
 const router = createBrowserRouter(
   createRoutesFromElements(
@@ -53,6 +54,7 @@ const router = createBrowserRouter(
         <Route path="Orderdetailspage" element={<OrderDetailsPage/>}/>
         <Route path="/home" element={<HomePage />} />
         <Route path="/profile" element={<ProfilePage />} />
+        <Route path="/notification" element={<NotificationPage />} />
         <Route path="/" element={<LandingPage />} />
       </Route>
       <Route path="/" element={<Outlate />} />

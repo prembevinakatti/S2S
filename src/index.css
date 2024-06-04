@@ -3,5 +3,5 @@
 @tailwind utilities;
 
 :root{
-    overflow :hidden;
+    overflow-x:hidden;
 }

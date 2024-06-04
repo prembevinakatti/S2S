@@ -11,6 +11,9 @@ const Navbar = () => {
   const handleNotification = () => {
     navigate("/notification");
   };
+  const handleClickFeedback = () => {
+    navigate("/feedback");
+  }
 
   return (
     <div className="w-full h-[5vw] mb-2 flex justify-between items-center">
@@ -49,6 +52,9 @@ const Navbar = () => {
                   onClick={handleNotification}
                 >
                   Notification
+                </button>
+                <button className="btn btn-outline m-3 btn-error" onClick={handleClickFeedback}>
+                  Feedback
                 </button>
                 <Logout />
               </ul>

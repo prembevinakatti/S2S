@@ -21,8 +21,8 @@ const RequestCard = ({ request }) => {
       const newUpload = await uploadServices.updaterequests(request.slug, { requests: JSON.stringify(newRequests) });
       console.log(newUpload);
       if(newUpload){
-        toast.success("Rejected")
         window.location.reload();
+        toast.success("Rejected")
       }
     } catch (error) {
       toast.error(error.message || error);
@@ -48,8 +48,8 @@ const RequestCard = ({ request }) => {
         approvedSection.push(request.slug);
         const suc = await profileService.updateapprovedSection(data.$id, { approvedSection: JSON.stringify(approvedSection) });
         if(suc){
-          toast.success("Approved")
           window.location.reload();
+          toast.success("Approved")
          
         }
       }

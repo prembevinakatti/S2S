@@ -9,7 +9,9 @@ const Outlate = () => {
   return (
     <div>
       <Navbar />
-      <Outlet />
+      <div className="mt-24">
+        <Outlet />
+      </div>
       {authData?.status === true && <Footer />}
     </div>
   );

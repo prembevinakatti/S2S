@@ -28,7 +28,7 @@ const CardNav = ({ name }) => {
 
   return (
     <div className="CardNav flex items-center p-3 bg-slate-800 justify-between rounded-md w-full h-20" onClick={handleNavigation}>
-      <div className="NavImage w-12">
+      <div className="NavImage w-20  z-10 rounded-lg overflow-hidden">
         {data && data.imgId ? (
           <img src={profileService.getFilePreview(data.imgId)} alt={`${data.name}'s profile`} />
         ) : (

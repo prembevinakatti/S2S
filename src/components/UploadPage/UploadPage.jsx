@@ -125,11 +125,13 @@ const UploadPage = ({ editdata }) => {
               placeholder="Number Of People To Feed"
               {...register("nofeed")}
             />
+            <label htmlFor="" className="m-0">Time At Which Food Prepared </label>
             <Input
             type="time"
               placeholder="timea at which food prepared"
               {...register("timeoffoodprepared")}
             />
+            <label htmlFor="" className="m-0">Food Approx Sustainability </label>
             <Input
             type="time"
               placeholder="approximate time it expire"

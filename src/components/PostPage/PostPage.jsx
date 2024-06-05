@@ -44,8 +44,8 @@ const PostPage = ({ flag }) => {
           pendingSection: JSON.stringify(pendingSection),
         });
         setType("pending");
-        toast.success("Ordered Successfully");
         window.location.reload();
+        toast.success("Ordered Successfully");
       }
     } catch (error) {
       toast.error("Error in handleOrder: " + error.message);
@@ -70,12 +70,14 @@ const PostPage = ({ flag }) => {
           const profileapp = JSON.parse(profiledata.approvedSection || "[]");
           profileapp.forEach((Id) => {
             if (Id === fooddata.$id) {
+              setType("approved");
               setApp(true);
             }
           });
           const profiledev = JSON.parse(profiledata.deliveredSection || "[]");
           profiledev.forEach((Id) => {
             if (Id === fooddata.$id) {
+              setType("delivered");
               setDev(true);
             }
           });
@@ -87,6 +89,15 @@ const PostPage = ({ flag }) => {
     if (slug && profiledata) {
       getFood();
     }
+    function getDate() {
+      const deta = JSON.parse(profiledata.pendingSection || "[]");
+      console.log(deta);
+      if (deta.length >= 1) {
+        setType("you can't order now");
+      }
+    }
+
+    getDate();
   }, [slug, profiledata]);
 
   if (!fooddata) {
@@ -106,71 +117,100 @@ const PostPage = ({ flag }) => {
     return a.badge ? -1 : 1;
   });
 
+  async function handeldelect() {
+    try {
+      await uploedservices.deleteFile(fooddata.$id);
+    } catch (error) {
+      toast.error("Error in handeldelect: " + error.message);
+    }
+  }
+
   return (
     <>
-      <div className="PostPage py-10 w-full h-full gap-5 flex items-center justify-center">
-        <div className="PostImg w-[25vw] h-fit">
-          <img
-            className="w-full h-full object-cover rounded-lg"
-            src={profileService.getFilePreview(fooddata.imageId)}
-            alt=""
-          />
-        </div>
-        <div className="PostDetails relative m-5 border border-slate-500 rounded-lg p-3 flex flex-col items-center justify-center gap-3 w-[50vw] h-fit">
-          <div className="absolute m-1 top-0 right-0">
-            <p className="text-sm">
-              Food Prepared Time: {fooddata.timeoffoodprepared}
-            </p>
-            <p className="text-sm">
-              Food Expired Time approximately: {fooddata.foodsustainability}
-            </p>
+      <div className="w-full h-full gap-5 flex items-center justify-center">
+        <div className="PostPage bg-slate-900 rounded-lg px-5 py-10 flex items-center justify-center ">
+          <div className="PostImg w-[25vw] h-fit">
+            <img
+              className="w-full h-full object-cover rounded-lg"
+              src={profileService.getFilePreview(fooddata.imageId)}
+              alt=""
+            />
           </div>
-          <div>
-            <label className="text-sm text-slate-500">Res Name</label>
-            <DetailsBox details={fooddata.name} />
-          </div>
-          <div>
-            <label className="text-sm text-slate-500">Location</label>
-            <DetailsBox details={fooddata.location} />
-          </div>
-          <div>
-            <label className="text-sm text-slate-500">Items</label>
-            <TextAreaBox details={fooddata.fooddetails} />
-          </div>
-          <div>
-            <label className="text-sm text-slate-500">Mode Of Delivery</label>
-            <DetailsBox details={fooddata.modofdev} />
-          </div>
-          <div>
-            <label className="text-sm text-slate-500">Number Of People to Feed</label>
-            <DetailsBox details={fooddata.nofeed} />
-          </div>
-          <div>
-            <label className="text-sm text-slate-500">Phone Number</label>
-            <DetailsBox details={fooddata.phoneNumber} />
-          </div>
-          {profiledata.ngoNumber && (
-            <button
-              className={`${
-                type === "pending" || type === "delivered"
-                  ? "btn-disabled"
-                  : "btn btn-wide btn-outline btn-primary"
-              }`}
-              onClick={() => handleOrder(false)}
-              disabled={type === "pending" || type === "delivered"}
-            >
-              {type}
-            </button>
-          )}
-          <div>
-            {profiledata.ngoNumber && type !== "pending" && type !== "delivered" && (
+          <div className="PostDetails text-white relative m-5 border border-slate-500 rounded-lg p-3 flex flex-col items-start justify-center gap-3 w-[50vw] h-fit">
+            <div className="absolute m-1 top-0 right-0">
+              <p className="text-sm">
+                Food Prepared Time: {fooddata.timeoffoodprepared}
+              </p>
+              <p className="text-sm">
+                Food Expired Time approximately: {fooddata.foodsustainability}
+              </p>
+            </div>
+            <div>
+              <label className="text-sm text-slate-500">Res Name</label>
+              <DetailsBox details={fooddata.name} />
+            </div>
+            <div>
+              <label className="text-sm text-slate-500">Location</label>
+              <DetailsBox details={fooddata.location} />
+            </div>
+            <div>
+              <label className="text-sm text-slate-500">Items</label>
+              <TextAreaBox details={fooddata.fooddetails} />
+            </div>
+            <div>
+              <label className="text-sm text-slate-500">Mode Of Delivery</label>
+              <DetailsBox details={fooddata.modofdev} />
+            </div>
+            <div>
+              <label className="text-sm text-slate-500">
+                Number Of People to Feed
+              </label>
+              <DetailsBox details={fooddata.nofeed} />
+            </div>
+            <div>
+              <label className="text-sm text-slate-500">Phone Number</label>
+              <DetailsBox details={fooddata.phoneNumber} />
+            </div>
+            {profiledata.ngoNumber && (
               <button
-                className="btn btn-outline btn-error"
-                onClick={() => handleOrder(true)}
+                className={`${
+                  type === "pending" ||
+                  type === "delivered" ||
+                  type === "approved" ||
+                  type === "you can't order now"
+                    ? "btn-disabled"
+                    : "btn btn-wide btn-outline btn-primary"
+                }`}
+                onClick={() => handleOrder(false)}
+                disabled={
+                  type === "pending" ||
+                  type === "delivered" ||
+                  type === "approved" ||
+                  type === "you can't order now"
+                }
               >
-                Emergency
+                {type}
               </button>
             )}
+            {profiledata.$id === fooddata.userId && (
+              <button className="btn-outline btn-error" onClick={handeldelect}>
+                Delete
+              </button>
+            )}
+            <div>
+              {profiledata.ngoNumber &&
+                type !== "you can't order now" &&
+                type !== "pending" &&
+                type !== "approved" &&
+                type !== "delivered" && (
+                  <button
+                    className="btn btn-outline btn-error"
+                    onClick={() => handleOrder(true)}
+                  >
+                    Emergency
+                  </button>
+                )}
+            </div>
           </div>
         </div>
       </div>

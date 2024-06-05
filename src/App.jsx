@@ -22,7 +22,7 @@ import Home from "./components/DistanceMap";
 function App() {
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const location=useLocation()
+  const location = useLocation();
   const profileData = useSelector((state) => state.profile.profiledata);
   const [loading, setLoading] = useState(true); // State variable to manage loading
   const originCoords = { lat: 40.758, lng: -73.9855 }; // Times Square, New York City
@@ -35,18 +35,15 @@ function App() {
           dispatch(login({ userData }));
           const profiledata = await profileService.getUser(userData.name);
           dispatch(updateProfile({ profiledata }));
-          navigate(`${location.pathname}`)
-          setLoading(false)
-        }
-        else{
-          navigate('/')
-          setLoading(false)
+          navigate(`${location.pathname}`);
+          setLoading(false);
+        } else {
+          
         }
       } catch (error) {
-        console.log(error);
+       
       } finally {
-        
-      
+        setLoading(false);
       }
     };
 
@@ -63,10 +60,7 @@ function App() {
 
   return (
     <>
-      
-     <Outlate /> 
-     
-     
+      <Outlate />
     </>
   );
 }

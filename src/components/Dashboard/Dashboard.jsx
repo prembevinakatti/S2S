@@ -15,7 +15,7 @@ import {
 
 const Dashboard = ({ flag }) => {
   const [userData, setUserData] = useState(null);
-  const [charts, setCharts] = useState(null);
+  const [charts, setCharts] = useState([]);
   const { slug } = useParams();
 
   useEffect(() => {
@@ -25,7 +25,7 @@ const Dashboard = ({ flag }) => {
         if (userData) {
           setUserData(userData);
           const parsedCharts = JSON.parse(userData.charts || "[]");
-          setCharts(parsedCharts);
+          setCharts(Array.isArray(parsedCharts) ? parsedCharts : []);
         }
       } catch (error) {
         console.log(error);
@@ -49,23 +49,23 @@ const Dashboard = ({ flag }) => {
             <div>
               <div className="m-3">
                 <label htmlFor="">{flag ? "Res Name" : "Ngo Name"}</label>
-                <DetailsBox details={userData?.name || "1233"} />
+                <DetailsBox details={userData?.name || "Not Available"} />
               </div>
               <div className="m-3">
                 <label htmlFor="">Location</label>
-                <DetailsBox details={userData?.location || "1233"} />
+                <DetailsBox details={userData?.location || "Not Available"} />
               </div>
               {!flag && (
                 <div className="m-3">
                   <label htmlFor="">Ngo Number</label>
-                  <DetailsBox details={userData?.ngoNumber || "1233"} />
+                  <DetailsBox details={userData?.ngoNumber || "Not Available"} />
                 </div>
               )}
             </div>
             <div>
               <div className="m-3">
                 <label htmlFor="">Phone Number</label>
-                <DetailsBox details={userData?.phoneNumber || "1233"} />
+                <DetailsBox details={userData?.phoneNumber || "Not Available"} />
               </div>
               <div className="m-2">
                 <label htmlFor="">Numbers Of Feed</label>
@@ -74,10 +74,11 @@ const Dashboard = ({ flag }) => {
             </div>
           </div>
         </div>
-        <div className="secondBox w-full h-[42vh]">
+        <div className="secondBox w-full flex flex-col gap-5 items-center justify-center h-[42vh]">
+          <p className="text-3xl">Analytics</p>
           {flag && (
             <div>
-              {charts ? (
+              {charts.length > 0 ? (
                 <BarChart
                   width={500}
                   height={300}
@@ -97,7 +98,7 @@ const Dashboard = ({ flag }) => {
                   <Bar dataKey="nuberoffeed" fill="#8884d8" />
                 </BarChart>
               ) : (
-                <div className="graph w-[70vw] h-full">Loading...</div>
+                <div className="graph w-[70vw] flex items-center justify-center h-full">No data available</div>
               )}
             </div>
           )}

@@ -2,11 +2,12 @@ import React, { useEffect, useState } from "react";
 import DetailsBox from "../DetailsBox";
 import toast from "react-hot-toast";
 import profileService from "../../appwrite/profile";
+import TextAreaBox from "../TextAreaBox";
 
 const FeedbackSection = ({ data }) => {
   const [prodata, setProdata] = useState(null);
   const [feedbackError, setFeedbackError] = useState(null);
-console.log(data)
+
   useEffect(() => {
     if (!data) return;
 
@@ -14,10 +15,9 @@ console.log(data)
       try {
         const userData = await profileService.getUser(data.ngoid);
         if (userData) {
-          const feedback = JSON.parse(userData.feedback);
-          setProdata(feedback);
+          setProdata(userData);
         } else {
-          setFeedbackError("No feedback data found for this user.");
+          setFeedbackError("No user data found.");
         }
       } catch (error) {
         console.error("Error fetching feedback data:", error);
@@ -32,28 +32,34 @@ console.log(data)
   return (
     <div className="w-full h-fit m-5 p-3 flex items-center justify-center">
       <div className="w-[40vw] relative h-fit p-5 rounded-lg border border-slate-500 flex items-center justify-between">
-        <div className="ReqImage w-[8vw] flex items-center justify-center rounded-full overflow-hidden">
-          {data && data.imgId && (
+        <div className="ReqImage w-[8vw] m-3 flex items-center justify-center rounded-full overflow-hidden">
+          {prodata && prodata.imgId && (
             <img
-              src={profileService.getFilePreview(data.imgId)}
+              src={profileService.getFilePreview(prodata.imgId)}
               alt="Profile"
             />
           )}
         </div>
-        <div className="flex flex-col gap-5 items-center justify-start">
-          <div className="ResDetails">
-            <DetailsBox details="Name" value={data?.name || ""} />
-            <DetailsBox details="Location" value={data?.location || ""} />
-            <DetailsBox details="Food Name" value={data?.foodname || ""} />
-            <DetailsBox details="Feedback">
-              {prodata ? (
-                prodata
-              ) : (
-                <span className="text-red-500">
-                  {feedbackError || "Loading feedback..."}
-                </span>
-              )}
-            </DetailsBox>
+        <div className="flex flex-col gap-5">
+          <div className="flex flex-col gap-10 items-center justify-center">
+            <div className="ResDetails mr-3 flex flex-col items-center justify-center gap-5">
+              <DetailsBox details={prodata?.name} />
+              <DetailsBox details={prodata?.location} />
+              <DetailsBox details={prodata?.$id} />
+              <TextAreaBox details={data.comment} />
+            </div>
+          </div>
+          <div className="flex ">
+            {Array.from({ length: data.rating }, (_, i) => (
+              <input
+                key={i}
+                type="readonly"
+                name="rating-8"
+                className="mask mask-star-2 w-10 bg-orange-400"
+                checked
+                readOnly
+              />
+            ))}
           </div>
         </div>
       </div>

@@ -56,6 +56,8 @@ const ProfilePage = ({ editdata, flag }) => {
             ? navigate(`/ResDashboard/${profileData.$id}`)
             : navigate(`/NgoDashboard/${profileData.$id}`);
         }
+      window.location.reload();
+
         toast.success("Profile updated successfully");
       }
     } catch (error) {
@@ -92,7 +94,7 @@ const ProfilePage = ({ editdata, flag }) => {
     <form onSubmit={handleSubmit(handleProfile)} className="w-full h-[80vh] flex items-center justify-center">
       <div className="profileBox w-[70vw] h-[70vh] bg-slate-800 rounded-xl flex items-center justify-center p-6">
         <div className="leftSide p-3 m-3 w-1/2 flex flex-col items-center justify-center gap-4">
-          <div className="profileImg w-24 h-24 bg-white rounded-full overflow-hidden">
+          <div className="profileImg w-60 bg-white rounded-full overflow-hidden">
             <img
               className="w-full h-full object-cover"
               src={
@@ -112,7 +114,7 @@ const ProfilePage = ({ editdata, flag }) => {
           <input
             id="image-upload"
             type="file"
-            className="hidden"
+            className="hidden text-white"
             accept="image/png, image/jpg, image/jpeg, image/gif"
             onChange={handlePreviewImage}
           />
@@ -124,7 +126,7 @@ const ProfilePage = ({ editdata, flag }) => {
               <label className="block text-sm text-gray-200 mb-1">Res Name</label>
               <input 
                 placeholder="Res Name" 
-                className="input input-bordered w-full"
+                className="input input-bordered text-white w-full"
                 {...register("name", { required: "Res Name is required" })} 
               />
               {errors.name && <p className="text-red-500 text-sm">{errors.name.message}</p>}
@@ -134,7 +136,7 @@ const ProfilePage = ({ editdata, flag }) => {
               <label className="block text-sm text-gray-200 mb-1">Ngo Name</label>
               <input 
                 placeholder="Ngo Name" 
-                className="input input-bordered w-full"
+                className="input input-bordered text-white w-full"
                 {...register("name", { required: "Ngo Name is required" })} 
               />
               {errors.name && <p className="text-red-500 text-sm">{errors.name.message}</p>}
@@ -145,7 +147,7 @@ const ProfilePage = ({ editdata, flag }) => {
               <label className="block text-sm text-gray-200 mb-1">Ngo Number</label>
               <input
                 placeholder="Ngo Number"
-                className="input input-bordered w-full"
+                className="input input-bordered text-white w-full"
                 {...register("ngoNumber", {
                   required: "Ngo Number is required",
                   validate: (value) =>
@@ -159,7 +161,7 @@ const ProfilePage = ({ editdata, flag }) => {
             <label className="block text-sm text-gray-200 mb-1">Phone Number</label>
             <input 
               placeholder="Phone Number" 
-              className="input input-bordered w-full"
+              className="input input-bordered text-white w-full"
               {...register("phoneNumber", { required: "Phone Number is required" })} 
             />
             {errors.phoneNumber && <p className="text-red-500 text-sm">{errors.phoneNumber.message}</p>}
@@ -168,7 +170,7 @@ const ProfilePage = ({ editdata, flag }) => {
             <label className="block text-sm text-gray-200 mb-1">Location</label>
             <input 
               placeholder="Location" 
-              className="input input-bordered w-full"
+              className="input input-bordered text-white w-full"
               {...register("location", { required: "Location is required" })} 
             />
             {errors.location && <p className="text-red-500 text-sm">{errors.location.message}</p>}
@@ -178,7 +180,7 @@ const ProfilePage = ({ editdata, flag }) => {
               <label className="block text-sm text-gray-200 mb-1">Number of People to Feed</label>
               <input 
                 placeholder="Number of People to Feed" 
-                className="input input-bordered w-full"
+                className="input input-bordered text-white w-full"
                 {...register("nofeed", { required: "Number of People to Feed is required" })} 
               />
               {errors.nofeed && <p className="text-red-500 text-sm">{errors.nofeed.message}</p>}

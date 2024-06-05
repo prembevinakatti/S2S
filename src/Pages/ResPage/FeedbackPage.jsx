@@ -14,7 +14,8 @@ const FeedbackPage = () => {
         const userData = await profileService.getUser(profiledata.$id);
         if (userData) {
           const feedback = JSON.parse(userData.feedback);
-          setFeedbackData(feedback);
+          // Reverse the order of the feedback array
+          setFeedbackData(feedback.reverse());
           console.log(userData.feedback);
         }
       } catch (error) {
@@ -26,6 +27,7 @@ const FeedbackPage = () => {
 
   return (
     <div>
+      <p className="text-3xl w-full text-center">Feedbacks</p>
       {feedbackData?.map((data, index) => {
         {
           console.log(data)

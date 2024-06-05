@@ -162,6 +162,9 @@ class UploadServices {
       throw error;
     }
   }
+  async deleteFile({fileId}){
+    return await this.databases.deleteDocument(fileId)
+  }
 }
 
 const uploadServices = new UploadServices();

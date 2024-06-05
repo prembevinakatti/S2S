@@ -8,16 +8,14 @@ const Navbar = () => {
   const authdata = useSelector((state) => state.auth.userData);
   const navigate = useNavigate();
 
-  const handleNotification = () => {
-    navigate("/notification");
-  };
+  const profiledata = useSelector((state) => state.profile.profiledata);
   const handleClickFeedback = () => {
     navigate("/feedback");
   }
 
   return (
-    <div className=" w-full h-[5vw] mb-2 flex justify-between items-center">
-      <div className="Logo m-2 p-1 w-16 h-full">
+    <div className="fixed top-0 bg-[#1D232A] z-30 w-full h-[5vw] mb-5 flex justify-between items-center">
+      <div className="Logo m-2 p-1 w-14 h-16">
         <img className="w-full h-full object-center" src={Logo} alt="Logo" />
       </div>
       <div>
@@ -47,13 +45,8 @@ const Navbar = () => {
               ></label>
               <ul className="menu p-4 w-80 min-h-full bg-base-200 text-base-content">
                 {/* Sidebar content here */}
-                <button
-                  className="btn btn-outline m-3 btn-error"
-                  onClick={handleNotification}
-                >
-                  Notification
-                </button>
-                <button className="btn btn-outline m-3 btn-error" onClick={handleClickFeedback}>
+                
+                {profiledata?.ngoNumber}<button className="btn btn-outline m-3 btn-error" onClick={handleClickFeedback}>
                   Feedback
                 </button>
                 <Logout />

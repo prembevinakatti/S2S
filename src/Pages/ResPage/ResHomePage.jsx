@@ -34,7 +34,7 @@ const ResHomePage = () => {
 
   return (
     <div className="w-full h-screen overflow-auto">
-      <div className="statusSection mt-3 fixed bg-[#1D232A] z-10 w-full h-fit p-3  flex items-center justify-start gap-3">
+      <div className="statusSection fixed  bg-[#1D232A] z-10 w-full h-fit p-3  flex items-center justify-start gap-3">
         <button
           className="btn btn-primary btn-wide"
           onClick={() => setType("delivered")}

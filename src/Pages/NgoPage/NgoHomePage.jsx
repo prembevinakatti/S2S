@@ -47,7 +47,7 @@ const NgoHomePage = () => {
 
   return (
     <div className="w-full h-screen overflow-auto">
-      <div className="statusSection z-20 mt-2  bg-[#1D232A] fixed w-full h-fit p-3  flex items-center justify-start  gap-3">
+      <div className="statusSection z-20   bg-[#1D232A] fixed w-full h-fit p-3  flex items-center justify-start  gap-3">
         <button
           className="btn btn-primary btn-wide"
           onClick={() => setType("NearLocation")}

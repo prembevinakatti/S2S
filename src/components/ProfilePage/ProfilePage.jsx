@@ -13,7 +13,7 @@ const ProfilePage = ({ editdata, flag }) => {
   const [fileUrl, setFileUrl] = useState();
   const [selectedFile, setSelectedFile] = useState(null);
   const [cordinates, setCordinates] = useState(null);
-  const validNgoNumbers = ["12345", "67890", "ABCDE"];
+  const validNgoNumbers = ["12345", "67890", "ABCDE","EFGH"];
 
   function handlePreviewImage(e) {
     const file = e.target.files[0];

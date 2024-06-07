@@ -127,6 +127,7 @@ const PostPage = ({ flag }) => {
 
   return (
     <>
+    <h1 className="w-full text-4xl mb-3 text-center">Post Page</h1>
       <div className="w-full h-full gap-5 flex items-center justify-center">
         <div className="PostPage bg-slate-900 rounded-lg px-5 py-10 flex items-center justify-center ">
           <div className="PostImg w-[25vw] h-fit">

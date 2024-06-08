@@ -29,7 +29,7 @@
   padding: 30px;
   transition: 0.8s cubic-bezier(0.22, 0.78, 0.45, 1.02);
 } */
-.dashImg, .detailsBox, .analyteBox, .totalFeed {
+.dashImg, .detailsBox, .analyteBox, .totalFeed, .PostPage, .requestCard {
   background: linear-gradient(145deg, #ececec, #ffffff);
   border-radius: 30px;
   box-shadow: 28px 28px 45px #d4d4d4, -28px -28px 45px #ffffff;

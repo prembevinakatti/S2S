@@ -127,9 +127,9 @@ const PostPage = ({ flag }) => {
 
   return (
     <>
-    <h1 className="w-full text-4xl mb-3 text-center">Post Page</h1>
+      <h1 className="w-full text-4xl mb-10 text-black text-center ">Post Page</h1>
       <div className="w-full h-full gap-5 flex items-center justify-center">
-        <div className="PostPage bg-slate-900 rounded-lg px-5 py-10 flex items-center justify-center ">
+        <div className="PostPage  text-black rounded-lg px-5 py-10 flex items-center justify-center ">
           <div className="PostImg w-[25vw] h-fit">
             <img
               className="w-full h-full object-cover rounded-lg"
@@ -137,7 +137,7 @@ const PostPage = ({ flag }) => {
               alt=""
             />
           </div>
-          <div className="PostDetails text-white relative m-5 border border-slate-500 rounded-lg p-3 flex flex-col items-start justify-center gap-3 w-[50vw] h-fit">
+          <div className="PostDetails text-black relative m-5 border border-slate-500 rounded-lg p-3 flex flex-col items-start justify-center gap-3 w-[50vw] h-fit">
             <div className="absolute m-1 top-0 right-0">
               <p className="text-sm">
                 Food Prepared Time: {fooddata.timeoffoodprepared}
@@ -168,10 +168,7 @@ const PostPage = ({ flag }) => {
               </label>
               <DetailsBox details={fooddata.nofeed} />
             </div>
-            <div>
-              <label className="text-sm text-slate-500">Phone Number</label>
-              <DetailsBox details={fooddata.phoneNumber} />
-            </div>
+
             {profiledata.ngoNumber && (
               <button
                 className={`${

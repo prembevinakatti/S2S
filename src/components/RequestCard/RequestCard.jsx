@@ -80,7 +80,7 @@ const RequestCard = ({ request }) => {
   
   return (
     <div className="w-full h-fit m-5 p-3 flex items-center justify-center">
-      <div className="w-[40vw] relative h-fit p-5 rounded-lg border border-slate-500 flex items-center justify-between">
+      <div className=" requestCard w-[40vw] text-black relative h-fit p-5 rounded-lg border flex items-center justify-between">
         <div className="timing text-white absolute top-0 right-5">
           <p>{request.request.currentDate}</p>
         </div>

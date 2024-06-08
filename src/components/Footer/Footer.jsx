@@ -50,7 +50,7 @@ const Footer = () => {
       );
     } else {
       return (
-          <div className="fixed z-10 bottom-0 px-5 w-full backdrop-blur-sm bg-[rgb(255 255 255 / 80%)] h-14 rounded-md flex items-center justify-between ">
+          <div className="fixed z-10 bottom-0 px-5 w-full bg-white backdrop-blur-sm bg-[rgb(255 255 255 / 80%)] h-14 rounded-md flex items-center justify-between ">
             <button
               className={`btn btn-outline btn-primary ${
                 activeButton === "Home" ? "btn-active" : ""

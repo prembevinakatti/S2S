@@ -13,7 +13,7 @@ const Footer = () => {
     if (profileData.ngoNumber !== null) {
       
       return (
-        <div className="fixed z-10 bottom-0 px-5 w-full h-14 rounded-md flex items-center justify-between ">
+        <div className="fixed z-10 bottom-0 px-5 w-full h-14 bg-white rounded-md flex items-center justify-between ">
           <button
             className={`btn btn-outline btn-primary ${
               activeButton === "Home" ? "btn-active" : ""

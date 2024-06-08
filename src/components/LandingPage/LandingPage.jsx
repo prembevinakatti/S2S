@@ -32,13 +32,13 @@ const LandingPage = () => {
 
   return (
     <div className="LandingPage">
-      <div className="LandingContent w-full h-[85vh]">
+      <div className="LandingContent w-full h-[85vh] text-slate-900">
         <div className="heading flex flex-col items-center justify-center gap-3">
           <motion.h1
             initial={{ opacity: 0, x: -50 }}
             animate={{ opacity: 1, x: 0 }}
             transition={{ duration: 1 }}
-            className="text-5xl font-semibold text-white"
+            className="text-5xl font-semibold "
           >
             Surplus To Serve
           </motion.h1>

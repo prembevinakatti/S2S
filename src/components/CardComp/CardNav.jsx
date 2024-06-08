@@ -28,9 +28,9 @@ const CardNav = ({ name }) => {
 
   return (
     <div className="CardNav flex mt-[-130px] mb-10 flex-col items-center p-3 gap-16  justify-between rounded-md w-full h-fit" onClick={handleNavigation}>
-      <div className="NavImage w-56 h-56 rounded-full bg-red-500  z-10  ">
+      <div className="NavImage w-56 h-56 rounded-full overflow-hidden bg-red-500  z-10  ">
         {data && data.imgId ? (
-          <img src={profileService.getFilePreview(data.imgId)} alt={`${data.name}'s profile`} />
+          <img className="w-full h-full object-cover" src={profileService.getFilePreview(data.imgId)} alt={`${data.name}'s profile`} />
         ) : (
           <img src="default-profile.png" alt="Default profile" />
         )}

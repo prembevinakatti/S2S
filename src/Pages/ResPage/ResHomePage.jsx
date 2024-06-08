@@ -33,7 +33,7 @@ const ResHomePage = () => {
   }, [type, usedata?.$id]); // Add usedata.$id to the dependency array
 
   return (
-    <div className="w-full h-screen overflow-auto">
+    <div className="w-full h-screen overflow-x-hidden ">
       <div className="statusSection z-10 w-full h-fit p-3  flex items-center justify-start gap-3">
         <button
           className="btn btn-primary btn-wide"

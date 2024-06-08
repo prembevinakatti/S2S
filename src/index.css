@@ -2,15 +2,36 @@
 @tailwind components;
 @tailwind utilities;
 
-:root{
-    padding-bottom: 5vw;
-    overflow-x :hidden;
-    background-color: white;
-    background-image: url("src/assets/menu-bg.png");
-    background-position: center;
-    background-size: cover;
-
+:root {
+  padding-bottom: 5vw;
+  overflow-x: hidden;
+  background-color: white;
+  background-image: url("src/assets/menu-bg.png");
+  background-position: center;
+  background-size: cover;
+  scroll-behavior: smooth;
 }
-::-webkit-scrollbar{
+/* ::-webkit-scrollbar{
     display: none;
+} */
+.ProfileBox {
+  background: linear-gradient(145deg, #ececec, #ffffff);
+  box-shadow: 28px 28px 45px #d4d4d4, -28px -28px 45px #ffffff;
+  margin: 40px 30px;
+  /* padding : 100px; */
+  transition: 0.8s cubic-bezier(0.22, 0.78, 0.45, 1.02);
+}
+/* .mainbox {
+  background: linear-gradient(145deg, #ececec, #ffffff);
+  border-radius: 30px;
+  box-shadow: 28px 28px 45px #d4d4d4, -28px -28px 45px #ffffff;
+  margin: 40px 30px;
+  padding: 30px;
+  transition: 0.8s cubic-bezier(0.22, 0.78, 0.45, 1.02);
+} */
+.dashImg, .detailsBox, .analyteBox, .totalFeed {
+  background: linear-gradient(145deg, #ececec, #ffffff);
+  border-radius: 30px;
+  box-shadow: 28px 28px 45px #d4d4d4, -28px -28px 45px #ffffff;
+  transition: 0.8s cubic-bezier(0.22, 0.78, 0.45, 1.02);
 }

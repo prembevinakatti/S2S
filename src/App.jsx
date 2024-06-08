@@ -19,6 +19,7 @@ import GeolocationMap from "./components/DistanceMap";
 import MyMap from "./components/DistanceMap";
 import Home from "./components/DistanceMap";
 import Card from "./components/CardComp/Card";
+import "./App.css"
 // import FeedbackSection from "./components/FeedbackSection/FeedbackSection";
 function App() {
   const dispatch = useDispatch();
@@ -39,10 +40,8 @@ function App() {
           navigate(`${location.pathname}`);
           setLoading(false);
         } else {
-          
         }
       } catch (error) {
-       
       } finally {
         setLoading(false);
       }
@@ -61,8 +60,9 @@ function App() {
 
   return (
     <>
-      <Outlate />
-      {/* <Card /> */}
+      <div className="outlet">
+        <Outlate />
+      </div>
     </>
   );
 }

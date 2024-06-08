@@ -13,7 +13,7 @@ const ProfilePage = ({ editdata, flag }) => {
   const [fileUrl, setFileUrl] = useState();
   const [selectedFile, setSelectedFile] = useState(null);
   const [cordinates, setCordinates] = useState(null);
-  const validNgoNumbers = ["12345", "67890", "ABCDE","EFGH"];
+  const validNgoNumbers = ["12345", "67890", "ABCDE","EFGH","7890"];
 
   function handlePreviewImage(e) {
     const file = e.target.files[0];
@@ -92,7 +92,7 @@ const ProfilePage = ({ editdata, flag }) => {
 
   return (
     <form onSubmit={handleSubmit(handleProfile)} className="w-full h-[80vh] flex items-center justify-center">
-      <div className="profileBox w-[70vw] h-[70vh] bg-slate-800 rounded-xl flex items-center justify-center p-6">
+      <div className="ProfileBox profileBox w-[70vw] h-[70vh] bg-white rounded-xl flex items-center justify-center p-6">
         <div className="leftSide p-3 m-3 w-1/2 flex flex-col items-center justify-center gap-4">
           <div className="profileImg w-60 bg-white rounded-full overflow-hidden">
             <img
@@ -133,10 +133,10 @@ const ProfilePage = ({ editdata, flag }) => {
             </div>
           ) : (
             <div className="w-full">
-              <label className="block text-sm text-gray-200 mb-1">Ngo Name</label>
+              <label className="block text-sm text-gray-800 mb-1">Ngo Name</label>
               <input 
                 placeholder="Ngo Name" 
-                className="input input-bordered text-white w-full"
+                className="input bg-transparent border-2 focus:border-2 focus:border-slate-900 border-slate-400  text-black w-full"
                 {...register("name", { required: "Ngo Name is required" })} 
               />
               {errors.name && <p className="text-red-500 text-sm">{errors.name.message}</p>}
@@ -144,10 +144,10 @@ const ProfilePage = ({ editdata, flag }) => {
           )}
           {!flag && (
             <div className="w-full">
-              <label className="block text-sm text-gray-200 mb-1">Ngo Number</label>
+              <label className="block text-sm text-gray-800 mb-1">Ngo Number</label>
               <input
                 placeholder="Ngo Number"
-                className="input input-bordered text-white w-full"
+                className="input bg-transparent border-2 focus:border-2 focus:border-slate-900 border-slate-400 text-black w-full"
                 {...register("ngoNumber", {
                   required: "Ngo Number is required",
                   validate: (value) =>
@@ -158,36 +158,37 @@ const ProfilePage = ({ editdata, flag }) => {
             </div>
           )}
           <div className="w-full">
-            <label className="block text-sm text-gray-200 mb-1">Phone Number</label>
+            <label className="block text-sm text-gray-800 mb-1">Phone Number</label>
             <input 
+            type="tel"
               placeholder="Phone Number" 
-              className="input input-bordered text-white w-full"
+              className="input bg-transparent border-2 border-slate-400 focus:border-2 focus:border-slate-900 text-black w-full"
               {...register("phoneNumber", { required: "Phone Number is required" })} 
             />
             {errors.phoneNumber && <p className="text-red-500 text-sm">{errors.phoneNumber.message}</p>}
           </div>
           <div className="w-full">
-            <label className="block text-sm text-gray-200 mb-1">Location</label>
+            <label className="block text-sm text-gray-800 mb-1">Location</label>
             <input 
               placeholder="Location" 
-              className="input input-bordered text-white w-full"
+              className="input bg-transparent border-2 border-slate-400  focus:border-2 focus:border-slate-900 text-white w-full"
               {...register("location", { required: "Location is required" })} 
             />
             {errors.location && <p className="text-red-500 text-sm">{errors.location.message}</p>}
           </div>
           {!flag && (
             <div className="w-full">
-              <label className="block text-sm text-gray-200 mb-1">Number of People to Feed</label>
+              <label className="block text-sm text-gray-800 mb-1">Number of People to Feed</label>
               <input 
                 placeholder="Number of People to Feed" 
-                className="input input-bordered text-white w-full"
+                className="input bg-transparent border-2 border-slate-400 focus:border-2 focus:border-slate-900 text-white w-full"
                 {...register("nofeed", { required: "Number of People to Feed is required" })} 
               />
               {errors.nofeed && <p className="text-red-500 text-sm">{errors.nofeed.message}</p>}
             </div>
           )}
           <div className="mt-5">
-            <button className="btn btn-wide bg-blue-600 text-2xl font-semibold">
+            <button className="btn btn-wide btn-primary text-2xl font-semibold">
               Set Profile
             </button>
           </div>

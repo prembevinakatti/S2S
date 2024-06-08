@@ -34,7 +34,7 @@ const ResHomePage = () => {
 
   return (
     <div className="w-full h-screen overflow-auto">
-      <div className="statusSection fixed  bg-[#1D232A] z-10 w-full h-fit p-3  flex items-center justify-start gap-3">
+      <div className="statusSection z-10 w-full h-fit p-3  flex items-center justify-start gap-3">
         <button
           className="btn btn-primary btn-wide"
           onClick={() => setType("delivered")}
@@ -48,7 +48,7 @@ const ResHomePage = () => {
           Pending
         </button>
       </div>
-      <div className="CardBox bg-[#1D232A] mt-20 w-full flex flex-wrap items-center justify-center gap-10 p-3">
+      <div className="CardBox  mt-20 w-full flex flex-wrap items-center justify-center gap-10 p-3">
         {posts && posts.map((post) => (
           <div key={post.$id} className="p-2 w-1/4 max-[600px]:w-11/12">
             <Card {...post} />

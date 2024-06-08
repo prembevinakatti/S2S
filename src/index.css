@@ -5,6 +5,10 @@
 :root{
     padding-bottom: 5vw;
     overflow-x :hidden;
+    background-color: white;
+    background-image: url("src/assets/menu-bg.png");
+    background-position: center;
+    background-size: cover;
 
 }
 ::-webkit-scrollbar{

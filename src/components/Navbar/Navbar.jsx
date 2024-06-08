@@ -11,10 +11,10 @@ const Navbar = () => {
   const profiledata = useSelector((state) => state.profile.profiledata);
   const handleClickFeedback = () => {
     navigate("/feedback");
-  }
+  };
 
   return (
-    <div className="fixed top-0 bg-[#1D232A] z-30 w-full h-[5vw] mb-5 flex justify-between items-center">
+    <div className="fixed top-0  z-30 w-full  backdrop-blur-sm bg-[rgb(255 255 255 / 80%)]  h-[5vw] mb-5 flex justify-between items-center">
       <div className="Logo m-2 p-1 w-14 h-16">
         <img className="w-full h-full object-center" src={Logo} alt="Logo" />
       </div>
@@ -27,7 +27,7 @@ const Navbar = () => {
               <label htmlFor="my-drawer-4" className="btn btn-circle">
                 {/* this hidden checkbox controls the state */}
                 <svg
-                  className="text-[#646EE4] border-2 border-[#646EE4] rounded-full w-full h-full p-1 shadow-lg fill-current"
+                  className=" backdrop-blur-md swap w-full h-full p-1 fill-current"
                   xmlns="http://www.w3.org/2000/svg"
                   width="32"
                   height="32"
@@ -45,8 +45,12 @@ const Navbar = () => {
               ></label>
               <ul className="menu p-4 w-80 min-h-full bg-base-200 text-base-content">
                 {/* Sidebar content here */}
-                
-                {profiledata?.ngoNumber}<button className="btn btn-outline m-3 btn-error" onClick={handleClickFeedback}>
+
+                {profiledata?.ngoNumber}
+                <button
+                  className="btn btn-outline m-3 btn-error"
+                  onClick={handleClickFeedback}
+                >
                   Feedback
                 </button>
                 <Logout />

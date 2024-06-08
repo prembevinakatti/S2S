@@ -61,7 +61,7 @@ const NgoHomePage = () => {
           Far Location
         </button>
       </div>
-      <div className="CardBox mt-16 w-full flex flex-wrap items-center justify-center gap-10 p-3">
+      <div className="CardBox mt-16 m-5 w-full flex flex-wrap items-center justify-center gap-10 p-3">
         {posts && posts.map((post) => (
           <div key={post.$id} className="p-2 w-1/4 max-[600px]:w-11/12">
             <Card {...post} />

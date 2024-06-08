@@ -18,6 +18,7 @@ import DistanceCalculator from "./components/DistanceMap";
 import GeolocationMap from "./components/DistanceMap";
 import MyMap from "./components/DistanceMap";
 import Home from "./components/DistanceMap";
+import Card from "./components/CardComp/Card";
 // import FeedbackSection from "./components/FeedbackSection/FeedbackSection";
 function App() {
   const dispatch = useDispatch();
@@ -61,6 +62,7 @@ function App() {
   return (
     <>
       <Outlate />
+      {/* <Card /> */}
     </>
   );
 }

@@ -1,0 +1,10 @@
+.FoodCard {
+    background: linear-gradient(145deg, #ececec, #ffffff);
+    box-shadow: 28px 28px 45px #d4d4d4, -28px -28px 45px #ffffff;
+    margin: 30px;
+    padding : 100px;
+    transition: 0.8s cubic-bezier(0.22, 0.78, 0.45, 1.02);
+}
+.FoodCard:hover {
+    transform: scale(1.03);
+}

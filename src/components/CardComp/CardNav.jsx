@@ -27,20 +27,20 @@ const CardNav = ({ name }) => {
   };
 
   return (
-    <div className="CardNav flex items-center p-3 bg-slate-800 justify-between rounded-md w-full h-20" onClick={handleNavigation}>
-      <div className="NavImage w-20  z-10 rounded-lg overflow-hidden">
+    <div className="CardNav flex mt-[-130px] mb-10 flex-col items-center p-3 gap-16  justify-between rounded-md w-full h-fit" onClick={handleNavigation}>
+      <div className="NavImage w-56 h-56 rounded-full bg-red-500  z-10  ">
         {data && data.imgId ? (
           <img src={profileService.getFilePreview(data.imgId)} alt={`${data.name}'s profile`} />
         ) : (
           <img src="default-profile.png" alt="Default profile" />
         )}
       </div>
-      <div>
+      <div className="flex flex-col items-center justify-center gap-3">
         <div className="NavName">
-          <p className="text-2xl">{data ? data.name : "null"}</p>
+          <p className="text-4xl text-black font-semibold">{data ? data.name : "Resturant Name"}</p>
         </div>
-        <div className="NavLocation">
-          <p>{data ? data.location : "null"}</p>
+        <div className="NavLocation font-semibold text-lg">
+          <p>{data ? data.location : "Location"}</p>
         </div>
       </div>
     </div>
